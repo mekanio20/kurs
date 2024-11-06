@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/src/assets/fonts/sf-pro-display-cufonfonts/SFPRODISPLAYREGULAR.OTF")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/src/assets/fonts/sf-pro-display-cufonfonts/SFPRODISPLAYBOLD.OTF")
+    format("opentype");
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url('@/assets/fonts/helvetica-255/Helvetica.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body,
+#app {
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #000000;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none; /* Firefox */
+  }
+}
