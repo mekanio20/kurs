@@ -4,7 +4,7 @@
             <AdminHeader name="Курсы"></AdminHeader>
             <div class="p-10 flex items-center justify-between bg-m_black-700 rounded-xl">
                 <h1 class="font-sf_pro font-bold text-2xl text-white">Создавай, обучай и вдохновляй!</h1>
-                <AdminButton name="Создать новый курс" :bold="true"></AdminButton>
+                <AdminButton name="Создать новый курс" :bold="true" @click="addCourse"></AdminButton>
             </div>
             <div class="py-8 flex items-center justify-end">
                 <div class="flex items-center space-x-2 cursor-pointer">
@@ -41,6 +41,11 @@ export default {
             cards: [
                 1, 2, 3, 4, 5, 6, 7, 8
             ]
+        }
+    },
+    methods: {
+        addCourse() {
+            this.$router.push('/admin/add/course')
         }
     }
 }

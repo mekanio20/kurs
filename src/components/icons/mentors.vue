@@ -10,7 +10,8 @@
 export default {
     props: {
         color: {
-            type: String
+            type: [String, Array],
+            default: '#fff'
         }
     }
 }

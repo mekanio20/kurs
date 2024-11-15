@@ -37,13 +37,26 @@
 </template>
 
 <script>
+import { markRaw } from "vue"
 import AbzorIcon from  '@/components/icons/abzor.vue'
 import KursIcons from '@/components/icons/kurs.vue'
 import MentorsIcon from '@/components/icons/mentors.vue'
 import CategoryIcon from '@/components/icons/category.vue'
 import UsersIcon from '@/components/icons/users.vue'
+const nonReactiveAbzorIcon = markRaw(AbzorIcon)
+const nonReactiveKursIcons = markRaw(KursIcons)
+const nonReactiveMentorsIcon = markRaw(MentorsIcon)
+const nonReactiveCategoryIcon = markRaw(CategoryIcon)
+const nonReactiveUsersIcon = markRaw(UsersIcon)
 export default {
     name: "Sidebar",
+    components: {
+        AbzorIcon,
+        KursIcons,
+        MentorsIcon,
+        CategoryIcon,
+        UsersIcon
+    },
     data() {
         return {
             routers: [
