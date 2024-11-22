@@ -41,16 +41,18 @@
         </div>
         <div class="w-full relative z-50">
             <div class="container bg-transparent flex items-start">
-                <form class="flex-1 flex flex-col items-center space-y-4 mt-40 mr-40">
+                <form @submit.prevent="handleRegister" class="flex-1 flex flex-col items-center space-y-4 mt-40 mr-40">
                     <h1 class="font-sf_pro font-bold text-4xl text-white mb-10">Авторизоваться</h1>
-                    <input type="email"
+                    <input type="email" v-model="email"
                         class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 text-lg rounded-lg outline-none"
                         placeholder="Электронная почта">
-                    <input type="password"
+                    <input type="password" v-model="password"
                         class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 text-lg rounded-lg outline-none"
                         placeholder="Пароль">
-                    <router-link to="#" class="font-sf_pro font-normal text-base text-m_black-400 hover:underline self-start">Забыли пароль?</router-link>
-                    <button type="submit"
+                    <router-link to="#"
+                        class="font-sf_pro font-normal text-base text-m_black-400 hover:underline self-start">Забыли
+                        пароль?</router-link>
+                    <button type="submit" 
                         class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold text-lg !mt-10">Войти</button>
                     <div class="flex items-center space-x-1 font-sf_pro font-normal text-lg !mt-40">
                         <p class="text-m_gray-100">У вас нет учетной записи?</p>
@@ -73,10 +75,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
     name: "Login",
     data() {
         return {
+            email: '',
+            password: '',
             galleryItems: [
                 {
                     img: 'https://via.placeholder.com/400x400',
@@ -130,6 +135,17 @@ export default {
                 },
             ],
         }
+    },
+    methods: {
+        ...mapActions(['registerUser']),
+        async handleRegister() {
+            try {
+                await this.registerUser({ email: this.email, password: this.password });
+                this.$router.push({ name: "Home" })
+            } catch (error) {
+                console.error("Error occurred: ", error);
+            }
+        },
     },
 }
 </script>

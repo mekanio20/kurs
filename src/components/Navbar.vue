@@ -85,7 +85,26 @@
                     </div>
                 </form>
             </div>
-            <div class="flex items-center space-x-8">
+            <div v-if="isRegistered" class="flex items-center space-x-8">
+                <router-link to="/notification" class="font-sf_pro font-bold text-lg text-white">
+                    Мое обучение
+                </router-link>
+                <router-link to="/notification" class="text-white relative">
+                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M18.75 8.3335C18.75 6.67589 18.0915 5.08618 16.9194 3.91408C15.7473 2.74198 14.1576 2.0835 12.5 2.0835C10.8424 2.0835 9.25268 2.74198 8.08058 3.91408C6.90848 5.08618 6.25 6.67589 6.25 8.3335C6.25 15.6252 3.125 17.7085 3.125 17.7085H21.875C21.875 17.7085 18.75 15.6252 18.75 8.3335Z"
+                            stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M14.3024 21.875C14.1193 22.1907 13.8564 22.4528 13.5401 22.6349C13.2239 22.8171 12.8653 22.913 12.5003 22.913C12.1353 22.913 11.7768 22.8171 11.4605 22.6349C11.1442 22.4528 10.8814 22.1907 10.6982 21.875"
+                            stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <div v-if="hasNotification" class="absolute top-0 right-1 w-2 h-2 bg-m_red-200 rounded-full"></div>
+                </router-link>
+                <router-link to="/profile" class="w-[40px]">
+                    <img class="w-full h-full object-cover rounded-l-full" src="/imgs/person4.png">
+                </router-link>
+            </div>
+            <div v-else class="flex items-center space-x-8">
                 <div @click="toogleLang" class="mr-4 cursor-pointer relative">
                     <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_292_16882)">
@@ -149,6 +168,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 export default {
     name: "Navbar",
     data() {
@@ -156,6 +176,7 @@ export default {
             isLang: false,
             rotate: false,
             searchQuery: null,
+            hasNotification: true,
             langs: ['RU', 'EN', 'KY'],
             lang: 'RU',
             cats: [
@@ -174,6 +195,9 @@ export default {
                 { id: 13, name: 'Спорт и легкая атлетика', url: '#' },
             ],
         }
+    },
+    computed: {
+        ...mapState(['isRegistered']),
     },
     methods: {
         performSearch() { },

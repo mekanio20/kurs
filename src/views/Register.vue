@@ -41,15 +41,15 @@
         </div>
         <div class="w-full relative z-50">
             <div class="container bg-transparent flex items-start">
-                <form class="flex-1 flex flex-col items-center space-y-4 mt-40 mr-40">
+                <form @submit.prevent="handleRegister" class="flex-1 flex flex-col items-center space-y-4 mt-40 mr-40">
                     <h1 class="font-sf_pro font-bold text-4xl text-white mb-10">Зарегистрироваться</h1>
-                    <input type="text"
+                    <input type="text" v-model="fullName"
                         class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 text-lg rounded-lg outline-none"
                         placeholder="Полное имя">
-                    <input type="email"
+                    <input type="email" v-model="email"
                         class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 text-lg rounded-lg outline-none"
                         placeholder="Электронная почта">
-                    <input type="password"
+                    <input type="password" v-model="password"
                         class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 text-lg rounded-lg outline-none"
                         placeholder="Пароль">
                     <div class="w-full flex items-center space-x-6 select-none">
@@ -89,10 +89,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
     name: "Register",
     data() {
         return {
+            email: '',
+            password: '',
             galleryItems: [
                 {
                     img: 'https://via.placeholder.com/400x400',
@@ -146,6 +149,17 @@ export default {
                 },
             ],
         }
+    },
+    methods: {
+        ...mapActions(['registerUser']),
+        async handleRegister() {
+            try {
+                await this.registerUser({ fullName: this.fullName, email: this.email, password: this.password });
+                this.$router.push({ name: "Home" })
+            } catch (error) {
+                console.error("Error occurred: ", error);
+            }
+        },
     },
 }
 </script>

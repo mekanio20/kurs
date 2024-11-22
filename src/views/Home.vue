@@ -238,6 +238,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import Card from '@/components/Card.vue';
@@ -255,6 +256,9 @@ export default {
         Card,
         Swiper,
         SwiperSlide,
+    },
+    computed: {
+        ...mapState(['user']),
     },
     data() {
         return {
