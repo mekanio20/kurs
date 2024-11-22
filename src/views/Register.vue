@@ -69,9 +69,9 @@
                     <button type="submit"
                         class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold text-lg !mt-10">Создать
                         аккаунт</button>
-                    <div class=" bg-transparent flex items-center space-x-1 font-sf_pro font-normal text-lg !mt-40">
+                    <div class="bg-transparent flex items-center space-x-1 font-sf_pro font-normal text-lg !mt-40">
                         <p class="text-m_gray-100">Уже есть аккаунт?</p>
-                        <router-link to="/login" class=" text-m_yellow-200 hover:underline">Войти</router-link>
+                        <router-link to="/login" class="text-m_yellow-200 hover:underline">Войти</router-link>
                     </div>
                 </form>
                 <div class="flex-1 flex flex-col items-center space-y-6">

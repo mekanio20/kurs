@@ -55,7 +55,7 @@
                     <div class="flex items-center space-x-1 font-sf_pro font-normal text-lg !mt-40">
                         <p class="text-m_gray-100">У вас нет учетной записи?</p>
                         <router-link to="/register"
-                            class=" text-m_yellow-200 hover:underline">Зарегистрироваться</router-link>
+                            class="text-m_yellow-200 hover:underline">Зарегистрироваться</router-link>
                     </div>
                 </form>
                 <div class="flex-1 flex flex-col items-center space-y-6">

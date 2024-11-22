@@ -250,7 +250,7 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class=" font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -270,7 +270,7 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class=" font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -290,7 +290,7 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class=" font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -312,7 +312,7 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class=" font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -332,7 +332,7 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class=" font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -352,7 +352,7 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class=" font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>

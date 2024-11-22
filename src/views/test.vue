@@ -1,38 +1,28 @@
 <template>
-  <div class="p-6 bg-gray-900 rounded-lg">
-    <table class="w-full text-left text-gray-200">
-      <thead>
-        <tr class="text-sm font-semibold uppercase border-b border-gray-700">
-          <th class="px-4 py-3">ID</th>
-          <th class="px-4 py-3">Имя, Фамилия</th>
-          <th class="px-4 py-3">Э-почта</th>
-          <th class="px-4 py-3">Дата добав.</th>
-          <th class="px-4 py-3">Тип пользователя</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="user in users"
-          :key="user.id"
-          class="border-b border-gray-800 hover:bg-gray-800"
-        >
-          <td class="px-4 py-3 text-sm font-medium">#{{ user.id }}</td>
-          <td class="px-4 py-3 text-sm">{{ user.name }}</td>
-          <td class="px-4 py-3 text-sm">{{ user.email }}</td>
-          <td class="px-4 py-3 text-sm">{{ user.addedDate }}</td>
-          <td class="px-4 py-3 text-sm">
-            <span
-              :class="[
-                'px-3 py-1 rounded-full text-xs font-semibold',
-                user.userType === 'Пользователь' ? 'bg-yellow-600' : 'bg-blue-600'
-              ]"
-            >
-              {{ user.userType }}
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div class="w-96 p-4 bg-white shadow-md rounded-md">
+      <label
+        for="videoInput"
+        class="block text-sm font-medium text-gray-700 mb-2"
+      >
+        Video Yükle
+      </label>
+      <input
+        id="videoInput"
+        type="file"
+        accept="video/*"
+        @change="handleVideoUpload"
+        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+      />
+      <div v-if="videoPreview" class="mt-4">
+        <p class="text-sm font-medium text-gray-700 mb-2">Önizleme:</p>
+        <img
+          :src="videoPreview"
+          alt="Video önizleme"
+          class="w-full h-56 object-cover rounded-md border"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -40,37 +30,35 @@
 export default {
   data() {
     return {
-      users: [
-        { id: 123, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Пользователь' },
-        { id: 124, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Наставник' },
-        { id: 125, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Пользователь' },
-        { id: 126, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Наставник' },
-        { id: 127, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Наставник' },
-        { id: 128, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Пользователь' },
-        { id: 129, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Наставник' },
-        { id: 130, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Наставник' },
-        { id: 131, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Пользователь' },
-        { id: 132, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Наставник' },
-        { id: 133, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Пользователь' }
-      ]
+      videoPreview: null, // Video önizleme için URL
     };
-  }
+  },
+  methods: {
+    handleVideoUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const videoElement = document.createElement("video");
+
+        videoElement.src = URL.createObjectURL(file);
+        videoElement.currentTime = 1; // Videonun 1. saniyesini alalım
+
+        videoElement.addEventListener("loadeddata", () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = videoElement.videoWidth;
+          canvas.height = videoElement.videoHeight;
+
+          const context = canvas.getContext("2d");
+          context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+          this.videoPreview = canvas.toDataURL("image/png"); // Görüntüyü Base64 olarak al
+          URL.revokeObjectURL(videoElement.src); // Hafızayı temizle
+        });
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
-/* Customize scrollbar for the table */
-table::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-table::-webkit-scrollbar-thumb {
-  background-color: #4b5563;
-  border-radius: 4px;
-}
-
-table::-webkit-scrollbar-track {
-  background-color: #1f2937;
-}
+/* Tailwind CSS varsayılan tasarımı yeterli olduğu için ek stil gerekmiyor. */
 </style>

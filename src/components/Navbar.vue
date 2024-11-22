@@ -29,7 +29,7 @@
                             fill="white" />
                     </svg>
                 </div>
-                <form @submit.prevent="performSearch" class="w-[550px] mx-20 md:block hidden">
+                <form @submit.prevent="performSearch" class="w-[450px] mx-20 md:block hidden">
                     <div class="relative">
                         <div class="absolute inset-y-0 end-6 flex items-center pointer-events-none">
                             <svg class="md:w-5 w-4 text-m_gray-100" aria-hidden="true"
