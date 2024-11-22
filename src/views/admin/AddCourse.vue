@@ -148,7 +148,7 @@
                                 type="text" placeholder="Название урока">
                         </div>
                     </div>
-                    <button @click="addField" class="w-full font-sf_pro font-normal text-m_yellow-100 text-lg pt-10">
+                    <button @click="addVideField" class="w-full font-sf_pro font-normal text-m_yellow-100 text-lg pt-10">
                         + Добавить еще
                     </button>
                 </div>
@@ -252,6 +252,9 @@ export default {
             });
         },
         addField() {
+            this.fields.push({ value: '' });
+        },
+        addVideField() {
             this.videoFields.push({
                 videoPreview: null,
                 imagePreview: null,
