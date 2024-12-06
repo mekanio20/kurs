@@ -62,9 +62,10 @@
                                 мастеров, развивайтесь до совершенства.</h1>
                             <p class="font-sf_pro font-medium text-xl text-m_gray-100">Учитесь у экспертов, чтобы стать
                                 тем,
-                                кем всегда мечтали быть.</p>
+                                кем всегда мечтали быть.
+                            </p>
                             <div
-                                class="flex items-center space-x-6 w-fit bg-m_yellow-100 px-8 py-2 cursor-pointer rounded-lg">
+                                class="flex items-center space-x-6 w-fit bg-m_yellow-100 px-8 py-3 cursor-pointer rounded-lg">
                                 <button class="font-helvetica font-bold text-xl">Попробовать
                                     бесплатно 7 дней</button>
                                 <svg class="w-5" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">

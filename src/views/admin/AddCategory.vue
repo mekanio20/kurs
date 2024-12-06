@@ -1,5 +1,5 @@
 <template>
-    <Sidebar active_route="/admin/categories">
+    <Sidebar active_route="/dashboard/admin/categories">
         <div class="container">
             <AdminHeader name="Добавить категорию"></AdminHeader>
             <form @submit.prevent="saveCategory" class="w-full">

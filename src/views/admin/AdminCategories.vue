@@ -1,5 +1,5 @@
 <template>
-    <Sidebar active_route="/admin/categories">
+    <Sidebar active_route="/dashboard/admin/categories">
         <div class="container">
             <AdminHeader name="Категории">
                 <AdminButton name="Добавить категорию" @click="addCategory"></AdminButton>
@@ -62,7 +62,7 @@ export default {
     },
     methods: {
         addCategory() {
-            this.$router.push('/admin/add/category')
+            this.$router.push('/dashboard/admin/add/category')
         }
     }
 }

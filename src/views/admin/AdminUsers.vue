@@ -1,5 +1,5 @@
 <template>
-    <Sidebar active_route="/admin/users">
+    <Sidebar active_route="/dashboard/admin/users">
         <div class="container">
             <AdminHeader name="Пользователи">
                 <div class="flex items-center space-x-2 cursor-pointer">

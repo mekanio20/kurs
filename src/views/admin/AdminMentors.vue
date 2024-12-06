@@ -1,5 +1,5 @@
 <template>
-    <Sidebar active_route="/admin/mentors">
+    <Sidebar active_route="/dashboard/admin/mentors">
         <div class="container">
             <AdminHeader name="Наставники">
                 <AdminButton name="Добавить нового наставника" @click="addMentor"></AdminButton>
@@ -38,7 +38,7 @@ export default {
     },
     methods: {
         addMentor() {
-            this.$router.push('/admin/add/mentor')
+            this.$router.push('/dashboard/admin/add/mentor')
         }
     }
 }

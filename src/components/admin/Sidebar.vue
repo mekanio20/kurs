@@ -60,11 +60,11 @@ export default {
     data() {
         return {
             routers: [
-                { name: 'Обзор', link: '/admin/home', component: AbzorIcon },
-                { name: 'Курсы', link: '/admin/courses', component: KursIcons },
-                { name: 'Наставники', link: '/admin/mentors', component: MentorsIcon },
-                { name: 'Категории', link: '/admin/categories', component: CategoryIcon },
-                { name: 'Пользователи', link: '/admin/users', component: UsersIcon },
+                { name: 'Обзор', link: '/dashboard/admin/home', component: AbzorIcon },
+                { name: 'Курсы', link: '/dashboard/admin/courses', component: KursIcons },
+                { name: 'Наставники', link: '/dashboard/admin/mentors', component: MentorsIcon },
+                { name: 'Категории', link: '/dashboard/admin/categories', component: CategoryIcon },
+                { name: 'Пользователи', link: '/dashboard/admin/users', component: UsersIcon },
             ]
         }
     },

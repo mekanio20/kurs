@@ -1,5 +1,5 @@
 <template>
-    <Sidebar active_route="/admin/mentors">
+    <Sidebar active_route="/dashboard/admin/mentors">
         <div class="container">
             <AdminHeader name="Добавить нового курса"></AdminHeader>
             <form @submit.prevent="saveCourse" class="w-full">

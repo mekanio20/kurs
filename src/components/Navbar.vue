@@ -1,9 +1,20 @@
 <template>
-    <div class="fixed w-full top-0 z-50 mx-auto bg-black select-none">
-        <div class="container py-10 flex items-center justify-between">
-            <div class="flex items-center space-x-20">
-                <router-link to="/" class="w-28 cursor-pointer">
-                    <svg width="106" height="21" viewBox="0 0 106 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="fixed w-full top-0 z-50 mx-auto bg-black select-none no-scrollbar">
+        <div class="container lg:py-10 py-6 flex items-center justify-between">
+            <div class="w-full flex items-center justify-start">
+                <!-- Burger -->
+                <div @click="openBurger" class="cursor-pointer lg:hidden block mr-5">
+                    <div class="w-10 flex flex-col justify-between space-y-2">
+                        <div class="h-0.5 bg-white duration-500"
+                            :class="[isBurger ? 'w-6 transform translate-y-[10px] -rotate-45' : 'w-6']"></div>
+                        <div class="w-6 h-0.5 bg-white duration-500" :class="[isBurger ? 'opacity-0' : '']"></div>
+                        <div class="h-0.5 bg-white duration-500"
+                            :class="[isBurger ? 'w-6 transform translate-y-[-10px] rotate-45' : 'w-6']"></div>
+                    </div>
+                </div>
+                <!-- Logo -->
+                <router-link to="/" class="lg:w-24 w-20 cursor-pointer mr-10">
+                    <svg viewBox="0 0 106 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M6.79183 1.26896C4.24284 2.10404 1.84991 4.40053 0.913546 6.9058C0.133243 8.99352 0.289304 12.4904 1.25168 14.3694C2.24006 16.2744 3.85269 17.8141 5.82946 18.7536C7.33804 19.4582 7.83223 19.5626 9.67895 19.5365C11.4736 19.5365 12.0459 19.406 13.5024 18.7275C16.8837 17.1617 18.6784 14.3955 18.8345 10.5854C18.9646 7.74089 18.3403 5.94023 16.5456 3.98299C14.7249 1.97356 12.8522 1.11238 10.0431 1.00799C8.69057 0.955799 7.41607 1.06018 6.79183 1.26896ZM12.9562 5.54878C17.508 8.83694 15.2451 15.9091 9.65294 15.9091C4.55496 15.9091 2.00597 9.93299 5.51733 6.30558C6.89587 4.89637 7.7542 4.55711 9.96506 4.6615C11.5777 4.71369 11.9678 4.84418 12.9562 5.54878Z"
                             fill="white" />
@@ -18,7 +29,8 @@
                             fill="white" />
                     </svg>
                 </router-link>
-                <div class="flex items-center space-x-3 cursor-pointer" @click="openCategory">
+                <!-- Category -->
+                <div @click="openCategory" class="lg:flex hidden items-center space-x-3 cursor-pointer">
                     <div class="font-sf_pro font-bold text-lg text-white">
                         Категории
                     </div>
@@ -29,7 +41,8 @@
                             fill="white" />
                     </svg>
                 </div>
-                <form @submit.prevent="performSearch" class="w-[450px] mx-20 md:block hidden">
+                <!-- Search -->
+                <form @submit.prevent="performSearch" class="w-[400px] mx-10 lg:block hidden">
                     <div class="relative">
                         <div class="absolute inset-y-0 end-6 flex items-center pointer-events-none">
                             <svg class="md:w-5 w-4 text-m_gray-100" aria-hidden="true"
@@ -86,7 +99,7 @@
                 </form>
             </div>
             <div v-if="isRegistered" class="flex items-center space-x-8">
-                <router-link to="/notification" class="font-sf_pro font-bold text-lg text-white">
+                <router-link to="/notification" class="font-sf_pro font-bold lg:text-lg text-base text-white text-nowrap sm:block hidden">
                     Мое обучение
                 </router-link>
                 <router-link to="/notification" class="text-white relative">
@@ -105,34 +118,17 @@
                 </router-link>
             </div>
             <div v-else class="flex items-center space-x-8">
-                <div @click="toogleLang" class="mr-4 cursor-pointer relative">
-                    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_292_16882)">
-                            <path
-                                d="M12 23C18.075 23 23 18.075 23 12C23 5.925 18.075 1 12 1M12 23C5.925 23 1 18.075 1 12C1 5.925 5.925 1 12 1M12 23C15 23 16 18 16 12C16 6 15 1 12 1M12 23C9 23 8 18 8 12C8 6 9 1 12 1M2 16H22M2 8H22"
-                                stroke="white" stroke-width="2" />
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_292_16882">
-                                <rect width="24" height="24" fill="white" />
-                            </clipPath>
-                        </defs>
-                    </svg>
-                    <div v-if="isLang" class="absolute bg-m_black-100 h-fit top-10 -right-5 flex flex-col">
-                        <span v-for="(item, index) in langs" :key="index" @click="updateLang(item)"
-                            class="py-2 px-5 cursor-pointer hover:bg-m_black-200 duration-200 text-white"
-                            :class="[lang === item ? 'text-m_yellow-100' : 'text-white']">{{ item }}</span>
-                    </div>
-                </div>
-                <router-link to="/login" class="font-sf_pro font-bold text-lg text-white cursor-pointer">Sign
+                <router-link to="/login"
+                    class="font-sf_pro font-bold lg:text-lg text-base text-white cursor-pointer text-nowrap sm:block hidden">Sign
                     in</router-link>
                 <router-link to="/register"
-                    class="px-5 py-3 rounded-lg bg-m_yellow-100 font-sf_pro font-bold text-lg cursor-pointer">Sign
+                    class="px-8 py-2 rounded-lg bg-m_yellow-100 font-sf_pro font-bold lg:text-lg text-base cursor-pointer text-nowrap">Sign
                     Up</router-link>
             </div>
         </div>
+        <!-- All category -->
         <div v-if="rotate" class="w-full bg-black container">
-            <div class="w-full flex items-start justify-between pt-5 pb-20">
+            <div class="w-full flex items-start justify-between pt-5 pb-10">
                 <div class="flex flex-col space-y-8">
                     <router-link to="/category"
                         class=" font-sf_pro font-medium text-white text-lg">Маркетинг</router-link>
@@ -165,20 +161,53 @@
             </div>
         </div>
     </div>
+    <!-- Mobile -->
+    <div class="select-none w-full fixed z-20 top-0 overflow-hidden duration-200 bg-black"
+        :class="[isBurger ? 'h-full' : 'h-0']">
+        <div class="w-full h-full mt-28 px-4">
+            <!-- Search -->
+            <div class="relative">
+                <svg class="absolute left-8 top-1/2 -translate-y-1/2" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" />
+                    <path d="M20 20L17 17" stroke="white" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <form @submit.prevent="performSearch">
+                    <input v-model="searchQuery"
+                        class="w-full py-6 pl-16 pr-12 outline-none rounded font-inter font-normal text-sm placeholder:text-white text-white bg-m_black-100"
+                        type="text" placeholder="Search" />
+                </form>
+            </div>
+            <!-- All category -->
+            <div class="w-full flex flex-col items-start overflow-y-scroll scrollbar space-y-6 px-1 mt-10 max-h-[50vh]">
+                <router-link v-for="item in cats" :key="item.id" :to="item.url"
+                    class="text-lg text-white font-sf_pro hover:font-bold duration-500 cursor-pointer pr-4">
+                    {{ item.name }}
+                </router-link>
+            </div>
+            <div class="my-10 flex flex-col space-y-4">
+                <router-link v-if="isRegistered" to="/notification" class="font-sf_pro font-bold lg:text-lg text-base text-white bg-m_black-400 w-fit py-3 px-6 rounded-lg text-nowrap sm:hidden block">
+                    Мое обучение
+                </router-link>
+                <router-link v-else to="/login"
+                    class="font-sf_pro font-bold lg:text-lg text-base text-white bg-m_black-400 w-fit py-3 px-6 rounded-lg cursor-pointer text-nowrap sm:hidden block">
+                    Sign in
+                </router-link>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 export default {
     name: "Navbar",
     data() {
         return {
-            isLang: false,
+            isBurger: false,
             rotate: false,
             searchQuery: null,
             hasNotification: true,
-            langs: ['RU', 'EN', 'KY'],
-            lang: 'RU',
             cats: [
                 { id: 1, name: 'Маркетинг', url: '#' },
                 { id: 2, name: 'Искусство и дизайн', url: '#' },
@@ -201,12 +230,8 @@ export default {
     },
     methods: {
         performSearch() { },
-        toogleLang() {
-            this.isLang = !this.isLang;
-        },
-        updateLang(l) {
-            localStorage.setItem('lang', l)
-            this.lang = l
+        openBurger() {
+            this.isBurger = !this.isBurger
         },
         openCategory() {
             this.rotate = !this.rotate
@@ -219,3 +244,25 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.scrollbar {
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: white transparent;
+    /* Firefox */
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 8px;
+}
+</style>

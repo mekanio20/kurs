@@ -1,5 +1,5 @@
 <template>
-    <Sidebar active_route="/admin/courses">
+    <Sidebar active_route="/dashboard/admin/courses">
         <div class="container">
             <AdminHeader name="Курсы"></AdminHeader>
             <div class="p-10 flex items-center justify-between bg-m_black-700 rounded-xl">
@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         addCourse() {
-            this.$router.push('/admin/add/course')
+            this.$router.push('/dashboard/admin/add/course')
         }
     }
 }

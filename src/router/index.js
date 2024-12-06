@@ -50,42 +50,42 @@ const router = createRouter({
     },
     // ADMIN
     {
-      path: "/admin/home",
+      path: "/dashboard/admin/home",
       name: "AdminHome",
       component: () => import("@/views/admin/AdminHome.vue"),
     },
     {
-      path: "/admin/users",
+      path: "/dashboard/admin/users",
       name: "AdminUsers",
       component: () => import("@/views/admin/AdminUsers.vue"),
     },
     {
-      path: "/admin/categories",
+      path: "/dashboard/admin/categories",
       name: "AdminCategories",
       component: () => import("@/views/admin/AdminCategories.vue"),
     },
     {
-      path: "/admin/mentors",
+      path: "/dashboard/admin/mentors",
       name: "AdminMentors",
       component: () => import("@/views/admin/AdminMentors.vue"),
     },
     {
-      path: "/admin/courses",
+      path: "/dashboard/admin/courses",
       name: "AdminCourses",
       component: () => import("@/views/admin/AdminCourses.vue"),
     },
     {
-      path: "/admin/add/category",
+      path: "/dashboard/admin/add/category",
       name: "AddCategory",
       component: () => import("@/views/admin/AddCategory.vue"),
     },
     {
-      path: "/admin/add/mentor",
+      path: "/dashboard/admin/add/mentor",
       name: "AddMentor",
       component: () => import("@/views/admin/AddMentor.vue"),
     },
     {
-      path: "/admin/add/course",
+      path: "/dashboard/admin/add/course",
       name: "AddCourse",
       component: () => import("@/views/admin/AddCourse.vue"),
     },
