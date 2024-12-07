@@ -2,7 +2,7 @@
     <div class="container ">
         <div
             class="flex lg:flex-row flex-col-reverse items-start justify-between py-20 border-b border-m_black-300">
-            <div class="flex-1 flex lg:items-start items-center lg:justify-start justify-center flex-col lg:mt-0 mt-20">
+            <div class="lg:flex-1 w-full flex lg:items-start items-center lg:justify-start justify-center flex-col lg:mt-0 mt-20">
                 <router-link to="/" class="flex items-center space-x-4 cursor-pointer">
                     <svg width="120" height="21" viewBox="0 0 106 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -20,7 +20,7 @@
                     </svg>
                 </router-link>
                 <p
-                    class="font-sf_pro font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100 my-10 w-1/2">
+                    class="font-sf_pro font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 my-10 w-1/2 lg:text-start text-center">
                     Учитесь у экспертов, чтобы стать тем, кем всегда мечтали быть.
                 </p>
                 <div class="flex items-center space-x-6">
@@ -29,90 +29,90 @@
                     </router-link>
                 </div>
                 <p
-                    class="font-sf_pro font-normal lg:text-lg text-end sm:text-base mobile:text-sm text-xs my-10 text-m_gray-100 lg:hidden block">
+                    class="font-sf_pro font-normal lg:text-lg text-end sm:text-base text-sm my-10 text-m_gray-100 lg:hidden block">
                     All Rights Reserved | <span class="text-m_yellow-100">Terms and Conditions</span> | <span
                         class="text-m_yellow-100">Privacy Policy</span>
                 </p>
             </div>
-            <div class="flex-1 flex flex-col items-end">
+            <div class="lg:flex-1 w-full flex flex-col items-end">
                 <div class="w-full flex items-center justify-between lg:pl-24">
                     <div class="flex flex-col items-start justify-center">
                         <h3
-                            class="font-sf_pro font-bold lg:text-lg sm:text-base mobile:text-sm text-xs text-white mb-10">
+                            class="font-sf_pro font-bold lg:text-lg sm:text-base text-sm text-white mb-10">
                             Product</h3>
                         <div class="flex flex-col items-start space-y-4">
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Features
                             </router-link>
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Pricing
                             </router-link>
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Case studies
                             </router-link>
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Reviews
                             </router-link>
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Updates
                             </router-link>
                         </div>
                     </div>
                     <div class="flex flex-col items-start justify-center">
                         <h3
-                            class="font-sf_pro font-bold lg:text-lg sm:text-base mobile:text-sm text-xs text-white mb-10">
+                            class="font-sf_pro font-bold lg:text-lg sm:text-base text-sm text-white mb-10">
                             Company</h3>
                         <div class="flex flex-col items-start space-y-4">
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 About
                             </router-link>
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Contact us
                             </router-link>
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Careers
                             </router-link>
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Culture
                             </router-link>
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Blog
                             </router-link>
                         </div>
                     </div>
                     <div class="flex flex-col items-start justify-center">
                         <h3
-                            class="font-sf_pro font-bold lg:text-lg sm:text-base mobile:text-sm text-xs text-white mb-10">
+                            class="font-sf_pro font-bold lg:text-lg sm:text-base text-sm text-white mb-10">
                             Support</h3>
                         <div class="flex flex-col items-start space-y-4">
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Getting started
                             </router-link>
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Help center
                             </router-link>
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Server status
                             </router-link>
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Report a bug
                             </router-link>
                             <router-link to="#"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base mobile:text-sm text-xs text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
                                 Chat support
                             </router-link>
                         </div>
@@ -121,7 +121,7 @@
             </div>
         </div>
         <p
-            class="font-sf_pro font-normal lg:text-lg text-end sm:text-base mobile:text-sm text-xs py-10 text-m_gray-100 lg:block hidden">
+            class="font-sf_pro font-normal lg:text-lg text-end sm:text-base text-sm py-10 text-m_gray-100 lg:block hidden">
             All Rights Reserved | <span class="text-m_yellow-100">Terms and Conditions</span> | <span
                 class="text-m_yellow-100">Privacy Policy</span>
         </p>

@@ -57,17 +57,17 @@
             <div class="container bg-transparent my-20">
                 <div class="w-full flex items-center justify-between">
                     <div class="w-[750px]">
-                        <div class="w-full flex flex-col space-y-10 py-40">
-                            <h1 class="font-sf_pro font-bold text-[50px] leading-[60px] text-white">Получайте знания от
+                        <div class="w-full flex flex-col space-y-10 lg:py-40 py-20">
+                            <h1 class="font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white">Получайте знания от
                                 мастеров, развивайтесь до совершенства.</h1>
-                            <p class="font-sf_pro font-medium text-xl text-m_gray-100">Учитесь у экспертов, чтобы стать
-                                тем,
-                                кем всегда мечтали быть.
+                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-m_gray-100">
+                                Учитесь у экспертов, чтобы стать тем, кем всегда мечтали быть.
                             </p>
                             <div
-                                class="flex items-center space-x-6 w-fit bg-m_yellow-100 px-8 py-3 cursor-pointer rounded-lg">
-                                <button class="font-helvetica font-bold text-xl">Попробовать
-                                    бесплатно 7 дней</button>
+                                class="flex items-center sm:space-x-6 space-x-3 w-fit bg-m_yellow-100 px-8 py-3 cursor-pointer rounded-lg">
+                                <button class="font-helvetica font-bold lg:text-lg sm:text-base text-sm text-nowrap">
+                                    Попробовать бесплатно 7 дней
+                                </button>
                                 <svg class="w-5" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M12.0842 0.269824C11.9982 0.182232 11.8962 0.11326 11.7841 0.0669526C11.6721 0.0206449 11.5522 -0.00206728 11.4315 0.000147736C11.3108 0.00236275 11.1918 0.0294604 11.0814 0.079852C10.9709 0.130244 10.8714 0.202915 10.7885 0.293607C10.7056 0.384299 10.641 0.491186 10.5986 0.608003C10.5562 0.72482 10.5367 0.849216 10.5414 0.9739C10.5461 1.09858 10.5748 1.22104 10.6259 1.33411C10.6769 1.44717 10.7493 1.54856 10.8388 1.63232L17.1735 7.82608L1.78828 7.82608C1.54777 7.82608 1.3171 7.92485 1.14703 8.10066C0.976965 8.27648 0.881422 8.51493 0.881422 8.76357C0.881422 9.01222 0.976965 9.25067 1.14703 9.42649C1.3171 9.6023 1.54777 9.70107 1.78828 9.70107L17.1759 9.70107L10.8388 15.8973C10.7493 15.9811 10.6769 16.0825 10.6259 16.1955C10.5748 16.3086 10.5461 16.4311 10.5414 16.5557C10.5367 16.6804 10.5562 16.8048 10.5986 16.9216C10.641 17.0385 10.7056 17.1453 10.7885 17.236C10.8714 17.3267 10.9709 17.3994 11.0814 17.4498C11.1918 17.5002 11.3108 17.5273 11.4315 17.5295C11.5522 17.5317 11.6721 17.509 11.7841 17.4627C11.8962 17.4164 11.9982 17.3474 12.0842 17.2598L19.8445 9.67232C20.0372 9.48399 20.1647 9.2354 20.2073 8.96482C20.2357 8.82965 20.2349 8.68963 20.2049 8.55482C20.1609 8.28814 20.0345 8.04339 19.8445 7.85732L12.0842 0.269824Z"
@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-[600px] h-[700px] overflow-y-scroll no-scrollbar relative">
+                    <div class="w-[600px] h-[700px] overflow-y-scroll no-scrollbar relative lg:block hidden">
                         <div class="columns-2 gap-8 animate-scroll">
                             <div v-for="(item, index) in galleryItems" :key="index" class="w-full mb-5 overflow-hidden">
                                 <img class="w-full object-cover mb-3 rounded-xl" :src="item.img" />
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="w-full py-10">
-                    <p class="font-sf_pro font-medium text-xl text-white text-center pt-10">
+                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-white text-center pt-10">
                         Доверяют более <span class="font-bold">800K+</span> фрилансеров и <span
                             class="font-bold">20K+</span> команд, таких как:
                     </p>
@@ -97,11 +97,11 @@
                     </div>
                 </div>
                 <div class="w-full pb-5">
-                    <h2 class="text-center font-sf_pro font-bold text-[50px] text-white w-2/3 leading-[60px] mx-auto">
+                    <h2 class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto">
                         Найдите свой источник вдохновения, когда угодно
                     </h2>
                     <div class="flex items-center justify-center flex-wrap pt-16 pb-10">
-                        <p class="font-sf_pro font-medium lg:px-10 lg:py-3 px-6 py-2 mr-4 mb-4 lg:text-sm text-xs bg-m_black-200 rounded-md text-m_gray-200 hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer"
+                        <p class="font-sf_pro font-medium lg:px-10 lg:py-3 px-6 py-2 sm:mr-4 sm:mb-4 mr-3 mb-3 lg:text-base text-sm bg-m_black-200 rounded-md text-m_gray-200 hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer"
                             v-for="item in cats" :key="item.id">
                             {{ item.name }}
                         </p>
@@ -117,13 +117,13 @@
                         </swiper-slide>
                     </swiper>
                     <router-link to="/"
-                        class="px-7 py-3 rounded-lg border border-white font-sf_pro font-medium text-white text-lg">
+                        class="px-7 py-3 rounded-lg border border-white font-sf_pro font-medium text-white lg:text-lg text-base">
                         Больше курсов
                     </router-link>
                 </div>
                 <div class="w-full pb-5">
                     <h2
-                        class="text-center font-sf_pro font-bold text-[50px] text-white w-2/3 leading-[60px] mx-auto mt-32 mb-20">
+                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-32 mt-20 mb-20">
                         Популярные категории на нашей платформе
                     </h2>
                     <div class="w-full flex flex-col items-center space-y-20">
@@ -139,81 +139,72 @@
                     </div>
                 </div>
                 <div class="w-full pb-5">
+                    <!-- Title -->
                     <h2
-                        class="text-center font-sf_pro font-bold text-[50px] text-white w-2/3 leading-[60px] mx-auto mt-32 mb-20">
+                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-32 mt-20 mb-20">
                         Получайте знания от творческих специалистов
                     </h2>
+                    <!-- Arrow icons -->
                     <div class="flex items-center justify-end mb-20">
                         <div class="hidden md:flex items-center space-x-2">
-                            <svg class="p-3 rounded-full cursor-pointer duration-200 bg-m_black-300 text-m_gray-100"
-                                width="65px" height="65px" viewBox="0 0 24 24" stroke="#B3B3B3"
+                            <svg class="p-3 lg:w-[65px] w-[50px] rounded-full cursor-pointer duration-200 bg-m_black-300 text-m_gray-100"
+                                viewBox="0 0 24 24" stroke="#B3B3B3"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke-width="1" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            <svg class="p-3 rounded-full cursor-pointer duration-200 bg-m_black-300 text-m_gray-100"
-                                width="65px" height="65px" viewBox="0 0 24 24" stroke="#B3B3B3"
+                            <svg class="p-3 lg:w-[65px] w-[50px] rounded-full cursor-pointer duration-200 bg-m_black-300 text-m_gray-100"
+                                viewBox="0 0 24 24" stroke="#B3B3B3"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke-width="1" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
                         </div>
                     </div>
-                    <div class="w-full grid grid-cols-3 gap-x-20">
-                        <div class="flex flex-col">
+                    <!-- Cards -->
+                    <swiper :slides-per-view="slidesPerView" :breakpoints="master_breakpoints" :spaceBetween="30"
+                        :modules="modules" :loop="true" :speed="1000"
+                        :autoplay="{ delay: 2000, duration: 2000, disableOnInteraction: false }"
+                        class="w-full grid grid-cols-3 gap-x-20">
+                        <swiper-slide v-for="item in masters" :key="item.id" class="flex flex-col">
                             <div class="h-[200px] rounded-lg bg-m_black-500 relative">
-                                <img class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[250px]"
-                                    src="/imgs/person1.png">
+                                <img class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[250px] object-cover"
+                                    :src="item.img">
                                 <div class="absolute top-4 right-4">
                                     <div class="flex items-center">
                                         <span class="text-lg text-m_yellow-100">★</span>
-                                        <span class="ml-1 text-white text-base font-bold font-sf_pro">4.8</span>
+                                        <span class="ml-1 text-white text-base font-bold font-sf_pro">{{ item.star }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <h3 class="font-sf_pro font-bold text-2xl text-white text-center mt-10 mb-4">Marques
-                                Brownlee</h3>
-                            <p class="font-sf_pro font-normal text-lg text-m_yellow-200 text-center">Youtuber, Podcaster
+                            <h3 class="font-sf_pro font-bold text-2xl text-white text-center mt-10 mb-4">{{ item.name }}</h3>
+                            <p class="font-sf_pro font-normal text-lg text-m_yellow-200 text-center">
+                                {{ item.position }}
                             </p>
-                        </div>
-                        <div class="flex flex-col">
+                        </swiper-slide>
+                    </swiper>
+                    <!-- <div class="w-full grid grid-cols-3 gap-x-20">
+                        <div v-for="item in masters" :key="item.id" class="flex flex-col">
                             <div class="h-[200px] rounded-lg bg-m_black-500 relative">
                                 <img class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[250px]"
-                                    src="/imgs/person2.png">
+                                    :src="item.img">
                                 <div class="absolute top-4 right-4">
                                     <div class="flex items-center">
                                         <span class="text-lg text-m_yellow-100">★</span>
-                                        <span class="ml-1 text-white text-base font-bold font-sf_pro">4.8</span>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <h3 class="font-sf_pro font-bold text-2xl text-white text-center mt-10 mb-4">Marques
-                                Brownlee</h3>
-                            <p class="font-sf_pro font-normal text-lg text-m_yellow-200 text-center">Youtuber, Podcaster
-                            </p>
-                        </div>
-                        <div class="flex flex-col">
-                            <div class="h-[200px] rounded-lg bg-m_black-500 relative">
-                                <img class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[250px]"
-                                    src="/imgs/person3.png">
-                                <div class="absolute top-4 right-4">
-                                    <div class="flex items-center">
-                                        <span class="text-lg text-m_yellow-100">★</span>
-                                        <span class="ml-1 text-white text-base font-bold font-sf_pro">4.8</span>
+                                        <span class="ml-1 text-white text-base font-bold font-sf_pro">{{ item.star }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <h3 class="font-sf_pro font-bold text-2xl text-white text-center mt-10 mb-4">Marques
-                                Brownlee</h3>
-                            <p class="font-sf_pro font-normal text-lg text-m_yellow-200 text-center">Youtuber, Podcaster
+                            <h3 class="font-sf_pro font-bold text-2xl text-white text-center mt-10 mb-4">{{ item.name }}</h3>
+                            <p class="font-sf_pro font-normal text-lg text-m_yellow-200 text-center">
+                                {{ item.position }}
                             </p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="w-full pb-5">
                     <h2
-                        class="text-center font-sf_pro font-bold text-[50px] text-white w-2/3 leading-[60px] mx-auto mt-32 mb-20">
+                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-32 mt-20 mb-20">
                         Часто задаваемые вопросы
                     </h2>
                     <div class="sm:p-6 text-white">
@@ -272,11 +263,39 @@ export default {
                 { id: 4, question: 'Lorem ipsum dolar sit', answer: 'Hawa shol lorem ipsum dolar sit bolya' },
                 { id: 5, question: 'Lorem ipsum dolar sit', answer: 'Hawa shol lorem ipsum dolar sit bolya' },
             ],
+            masters: [
+                {
+                    id: 1,
+                    img: '/imgs/person1.png',
+                    name: 'Marques Brownlee',
+                    position: 'Youtuber, Podcaster',
+                    star: 4.8
+                },
+                {
+                    id: 2,
+                    img: '/imgs/person2.png',
+                    name: 'Marques Brownlee',
+                    position: 'Youtuber, Podcaster',
+                    star: 4.8
+                },
+                {
+                    id: 3,
+                    img: '/imgs/person3.png',
+                    name: 'Marques Brownlee',
+                    position: 'Youtuber, Podcaster',
+                    star: 4.8
+                },
+            ],
             cource_breakpoints: {
                 200: { slidesPerView: 1 },
                 500: { slidesPerView: 2 },
                 950: { slidesPerView: 3 },
                 1200: { slidesPerView: 4 },
+            },
+            master_breakpoints: {
+                200: { slidesPerView: 1 },
+                600: { slidesPerView: 2 },
+                900: { slidesPerView: 3 },
             },
             banner_breakpoints: {
                 200: { slidesPerView: 1.2 },
