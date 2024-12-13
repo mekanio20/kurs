@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-full relative">
+    <div class="w-full min-h-100vh relative overflow-hidden">
         <div class="absolute left-0 top-0">
             <svg width="634" height="765" viewBox="0 0 634 765" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <ellipse cx="0.5" cy="-153.5" rx="633.5" ry="918.5" fill="url(#paint0_radial_471_1430)"
@@ -40,27 +40,27 @@
             </svg>
         </div>
         <div class="w-full relative z-50">
-            <div class="container bg-transparent flex items-start">
-                <form @submit.prevent="handleRegister" class="flex-1 flex flex-col items-center space-y-4 mt-40 mr-40">
-                    <h1 class="font-sf_pro font-bold text-4xl text-white mb-10">Авторизоваться</h1>
+            <div class="container bg-transparent flex lg:items-start items-center">
+                <form @submit.prevent="handleRegister" class="lg:flex-1 w-full flex flex-col items-center space-y-4 mt-40 lg:mr-40 lg:mx-0 sm:mx-40">
+                    <h1 class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white mb-10">Авторизоваться</h1>
                     <input type="email" v-model="email"
-                        class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 text-lg rounded-lg outline-none"
+                        class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 lg:text-lg sm:text-base text-sm rounded-lg outline-none"
                         placeholder="Электронная почта">
                     <input type="password" v-model="password"
-                        class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 text-lg rounded-lg outline-none"
+                        class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 lg:text-lg sm:text-base text-sm rounded-lg outline-none"
                         placeholder="Пароль">
                     <router-link to="#"
-                        class="font-sf_pro font-normal text-base text-m_black-400 hover:underline self-start">Забыли
+                        class="font-sf_pro font-normal lg:text-base text-sm text-m_black-400 hover:underline self-start">Забыли
                         пароль?</router-link>
                     <button type="submit" 
-                        class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold text-lg !mt-10">Войти</button>
-                    <div class="flex items-center space-x-1 font-sf_pro font-normal text-lg !mt-40">
-                        <p class="text-m_gray-100">У вас нет учетной записи?</p>
+                        class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold lg:text-lg sm:text-base text-sm !mt-10">Войти</button>
+                    <div class="flex items-center space-x-1 font-sf_pro font-normal !mt-40">
+                        <p class="text-m_gray-100 sm:text-base text-sm text-nowrap">У вас нет учетной записи?</p>
                         <router-link to="/register"
-                            class="text-m_yellow-200 hover:underline">Зарегистрироваться</router-link>
+                            class="text-m_yellow-200 hover:underline sm:text-base text-sm text-nowrap">Зарегистрироваться</router-link>
                     </div>
                 </form>
-                <div class="flex-1 flex flex-col items-center space-y-6">
+                <div class="flex-1 lg:flex hidden flex-col items-center space-y-6">
                     <div class="w-[600px] h-[700px] overflow-y-scroll no-scrollbar relative">
                         <div class="columns-2 gap-8 animate-scroll">
                             <div v-for="(item, index) in galleryItems" :key="index" class="w-full mb-5 overflow-hidden">

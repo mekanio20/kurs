@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-full relative">
+    <div class="w-full min-h-100vh relative overflow-hidden">
         <div class="absolute top-0 right-0">
             <svg width="591" height="1735" viewBox="0 0 591 1735" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <ellipse cx="613.473" cy="834.913" rx="613.473" ry="899.913" fill="url(#paint0_radial_553_5476)"
@@ -41,129 +41,129 @@
         </div>
         <div class="w-full relative z-50">
             <Navbar />
-            <div class="container bg-transparent mt-44">
-                <div class="flex items-center">
-                    <div class="w-[540px] mr-20">
+            <div class="container bg-transparent sm:mt-44 mt-36">
+                <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center">
+                    <div class="lg:w-[540px] sm:w-[600px] w-full lg:mr-20">
                         <img class="w-full h-full object-cover rounded-xl" src="/imgs/person5.png">
                     </div>
-                    <div class="flex-1 flex flex-col space-y-10">
-                        <h1 class="font-sf_pro font-bold text-5xl text-white">Эффективно общайтесь и работайте в
+                    <div class="lg:flex-1 w-full flex lg:items-start items-center flex-col space-y-10">
+                        <h1 class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white lg:text-start text-center">Эффективно общайтесь и работайте в
                             командах</h1>
-                        <p class="w-3/4 font-sf_pro font-normal text-xl text-m_gray-100">
+                        <p class="lg:w-3/4 w-full font-sf_pro font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 lg:text-start text-center">
                             Продвигайте себя, ясно выражайте идеи
                             и используйте приемы, которые сделают вас более убедительными.
                         </p>
-                        <div class="flex items-center space-x-4">
+                        <div class="flex sm:flex-row flex-col sm:space-y-0 space-y-4 items-center sm:space-x-4">
                             <div
-                                class="px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal text-lg text-m_gray-100">
+                                class="px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-m_gray-100 text-nowrap">
                                 Бизнес & предпринимательство</div>
                             <div
-                                class="px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal text-lg text-m_gray-100">
+                                class="px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-m_gray-100 text-nowrap">
                                 17 уроков</div>
                             <div
-                                class="px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal text-lg text-m_gray-100">
+                                class="px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-m_gray-100 text-nowrap">
                                 2h 10m</div>
                         </div>
                         <div class="flex items-center space-x-8">
                             <div class="flex items-center">
-                                <span class="text-lg text-m_yellow-100">★</span>
-                                <span class="ml-1 text-white text-lg font-medium">4.8</span>
-                                <span class="ml-2 text-m_gray-100 text-base font-medium">(82 827 отзывов)</span>
+                                <span class="lg:text-base text-sm text-m_yellow-100">★</span>
+                                <span class="ml-1 text-white lg:text-base text-sm font-medium">4.8</span>
+                                <span class="ml-2 text-m_gray-100 lg:text-base text-sm font-medium">(82 827 отзывов)</span>
                             </div>
-                            <div class="flex items-center font-sf_pro font-medium text-lg text-white">
+                            <div class="flex items-center font-sf_pro font-medium lg:text-base text-sm text-white">
                                 237 студентов
                             </div>
                         </div>
                         <button
-                            class="w-fit px-10 py-3 rounded-lg bg-m_yellow-100 font-helvetica font-bold text-xl">Купить
+                            class="w-fit px-10 py-3 rounded-lg bg-m_yellow-100 font-helvetica font-bold lg:text-xl sm:text-lg text-base">Купить
                             сейчас</button>
                     </div>
                 </div>
                 <div class="my-20 text-center">
-                    <h2 class="font-sf_pro font-bold text-[40px] leading-[60px] text-white">Чему вы научитесь</h2>
+                    <h2 class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white">Чему вы научитесь</h2>
                     <div class="my-10 flex items-center justify-center flex-wrap gap-x-6 gap-y-4">
                         <div
-                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal text-lg text-white">
+                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
                             Создавать уникальный фирменный стиль.
                         </div>
                         <div
-                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal text-lg text-white">
+                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
                             Превращение обыденного в культовое
                         </div>
                         <div
-                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal text-lg text-white">
+                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
                             Как вырасти из неудач
                         </div>
                         <div
-                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal text-lg text-white">
+                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
                             Создание продуктов, которые нравятся рынку
                         </div>
                         <div
-                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal text-lg text-white">
+                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
                             Масштабирование идей до крупных успехов
                         </div>
                     </div>
                 </div>
-                <div class="py-20 text-center">
-                    <h2 class="font-sf_pro font-bold text-[40px] leading-[60px] text-white">Программа курса</h2>
-                    <div class="flex items-center space-x-20 my-20">
-                        <div class="flex-1 flex flex-col space-y-6">
+                <div class="sm:pb-20 text-center">
+                    <h2 class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white">Программа курса</h2>
+                    <div class="flex lg:flex-row flex-col items-center lg:space-x-20 lg:my-20 my-14 space-y-6">
+                        <div class="lg:flex-1 w-full flex flex-col space-y-6">
                             <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
                                 <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
                                 <div class="flex items-start flex-col space-y-2">
-                                    <p class="font-sf_pro font-medium text-lg text-m_gray-100">Урок: 1</p>
-                                    <p class="font-sf_pro font-medium text-xl text-white">Определите своих клиентов</p>
+                                    <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: 1</p>
+                                    <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
                                 </div>
                             </div>
                             <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
                                 <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
                                 <div class="flex items-start flex-col space-y-2">
-                                    <p class="font-sf_pro font-medium text-lg text-m_gray-100">Урок: 1</p>
-                                    <p class="font-sf_pro font-medium text-xl text-white">Определите своих клиентов</p>
+                                    <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: 1</p>
+                                    <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
                                 </div>
                             </div>
                             <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
                                 <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
                                 <div class="flex items-start flex-col space-y-2">
-                                    <p class="font-sf_pro font-medium text-lg text-m_gray-100">Урок: 1</p>
-                                    <p class="font-sf_pro font-medium text-xl text-white">Определите своих клиентов</p>
+                                    <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: 1</p>
+                                    <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-1 flex flex-col space-y-6">
+                        <div class="lg:flex-1 w-full flex flex-col space-y-6">
                             <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
                                 <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
                                 <div class="flex items-start flex-col space-y-2">
-                                    <p class="font-sf_pro font-medium text-lg text-m_gray-100">Урок: 1</p>
-                                    <p class="font-sf_pro font-medium text-xl text-white">Определите своих клиентов</p>
+                                    <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: 1</p>
+                                    <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
                                 </div>
                             </div>
                             <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
                                 <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
                                 <div class="flex items-start flex-col space-y-2">
-                                    <p class="font-sf_pro font-medium text-lg text-m_gray-100">Урок: 1</p>
-                                    <p class="font-sf_pro font-medium text-xl text-white">Определите своих клиентов</p>
+                                    <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: 1</p>
+                                    <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
                                 </div>
                             </div>
                             <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
                                 <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
                                 <div class="flex items-start flex-col space-y-2">
-                                    <p class="font-sf_pro font-medium text-lg text-m_gray-100">Урок: 1</p>
-                                    <p class="font-sf_pro font-medium text-xl text-white">Определите своих клиентов</p>
+                                    <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: 1</p>
+                                    <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <router-link to="/"
-                        class="px-7 py-3 rounded-lg border border-white font-sf_pro font-medium text-white text-lg">
+                        class="px-7 py-3 rounded-lg border border-white font-sf_pro font-medium text-white lg:text-base text-sm">
                         Посмотреть все
                     </router-link>
                 </div>
-                <div class="flex items-center py-20">
-                    <div class="flex-1 mr-20">
-                        <h2 class="w-3/4 font-sf_pro font-bold text-[44px] text-white">Этот курс включает в себя:</h2>
+                <div class="w-full flex lg:flex-row flex-col lg:space-y-0 space-y-10 py-20">
+                    <div class="lg:flex-1 w-full lg:mr-20">
+                        <h2 class="lg:w-3/4 font-sf_pro font-bold lg:text-[44px] lg:leading-[60px] text-3xl leading-[50px] text-white">Этот курс включает в себя:</h2>
                     </div>
-                    <div class="flex-1 flex flex-col space-y-8">
+                    <div class="lg:flex-1 w-full flex flex-col space-y-8">
                         <div class="flex items-center space-x-4">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -175,7 +175,7 @@
                                 <path d="M12 15V3" stroke="white" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            <p class="font-sf_pro font-medium text-xl text-white">Скачивайте и смотрите оффлайн</p>
+                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-white">Скачивайте и смотрите оффлайн</p>
                         </div>
                         <div class="flex items-center space-x-4">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -187,7 +187,7 @@
                                     d="M5 15H4C3.46957 15 2.96086 14.7893 2.58579 14.4142C2.21071 14.0391 2 13.5304 2 13V4C2 3.46957 2.21071 2.96086 2.58579 2.58579C2.96086 2.21071 3.46957 2 4 2H13C13.5304 2 14.0391 2.21071 14.4142 2.58579C14.7893 2.96086 15 3.46957 15 4V5"
                                     stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                            <p class="font-sf_pro font-medium text-xl text-white">Доступ на мобильном телефоне и
+                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-white">Доступ на мобильном телефоне и
                                 телевизоре</p>
                         </div>
                         <div class="flex items-center space-x-4">
@@ -199,7 +199,7 @@
                                 <path d="M22 4L12 14.01L9 11.01" stroke="white" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            <p class="font-sf_pro font-medium text-xl text-white">Доступ на 3 месяца</p>
+                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-white">Доступ на 3 месяца</p>
                         </div>
                         <div class="flex items-center space-x-4">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -208,28 +208,28 @@
                                     d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
                                     stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                            <p class="font-sf_pro font-medium text-xl text-white">Сертификат об окончании</p>
+                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-white">Сертификат об окончании</p>
                         </div>
                     </div>
                 </div>
-                <div class="py-20">
-                    <h2 class="font-sf_pro font-bold text-[40px] leading-[60px] text-white text-center">Ментор</h2>
-                    <div class="flex items-center space-x-10 my-28">
-                        <div class="w-[400px] h-[200px] rounded-lg bg-m_black-500 relative">
-                            <img class="absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]"
+                <div class="w-full lg:py-20">
+                    <h2 class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center">Ментор</h2>
+                    <div class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 sm:my-28 my-20">
+                        <div class="sm:w-[400px] w-full h-[200px] rounded-lg bg-m_black-500 relative">
+                            <img class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]"
                                 src="/imgs/person1.png">
                             <div class="absolute top-4 right-4">
                                 <div class="flex items-center">
-                                    <span class="text-lg text-m_yellow-100">★</span>
-                                    <span class="ml-1 text-white text-base font-bold font-sf_pro">4.8</span>
+                                    <span class="lg:text-base text-sm text-m_yellow-100">★</span>
+                                    <span class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">4.8</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-1 flex flex-col space-y-3">
-                            <h3 class="font-sf_pro font-bold text-2xl text-white">Marques Brownlee</h3>
-                            <p class="font-sf_pro font-normal text-lg text-m_yellow-200">Youtuber, Podcaster</p>
-                            <div class="bg-black text-m_gray-100">
-                                <p class="text-base leading-relaxed mb-4">
+                        <div class="flex-1 flex lg:items-start items-center flex-col space-y-3">
+                            <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">Marques Brownlee</h3>
+                            <p class="font-sf_pro font-normal lg:text-base text-sm text-m_yellow-200">Youtuber, Podcaster</p>
+                            <div class="text-m_gray-100 lg:text-start text-center">
+                                <p class="lg:text-base text-sm leading-relaxed mb-4">
                                     Я также являюсь онлайн-инструктором с опытом преподавания более 3 лет и преподаю
                                     веб-разработку и деловое письмо более чем 14 000 студентам со всего мира на
                                     нескольких глобальных платформах. Я больше сосредоточен на творческих вещах и
@@ -240,17 +240,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center">
-                    <h2 class="font-sf_pro font-bold text-[40px] leading-[60px] text-white text-center pb-20">Отзывы
+                <div class="w-full text-center">
+                    <h2 class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center pb-20">Отзывы
                         пользователей</h2>
-                    <div class="columns-3 gap-6 pb-20">
+                    <div class="md:columns-3 mobile:columns-2 columns-1 gap-6 sm:pb-20 pb-10">
                         <div class="bg-m_black-500 rounded-lg p-8 mb-6">
                             <div class="w-full flex space-x-6 items-center">
                                 <div class="w-16 rounded-full">
                                     <img src="/imgs/person4.png">
                                 </div>
-                                <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
+                                <div class="flex flex-col items-start space-y-1">
+                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -259,7 +259,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full pt-6 font-sf_pro font-normal text-lg text-white">
+                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-sm text-white">
                                 Курсы предоставляют отличную возможность для расширения знаний и навыков в различных
                                 областях. 💜 Они структурированы так, чтобы обеспечить понимание материала.
                             </div>
@@ -270,7 +270,7 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -279,7 +279,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full pt-6 font-sf_pro font-normal text-lg text-white">
+                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-sm text-white">
                                 Курсы предоставляют отличную возможность для расширения знаний и навыков в различных
                                 областях. 💜 Они структурированы так, чтобы обеспечить понимание материала.
                             </div>
@@ -290,7 +290,7 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -299,7 +299,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full pt-6 font-sf_pro font-normal text-lg text-white">
+                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-sm text-white">
                                 Опытные наставники и качественные материалы делают обучение Курсы предоставляют отличную
                                 возможность для расширения знаний и навыков в различных областях 😀🩷 Они
                                 структурированы так, чтобы обеспечить понимание материала, с интерактивными и
@@ -312,7 +312,7 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -321,7 +321,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full pt-6 font-sf_pro font-normal text-lg text-white">
+                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-sm text-white">
                                 Курсы предоставляют отличную возможность для расширения знаний и навыков в различных
                                 областях. 💜 Они структурированы так, чтобы обеспечить понимание материала.
                             </div>
@@ -332,7 +332,7 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -341,7 +341,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full pt-6 font-sf_pro font-normal text-lg text-white">
+                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-sm text-white">
                                 Курсы предоставляют отличную возможность для расширения знаний и навыков в различных
                                 областях. 💜 Они структурированы так, чтобы обеспечить понимание материала.
                             </div>
@@ -352,7 +352,7 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium text-xl text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -361,7 +361,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full pt-6 font-sf_pro font-normal text-lg text-white">
+                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-sm text-white">
                                 Опытные наставники и качественные материалы делают обучение Курсы предоставляют отличную
                                 возможность для расширения знаний и навыков в различных областях 😀🩷 Они
                                 структурированы так, чтобы обеспечить понимание материала, с интерактивными и
@@ -370,13 +370,13 @@
                         </div>
                     </div>
                     <router-link to="/"
-                        class="px-7 py-3 mt-20 rounded-lg border border-white font-sf_pro font-medium text-white text-lg">
+                        class="px-7 py-3 mt-20 rounded-lg border border-white font-sf_pro font-medium text-white lg:text-base text-sm">
                         Посмотреть все
                     </router-link>
                 </div>
-                <div class="w-full pb-40 pt-10">
+                <div class="w-full sm:pb-40 pb-20 pt-10">
                     <h2
-                        class="text-center font-sf_pro font-bold text-[50px] text-white w-2/3 leading-[60px] mx-auto mt-32 mb-20">
+                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-3xl text-white lg:w-2/3 w-full lg:leading-[60px] sm:leading-[50px] leading-[40px] mx-auto my-20">
                         Похожие курсы
                     </h2>
                     <div class="flex flex-col items-center space-y-20">

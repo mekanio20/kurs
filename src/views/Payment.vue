@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-full relative">
+    <div class="w-full min-h-100vh relative overflow-hidden">
         <div class="absolute bottom-0 left-0">
             <svg width="587" height="910" viewBox="0 0 587 910" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <ellipse cx="-26.5267" cy="899.913" rx="613.473" ry="899.913" fill="url(#paint0_radial_731_5230)"

@@ -1,5 +1,5 @@
 <template>
-  <div class="!w-full !h-full overflow-x-hidden">
+  <div class="!w-full !h-full no-scrollbar">
     <RouterView />
   </div>
 </template>

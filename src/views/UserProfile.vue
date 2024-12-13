@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-full relative">
+    <div class="w-full min-h-100vh relative overflow-hidden">
         <div class="absolute left-0 -bottom-40">
             <svg width="580" height="861" viewBox="0 0 580 861" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <ellipse cx="-33.5267" cy="899.913" rx="613.473" ry="899.913" fill="url(#paint0_radial_585_4648)"
@@ -29,12 +29,13 @@
         <div class="w-full relative z-50">
             <Navbar />
             <div class="container bg-transparent my-44">
-                <div class="w-full flex items-stretch">
-                    <div class="p-10 bg-m_black-500 rounded-xl mr-10">
-                        <h1 class="font-sf_pro font-bold text-2xl text-white">Личный кабинет</h1>
-                        <div class="flex flex-col space-y-8 my-20">
+                <div class="w-full flex md:flex-row flex-col items-stretch">
+                    <div class="md:w-[550px] w-full lg:p-10 md:p-8 p-6 bg-m_black-500 rounded-xl lg:mr-10 md:mr-5 mb-2">
+                        <h1 class="font-sf_pro font-bold lg:text-2xl text-xl text-white md:block hidden">Личный кабинет
+                        </h1>
+                        <div class="flex md:flex-col flex-row justify-evenly md:space-y-8 md:space-x-0 space-x-6 md:my-20">
                             <router-link to="#" class="flex items-center space-x-6">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                <svg class="md:w-[25px] w-[20px]" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M9.16699 3.33325H3.33366C2.89163 3.33325 2.46771 3.50885 2.15515 3.82141C1.84259 4.13397 1.66699 4.55789 1.66699 4.99992V16.6666C1.66699 17.1086 1.84259 17.5325 2.15515 17.8451C2.46771 18.1577 2.89163 18.3333 3.33366 18.3333H15.0003C15.4424 18.3333 15.8663 18.1577 16.1788 17.8451C16.4914 17.5325 16.667 17.1086 16.667 16.6666V10.8333"
@@ -45,12 +46,12 @@
                                         stroke="white" stroke-width="1.2" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                                <div class="font-sf_pro font-medium text-lg text-white">
+                                <div class="font-sf_pro font-medium lg:text-lg text-base text-white md:block hidden">
                                     Редактировать профиль
                                 </div>
                             </router-link>
                             <router-link to="#" class="flex items-center space-x-6">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                <svg class="md:w-[25px] w-[20px]" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_585_5094)">
                                         <path
@@ -68,12 +69,12 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <div class="font-sf_pro font-medium text-lg text-white">
+                                <div class="font-sf_pro font-medium lg:text-lg text-base text-white md:block hidden">
                                     Настройки учетной записи
                                 </div>
                             </router-link>
                             <router-link to="#" class="flex items-center space-x-6">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                <svg class="md:w-[25px] w-[20px]" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M10.0003 18.3334C14.6027 18.3334 18.3337 14.6025 18.3337 10.0001C18.3337 5.39771 14.6027 1.66675 10.0003 1.66675C5.39795 1.66675 1.66699 5.39771 1.66699 10.0001C1.66699 14.6025 5.39795 18.3334 10.0003 18.3334Z"
@@ -84,12 +85,12 @@
                                         d="M10.0003 1.66675C12.0847 3.94871 13.2693 6.91011 13.3337 10.0001C13.2693 13.0901 12.0847 16.0515 10.0003 18.3334C7.91593 16.0515 6.73136 13.0901 6.66699 10.0001C6.73136 6.91011 7.91593 3.94871 10.0003 1.66675V1.66675Z"
                                         stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <div class="font-sf_pro font-medium text-lg text-white">
+                                <div class="font-sf_pro font-medium lg:text-lg text-base text-white md:block hidden">
                                     Язык
                                 </div>
                             </router-link>
                             <router-link to="#" class="flex items-center space-x-6">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                <svg class="md:w-[25px] w-[20px]" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M10.0003 18.3334C14.6027 18.3334 18.3337 14.6025 18.3337 10.0001C18.3337 5.39771 14.6027 1.66675 10.0003 1.66675C5.39795 1.66675 1.66699 5.39771 1.66699 10.0001C1.66699 14.6025 5.39795 18.3334 10.0003 18.3334Z"
@@ -100,16 +101,16 @@
                                     <path d="M10 6.66675H10.0083" stroke="white" stroke-width="1.3"
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <div class="font-sf_pro font-medium text-lg text-white">
+                                <div class="font-sf_pro font-medium lg:text-lg text-base text-white md:block hidden">
                                     Поддержка и помощь
                                 </div>
                             </router-link>
                         </div>
                     </div>
-                    <div class="flex-1 p-10 bg-m_black-500 rounded-xl">
-                        <div class="w-full flex-col space-y-10">
-                            <div class="flex items-center space-x-6">
-                                <svg width="30" height="30" viewBox="0 0 20 20" fill="none"
+                    <div class="w-full p-10 bg-m_black-500 rounded-xl">
+                        <div class="w-full flex-col md:space-y-10 space-y-5">
+                            <div class="md:flex hidden items-center space-x-6">
+                                <svg class="lg:w-[30px] w-[20px]" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M9.16699 3.33325H3.33366C2.89163 3.33325 2.46771 3.50885 2.15515 3.82141C1.84259 4.13397 1.66699 4.55789 1.66699 4.99992V16.6666C1.66699 17.1086 1.84259 17.5325 2.15515 17.8451C2.46771 18.1577 2.89163 18.3333 3.33366 18.3333H15.0003C15.4424 18.3333 15.8663 18.1577 16.1788 17.8451C16.4914 17.5325 16.667 17.1086 16.667 16.6666V10.8333"
@@ -120,16 +121,16 @@
                                         stroke="white" stroke-width="1.2" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                                <div class="font-sf_pro font-bold text-3xl text-white">
+                                <div class="font-sf_pro font-bold lg:text-2xl text-xl text-white">
                                     Редактировать профиль
                                 </div>
                             </div>
-                            <div class="flex items-center space-x-16 pt-10 pb-4">
+                            <div class="flex md:flex-row flex-col md:space-y-0 space-y-6 items-center lg:space-x-16 md:space-x-10 md:pt-10 pb-4">
                                 <div class="w-24 rounded-full">
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div
-                                    class="flex items-center space-x-6 px-8 py-3 font-sf_pro font-medium text-xl rounded-xl text-white border border-white cursor-pointer">
+                                    class="flex items-center md:space-x-6 space-x-3 lg:px-8 px-6 py-3 font-sf_pro font-medium lg:text-lg sm:text-base text-sm rounded-xl text-white border border-white cursor-pointer">
                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -147,30 +148,32 @@
                                 </div>
                             </div>
                             <div class="flex flex-col space-y-2">
-                                <label class="font-sf_pro font-normal text-m_gray-100 text-base">Имя</label>
+                                <label class="font-sf_pro font-normal text-m_gray-100 sm:text-base text-sm">Имя</label>
                                 <input
-                                    class="w-1/2 bg-m_black-300 px-8 py-4 rounded-lg font-sf_pro font-normal text-lg text-white focus:outline-none focus:ring-1 focus:ring-m_yellow-200 focus:border-transparent"
+                                    class="lg:w-2/3 w-full bg-m_black-300 px-8 py-4 rounded-lg font-sf_pro font-normal sm:text-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-m_yellow-200 focus:border-transparent"
                                     type="text" value="Мария">
                             </div>
                             <div class="flex flex-col space-y-2">
-                                <label class="font-sf_pro font-normal text-m_gray-100 text-base">Фамилия</label>
+                                <label
+                                    class="font-sf_pro font-normal text-m_gray-100 sm:text-base text-sm">Фамилия</label>
                                 <input
-                                    class="w-1/2 bg-m_black-300 px-8 py-4 rounded-lg font-sf_pro font-normal text-lg text-white focus:outline-none focus:ring-1 focus:ring-m_yellow-200 focus:border-transparent"
+                                    class="lg:w-2/3 w-full bg-m_black-300 px-8 py-4 rounded-lg font-sf_pro font-normal sm:text-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-m_yellow-200 focus:border-transparent"
                                     type="text" value="Смирнова">
                             </div>
-                            <div class="flex flex-col space-y-2 w-1/2">
-                                <label class="font-sf_pro font-normal text-m_gray-100 text-base">Информация</label>
+                            <div class="flex flex-col space-y-2 lg:w-2/3 w-full">
+                                <label
+                                    class="font-sf_pro font-normal text-m_gray-100 sm:text-base text-sm">Информация</label>
                                 <textarea v-model="infoText"
-                                    class="w-full bg-m_black-300 px-8 py-4 rounded-lg font-sf_pro font-normal text-lg text-white focus:outline-none focus:ring-1 focus:ring-m_yellow-200 focus:border-transparent"
+                                    class="w-full bg-m_black-300 px-8 py-4 rounded-lg font-sf_pro font-normal sm:text-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-m_yellow-200 focus:border-transparent"
                                     rows="5" placeholder="Write your information here..."></textarea>
                             </div>
-                            <div class="flex items-center space-x-6">
+                            <div class="flex items-center space-x-6 pt-5">
                                 <div
-                                    class="w-fit flex items-center space-x-6 px-8 py-3 font-sf_pro font-normal text-lg rounded-lg text-m_yellow-100 border border-m_yellow-100 cursor-pointer">
+                                    class="w-fit flex items-center space-x-6 px-8 py-3 font-sf_pro font-normal sm:text-base text-sm rounded-lg text-m_yellow-100 border border-m_yellow-100 cursor-pointer">
                                     Отмена
                                 </div>
                                 <div
-                                    class="w-fit flex items-center space-x-6 px-8 py-3 font-sf_pro font-normal text-lg rounded-lg text-black bg-m_yellow-100 cursor-pointer">
+                                    class="w-fit flex items-center space-x-6 px-8 py-3 font-sf_pro font-normal sm:text-base text-sm rounded-lg text-black bg-m_yellow-100 cursor-pointer">
                                     Обновить
                                 </div>
                             </div>

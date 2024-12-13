@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-full relative">
+    <div class="w-full min-h-100vh relative overflow-hidden">
         <div class="absolute left-0 top-0">
             <svg width="598" height="1581" viewBox="0 0 598 1581" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <ellipse cx="-15.5267" cy="680.913" rx="613.473" ry="899.913" fill="url(#paint0_radial_401_1794)"
@@ -52,7 +52,7 @@
                 </defs>
             </svg>
         </div>
-        <div class="w-full relative z-50">
+        <div class="w-full h-full relative z-50">
             <Navbar />
             <div class="container bg-transparent my-20">
                 <div class="w-full flex items-center justify-between">
@@ -145,7 +145,7 @@
                         Получайте знания от творческих специалистов
                     </h2>
                     <!-- Arrow icons -->
-                    <div class="flex items-center justify-end mb-20">
+                    <div class="flex items-center justify-end md:mb-20">
                         <div class="hidden md:flex items-center space-x-2">
                             <svg class="p-3 lg:w-[65px] w-[50px] rounded-full cursor-pointer duration-200 bg-m_black-300 text-m_gray-100"
                                 viewBox="0 0 24 24" stroke="#B3B3B3"

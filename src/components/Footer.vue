@@ -1,7 +1,7 @@
 <template>
     <div class="container ">
         <div
-            class="flex lg:flex-row flex-col-reverse items-start justify-between py-20 border-b border-m_black-300">
+            class="flex lg:flex-row flex-col-reverse items-start justify-between sm:py-20 py-10 border-b border-m_black-300">
             <div class="lg:flex-1 w-full flex lg:items-start items-center lg:justify-start justify-center flex-col lg:mt-0 mt-20">
                 <router-link to="/" class="flex items-center space-x-4 cursor-pointer">
                     <svg width="120" height="21" viewBox="0 0 106 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,7 @@
                     </router-link>
                 </div>
                 <p
-                    class="font-sf_pro font-normal lg:text-lg text-end sm:text-base text-sm my-10 text-m_gray-100 lg:hidden block">
+                    class="font-sf_pro font-normal lg:text-lg sm:text-end text-center sm:text-base text-sm my-10 text-m_gray-100 lg:hidden block">
                     All Rights Reserved | <span class="text-m_yellow-100">Terms and Conditions</span> | <span
                         class="text-m_yellow-100">Privacy Policy</span>
                 </p>
