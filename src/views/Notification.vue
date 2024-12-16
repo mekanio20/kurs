@@ -28,18 +28,18 @@
         </div>
         <div class="w-full relative z-50">
             <Navbar />
-            <div class="container bg-transparent mt-44">
-                <h2 class="font-sf_pro font-bold text-[35px] text-white leading-[60px] mx-auto mt-32 mb-10">
+            <div class="container bg-transparent sm:mt-44 mt-32">
+                <h2 class="font-sf_pro font-bold lg:text-3xl sm:text-2xl text-xl text-white lg:leading-[60px] sm:leading-[50px] leading-[40px] mx-auto sm:mt-32 mt-10 mb-10">
                     Мое обучение
                 </h2>
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-4 overflow-x-auto no-scrollbar">
                     <div :class="[true ? 'bg-m_yellow-100 text-black' : 'bg-m_black-200 text-m_gray-200']"
-                        class="px-8 py-3 rounded-3xl font-sf_pro font-medium text-lg hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer">
+                        class="px-8 py-3 text-nowrap rounded-3xl font-sf_pro font-medium lg:text-lg sm:text-base text-sm hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer">
                         Все
                     </div>
                     <div
-                        class="flex items-center space-x-3 px-8 py-3 rounded-3xl bg-m_black-200 font-sf_pro font-medium text-lg text-m_gray-200 hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer group">
-                        <svg class="w-[20px] stroke-m_gray-200 group-hover:stroke-black" viewBox="0 0 21 21" fill="none"
+                        class="flex items-center space-x-3 px-8 py-3 text-nowrap rounded-3xl bg-m_black-200 font-sf_pro font-medium lg:text-lg sm:text-base text-sm text-m_gray-200 hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer group">
+                        <svg class="sm:w-[20px] w-[15px] stroke-m_gray-200 group-hover:stroke-black" viewBox="0 0 21 21" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M18.375 13.125V16.625C18.375 17.0891 18.1906 17.5342 17.8624 17.8624C17.5342 18.1906 17.0891 18.375 16.625 18.375H4.375C3.91087 18.375 3.46575 18.1906 3.13756 17.8624C2.80937 17.5342 2.625 17.0891 2.625 16.625V13.125"
@@ -52,8 +52,8 @@
                         <p>Загрузки</p>
                     </div>
                     <div
-                        class="flex items-center space-x-3 px-8 py-3 rounded-3xl bg-m_black-200 font-sf_pro font-medium text-lg text-m_gray-200 hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer group">
-                        <svg class="w-[20px] stroke-m_gray-200 group-hover:stroke-black" viewBox="0 0 20 21" fill="none"
+                        class="flex items-center space-x-3 px-8 py-3 text-nowrap rounded-3xl bg-m_black-200 font-sf_pro font-medium lg:text-lg sm:text-base text-sm text-m_gray-200 hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer group">
+                        <svg class="sm:w-[20px] w-[15px] stroke-m_gray-200 group-hover:stroke-black" viewBox="0 0 20 21" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M15.8327 18.375L9.99935 14L4.16602 18.375V4.375C4.16602 3.91087 4.34161 3.46575 4.65417 3.13756C4.96673 2.80937 5.39065 2.625 5.83268 2.625H14.166C14.608 2.625 15.032 2.80937 15.3445 3.13756C15.6571 3.46575 15.8327 3.91087 15.8327 4.375V18.375Z"
@@ -62,8 +62,8 @@
                         <p>Сохраненные</p>
                     </div>
                     <div
-                        class="flex items-center space-x-3 px-8 py-3 rounded-3xl bg-m_black-200 font-sf_pro font-medium text-lg text-m_gray-200 hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer group">
-                        <svg class="w-[20px] stroke-m_gray-200 group-hover:stroke-black" viewBox="0 0 20 20" fill="none"
+                        class="flex items-center space-x-3 px-8 py-3 text-nowrap rounded-3xl bg-m_black-200 font-sf_pro font-medium lg:text-lg sm:text-base text-sm text-m_gray-200 hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer group">
+                        <svg class="sm:w-[20px] w-[15px] stroke-m_gray-200 group-hover:stroke-black" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_885_14911)">
                                 <path
@@ -81,8 +81,8 @@
                         <p>Пройденные</p>
                     </div>
                     <div
-                        class="flex items-center space-x-3 px-8 py-3 rounded-3xl bg-m_black-200 font-sf_pro font-medium text-lg text-m_gray-200 hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer group">
-                        <svg class="w-[20px] stroke-m_gray-200 group-hover:stroke-black" viewBox="0 0 20 20" fill="none"
+                        class="flex items-center space-x-3 px-8 py-3 text-nowrap rounded-3xl bg-m_black-200 font-sf_pro font-medium lg:text-lg sm:text-base text-sm text-m_gray-200 hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer group">
+                        <svg class="sm:w-[20px] w-[15px] stroke-m_gray-200 group-hover:stroke-black" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_885_14913)">
                                 <path
@@ -100,85 +100,85 @@
                         <p>История просмотра</p>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-y-8 py-20">
-                    <div class="w-[650px] flex items-start space-x-6 bg-m_black-500 rounded-lg p-4">
+                <div class="grid sm:grid-cols-2 grid-cols-1 gap-x-4 gap-y-8 sm:py-20 py-10">
+                    <div class="flex items-start space-x-6 bg-m_black-500 rounded-lg p-4">
                         <div class="w-[120px] rounded-lg">
                             <img src="/imgs/person5.png">
                         </div>
                         <div class="flex flex-col space-y-2">
-                            <h4 class="font-sf_pro font-medium text-xl text-white">Do Things, Tell People: The Power of
+                            <h4 class="font-sf_pro font-medium lg:text-lg md:text-base text-sm text-white">Do Things, Tell People: The Power of
                                 Personal Branding</h4>
-                            <p class="font-sf_pro font-normal text-lg text-m_gray-100">Anthony Wade</p>
+                            <p class="font-sf_pro font-normal lg:text-base md:text-sm text-xs text-m_gray-100">Anthony Wade</p>
                             <div class="relative pt-2">
                                 <div class="absolute w-full border-b-2 border-m_black-300"></div>
                                 <div class="absolute w-16 border-b-2 border-yellow-500"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="w-[650px] flex items-start space-x-6 bg-m_black-500 rounded-lg p-4">
+                    <div class="flex items-start space-x-6 bg-m_black-500 rounded-lg p-4">
                         <div class="w-[120px] rounded-lg">
                             <img src="/imgs/person5.png">
                         </div>
                         <div class="flex flex-col space-y-2">
-                            <h4 class="font-sf_pro font-medium text-xl text-white">Do Things, Tell People: The Power of
+                            <h4 class="font-sf_pro font-medium lg:text-lg md:text-base text-sm text-white">Do Things, Tell People: The Power of
                                 Personal Branding</h4>
-                            <p class="font-sf_pro font-normal text-lg text-m_gray-100">Anthony Wade</p>
+                            <p class="font-sf_pro font-normal lg:text-base md:text-sm text-xs text-m_gray-100">Anthony Wade</p>
                             <div class="relative pt-2">
                                 <div class="absolute w-full border-b-2 border-m_black-300"></div>
                                 <div class="absolute w-16 border-b-2 border-yellow-500"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="w-[650px] flex items-start space-x-6 bg-m_black-500 rounded-lg p-4">
+                    <div class="flex items-start space-x-6 bg-m_black-500 rounded-lg p-4">
                         <div class="w-[120px] rounded-lg">
                             <img src="/imgs/person5.png">
                         </div>
                         <div class="flex flex-col space-y-2">
-                            <h4 class="font-sf_pro font-medium text-xl text-white">Do Things, Tell People: The Power of
+                            <h4 class="font-sf_pro font-medium lg:text-lg md:text-base text-sm text-white">Do Things, Tell People: The Power of
                                 Personal Branding</h4>
-                            <p class="font-sf_pro font-normal text-lg text-m_gray-100">Anthony Wade</p>
+                            <p class="font-sf_pro font-normal lg:text-base md:text-sm text-xs text-m_gray-100">Anthony Wade</p>
                             <div class="relative pt-2">
                                 <div class="absolute w-full border-b-2 border-m_black-300"></div>
                                 <div class="absolute w-16 border-b-2 border-yellow-500"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="w-[650px] flex items-start space-x-6 bg-m_black-500 rounded-lg p-4">
+                    <div class="flex items-start space-x-6 bg-m_black-500 rounded-lg p-4">
                         <div class="w-[120px] rounded-lg">
                             <img src="/imgs/person5.png">
                         </div>
                         <div class="flex flex-col space-y-2">
-                            <h4 class="font-sf_pro font-medium text-xl text-white">Do Things, Tell People: The Power of
+                            <h4 class="font-sf_pro font-medium lg:text-lg md:text-base text-sm text-white">Do Things, Tell People: The Power of
                                 Personal Branding</h4>
-                            <p class="font-sf_pro font-normal text-lg text-m_gray-100">Anthony Wade</p>
+                            <p class="font-sf_pro font-normal lg:text-base md:text-sm text-xs text-m_gray-100">Anthony Wade</p>
                             <div class="relative pt-2">
                                 <div class="absolute w-full border-b-2 border-m_black-300"></div>
                                 <div class="absolute w-16 border-b-2 border-yellow-500"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="w-[650px] flex items-start space-x-6 bg-m_black-500 rounded-lg p-4">
+                    <div class="flex items-start space-x-6 bg-m_black-500 rounded-lg p-4">
                         <div class="w-[120px] rounded-lg">
                             <img src="/imgs/person5.png">
                         </div>
                         <div class="flex flex-col space-y-2">
-                            <h4 class="font-sf_pro font-medium text-xl text-white">Do Things, Tell People: The Power of
+                            <h4 class="font-sf_pro font-medium lg:text-lg md:text-base text-sm text-white">Do Things, Tell People: The Power of
                                 Personal Branding</h4>
-                            <p class="font-sf_pro font-normal text-lg text-m_gray-100">Anthony Wade</p>
+                            <p class="font-sf_pro font-normal lg:text-base md:text-sm text-xs text-m_gray-100">Anthony Wade</p>
                             <div class="relative pt-2">
                                 <div class="absolute w-full border-b-2 border-m_black-300"></div>
                                 <div class="absolute w-16 border-b-2 border-yellow-500"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="w-[650px] flex items-start space-x-6 bg-m_black-500 rounded-lg p-4">
+                    <div class="flex items-start space-x-6 bg-m_black-500 rounded-lg p-4">
                         <div class="w-[120px] rounded-lg">
                             <img src="/imgs/person5.png">
                         </div>
                         <div class="flex flex-col space-y-2">
-                            <h4 class="font-sf_pro font-medium text-xl text-white">Do Things, Tell People: The Power of
+                            <h4 class="font-sf_pro font-medium lg:text-lg md:text-base text-sm text-white">Do Things, Tell People: The Power of
                                 Personal Branding</h4>
-                            <p class="font-sf_pro font-normal text-lg text-m_gray-100">Anthony Wade</p>
+                            <p class="font-sf_pro font-normal lg:text-base md:text-sm text-xs text-m_gray-100">Anthony Wade</p>
                             <div class="relative pt-2">
                                 <div class="absolute w-full border-b-2 border-m_black-300"></div>
                                 <div class="absolute w-16 border-b-2 border-yellow-500"></div>
