@@ -1,4 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
+import axios from "axios";
+
+axios.interceptors.request.use((config) => {
+  const authUser = localStorage.getItem("access");
+  if (authUser) {
+    config.headers['Authorization'] = `Bearer ${authUser}`;
+  }
+  return config;
+});
 
 const router = createRouter({
   history: createWebHistory(),

@@ -20,15 +20,13 @@
                             class="border-b border-m_black-800 hover:bg-m_black-800">
                             <td class="px-3 py-4 text-base font-medium">#{{ item.id }}</td>
                             <td class="px-3 py-4">
-                                <img class="w-14 h-14 rounded-lg object-cover" :src="item.foto"></td>
+                                <img class="w-14 h-14 rounded-lg object-cover" :src="item.image"></td>
                             <td class="px-3 py-4 text-base">{{ item.name }}</td>
                             <td class="px-3 py-4 text-base">{{ item.kal }}</td>
                             <td class="px-3 py-4 text-base">
-                                <span :class="[
-                            'px-3 py-2 rounded-lg text-xs font-semibold',
-                            item.status === 'Активный' ? 'bg-m_yellow-400 text-m_yellow-500' : 'bg-m_red-100 text-m_red-200'
-                        ]">
-                                    {{ item.status }}
+                                <span :class="['px-3 py-2 rounded-lg text-xs font-semibold',
+                                    item.is_active === true ? 'bg-m_yellow-400 text-m_yellow-500' : 'bg-m_red-100 text-m_red-200']">
+                                    {{ item.is_active === true ? 'Активный' : 'Не активен' }}
                                 </span>
                             </td>
                         </tr>
@@ -40,6 +38,7 @@
 </template>
 
 <script>
+import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
 import AdminHeader from '@/components/admin/Header.vue'
 import AdminButton from '@/components/base/AdminButton.vue';
@@ -52,17 +51,20 @@ export default {
     },
     data() {
         return {
-            categories: [
-                { id: 123, foto: '/imgs/bitmap.png', name: 'Маркетинг', kal: 32, status: 'Активный' },
-                { id: 124, foto: '/imgs/bitmap.png', name: 'Искусство и дизайн', kal: 32, status: 'Не активен' },
-                { id: 125, foto: '/imgs/bitmap.png', name: 'Бизнес и предпринимательство', kal: 32, status: 'Активный' },
-                { id: 126, foto: '/imgs/bitmap.png', name: 'Сообщество и правительство', kal: 32, status: 'Активный' },
-            ]
+            categories: null
         }
+    },
+    created() {
+        this.getCategories()
     },
     methods: {
         addCategory() {
             this.$router.push('/dashboard/admin/add/category')
+        },
+        // --------------
+        async getCategories() {
+            const response = await api.get('/categories')
+            this.categories = response.data.results
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full min-h-100vh relative overflow-hidden">
+    <div class="w-full h-full relative overflow-hidden">
         <div class="absolute left-0 top-0">
             <svg width="634" height="765" viewBox="0 0 634 765" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <ellipse cx="0.5" cy="-153.5" rx="633.5" ry="918.5" fill="url(#paint0_radial_471_1430)"
@@ -75,7 +75,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import api from '@/api/index';
+import { mapActions, mapState } from 'vuex';
+import { useToast } from 'vue-toastification';
 export default {
     name: "Login",
     data() {
@@ -137,15 +139,35 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['registerUser']),
+        ...mapActions(['registerUser', 'setLoading']),
         async handleRegister() {
+            const toast = useToast();
+            this.$store.dispatch('setLoading', true);
             try {
-                await this.registerUser({ email: this.email, password: this.password });
-                this.$router.push({ name: "Home" })
+                const user = { email: this.email, password: this.password };
+                const res = await api.post('/token/', user);
+                if (res.status === 200) {
+                    const { access, refresh, user } = res.data;
+                    localStorage.setItem('access', access);
+                    localStorage.setItem('refresh', refresh);
+                    
+                    await this.registerUser({ access: access, refresh: refresh });
+
+                    if (user.is_teacher) { this.$router.push({ name: "AdminHome" }) }
+                    else if (user.is_superuser) { this.$router.push({ name: "AdminHome" }) }
+                    else { this.$router.push({ name: "Home" }) }
+                }
             } catch (error) {
-                console.error("Error occurred: ", error);
+                console.error(error);
+                const errorMessage = error.response?.data?.detail || 'Login failed';
+                toast.error(errorMessage);
+            } finally {
+                this.$store.dispatch('setLoading', false);
             }
         },
+    },
+    computed: {
+        ...mapState(['loading']),
     },
 }
 </script>

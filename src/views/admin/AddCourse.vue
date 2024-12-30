@@ -91,7 +91,7 @@
                                         <div
                                             class="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
                                             <!-- Play svg -->
-                                            <svg width="40" height="40" viewBox="0 0 29 29" fill="none"
+                                            <svg v-if="!isLoading[index]" width="40" height="40" viewBox="0 0 29 29" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_1270_12575)">
                                                     <mask id="mask0_1270_12575" style="mask-type:luminance"
@@ -118,6 +118,13 @@
                                         </div>
                                     </div>
                                 </label>
+                                <div v-if="isLoading[index]"
+                                    class="absolute inset-0 flex flex-col items-center justify-center mt-2">
+                                    <div
+                                        class="w-10 h-10 border-4 border-gray-200 border-t-[#FFCC02] rounded-full animate-spin">
+                                    </div>
+                                    <p class="mt-2 text-white">{{ uploadProgress[index] }}%</p>
+                                </div>
                                 <input :id="'videoInput' + index" accept="video/*"
                                     @change="handleVideoUpload($event, index)" type="file" class="hidden">
                             </div>
@@ -148,9 +155,13 @@
                                 type="text" placeholder="Название урока">
                         </div>
                     </div>
-                    <button @click="addVideField" class="w-full font-sf_pro font-normal text-m_yellow-100 text-lg pt-10">
+                    <button @click="addVideField"
+                        class="w-full font-sf_pro font-normal text-m_yellow-100 text-lg pt-10">
                         + Добавить еще
                     </button>
+                    <div class="w-fit py-10 mx-auto">
+                        <AdminButton :bold="true" name="Загрузить" @click="saveCourse"></AdminButton>
+                    </div>
                 </div>
             </form>
         </div>
@@ -158,6 +169,7 @@
 </template>
 
 <script>
+import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
 import AdminHeader from '@/components/admin/Header.vue';
 import AdminButton from '@/components/base/AdminButton.vue';
@@ -181,13 +193,9 @@ export default {
             videoFile: null,
             active_category: 'Категория',
             active_lang: 'Язык',
-            categories: [
-                { id: 1, name: 'Категория 1' },
-                { id: 2, name: 'Категория 2' },
-                { id: 3, name: 'Категория 3' },
-                { id: 4, name: 'Категория 4' },
-                { id: 5, name: 'Категория 5' },
-            ],
+            categories: null,
+            isLoading: [false],
+            uploadProgress: [0],
             langs: [
                 { id: 1, name: 'Русский' },
                 { id: 2, name: 'Английский' },
@@ -211,15 +219,23 @@ export default {
         }
     },
     methods: {
+        async getCategories() {
+            const response = await api.get('/categories')
+            this.categories = response.data.results
+        },
+        // ---------------
         handleFileUpload(event) {
             this.imageFile = URL.createObjectURL(event.target.files[0])
         },
         handleImageUpload(event, index) {
             this.videoFields[index].imagePreview = URL.createObjectURL(event.target.files[0])
         },
-        handleVideoUpload(event, index) {
+        async handleVideoUpload(event, index) {
             const file = event.target.files[0];
             if (!file) return;
+
+            this.isLoading[index] = true;
+            this.uploadProgress[index] = 0;
 
             const videoURL = URL.createObjectURL(file);
 
@@ -227,6 +243,43 @@ export default {
             this.videoFields[index].videoPreview = videoURL;
 
             this.generateThumbnail(videoURL, index);
+
+            const formData = new FormData();
+            formData.append('path', this.videoFields[index].videoFile);
+
+            try {
+                await this.uploadWithProgress('https://0-100.community/api/videos/', formData, index);
+            } catch (error) {
+                console.error('Error occurred: ', error);
+            } finally {
+                this.isLoading[index] = false;
+            }
+        },
+        async uploadWithProgress (url, formData, index) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', url, true);
+
+                xhr.setRequestHeader('Authorization', `Bearer ${localStorage.getItem('access')}`);
+
+                xhr.upload.onprogress = (event) => {
+                    if (event.lengthComputable) {
+                        this.uploadProgress[index] = Math.round((event.loaded / event.total) * 100);
+                    }
+                };
+
+                xhr.onload = () => {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        resolve(JSON.parse(xhr.responseText));
+                    } else {
+                        reject(new Error(`HTTP Error: ${xhr.status}`));
+                    }
+                };
+
+                xhr.onerror = () => reject(new Error('Error occurred'));
+
+                xhr.send(formData);
+            });
         },
         generateThumbnail(videoURL, index) {
             const videoElement = document.createElement("video");
@@ -255,6 +308,8 @@ export default {
             this.fields.push({ value: '' });
         },
         addVideField() {
+            this.isLoading.push(false);
+            this.uploadProgress.push(0);
             this.videoFields.push({
                 videoPreview: null,
                 imagePreview: null,
@@ -273,6 +328,9 @@ export default {
             console.log(this.post);
         },
 
+    },
+    async created() {
+        await this.getCategories()
     }
 }
 </script>

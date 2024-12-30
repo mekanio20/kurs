@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full min-h-100vh relative overflow-hidden">
+    <div class="w-full h-full relative overflow-hidden">
         <div class="absolute left-0 top-0">
             <svg width="634" height="765" viewBox="0 0 634 765" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <ellipse cx="0.5" cy="-153.5" rx="633.5" ry="918.5" fill="url(#paint0_radial_471_1430)"
@@ -74,7 +74,7 @@
                         class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold sm:text-base text-sm !mt-10">Создать
                         аккаунт</button>
                     <div
-                        class="bg-transparent flex items-center space-x-1 font-sf_pro font-normal sm:text-base text-sm !mt-40">
+                        class="bg-transparent flex items-center space-x-1 font-sf_pro font-normal sm:text-base text-sm !mt-36">
                         <p class="text-m_gray-100">Уже есть аккаунт?</p>
                         <router-link to="/login" class="text-m_yellow-200 hover:underline">Войти</router-link>
                     </div>
@@ -101,6 +101,7 @@ export default {
         return {
             email: '',
             password: '',
+            fullName: '',
             checked: false,
             galleryItems: [
                 {
@@ -169,3 +170,19 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+@keyframes scroll {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+.animate-scroll {
+    animation: scroll 80s linear infinite;
+}
+</style>

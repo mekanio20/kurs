@@ -29,10 +29,8 @@
                             <td class="px-4 py-6 text-sm">{{ user.email }}</td>
                             <td class="px-4 py-6 text-sm">{{ user.addedDate }}</td>
                             <td class="px-4 py-6 text-sm">
-                                <span :class="[
-                            'px-4 py-2 rounded-lg text-xs font-semibold',
-                            user.userType === 'Пользователь' ? 'bg-m_yellow-300 text-m_yellow-100' : 'bg-m_blue-200 text-m_blue-300'
-                        ]">
+                                <span :class="['px-4 py-2 rounded-lg text-xs font-semibold',
+                                    user.userType === 'Пользователь' ? 'bg-m_yellow-300 text-m_yellow-100' : 'bg-m_blue-200 text-m_blue-300']">
                                     {{ user.userType }}
                                 </span>
                             </td>
@@ -45,6 +43,7 @@
 </template>
 
 <script>
+import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
 import AdminHeader from '@/components/admin/Header.vue'
 export default {
@@ -55,20 +54,17 @@ export default {
     },
     data() {
         return {
-            users: [
-                { id: 123, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Пользователь' },
-                { id: 124, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Наставник' },
-                { id: 125, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Пользователь' },
-                { id: 126, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Наставник' },
-                { id: 127, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Наставник' },
-                { id: 128, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Пользователь' },
-                { id: 129, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Наставник' },
-                { id: 130, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Наставник' },
-                { id: 131, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Пользователь' },
-                { id: 132, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Наставник' },
-                { id: 133, name: 'Мария Смирнова', email: 'randommail@gmail.com', addedDate: '30.12.2022 23:00', userType: 'Пользователь' }
-            ]
+            users: null
         }
     },
+    created() {
+        this.getUsers()
+    },
+    methods: {
+        async getUsers() {
+            const response = await api.get('/users/')
+            this.users = response.data.results
+        }
+    }
 }
 </script>
