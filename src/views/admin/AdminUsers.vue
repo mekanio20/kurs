@@ -25,7 +25,7 @@
                     <tbody>
                         <tr v-for="user in users" :key="user.id" class="border-b border-m_black-800 hover:bg-m_black-800">
                             <td class="px-4 py-6 text-sm font-medium">#{{ user.id }}</td>
-                            <td class="px-4 py-6 text-sm">{{ user.name }}</td>
+                            <td class="px-4 py-6 text-sm">{{ user.full_name }}</td>
                             <td class="px-4 py-6 text-sm">{{ user.email }}</td>
                             <td class="px-4 py-6 text-sm">{{ user.addedDate }}</td>
                             <td class="px-4 py-6 text-sm">

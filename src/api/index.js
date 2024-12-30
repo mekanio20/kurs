@@ -1,73 +1,76 @@
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: 'https://0-100.community/api', // API base URL
-  headers: {
-    "Content-Type": "application/json",
-  },
+const apiClient = axios.create({
+  baseURL: 'https://0-100.community/api',
 });
 
-let isRefreshing = false;
-let failedQueue = [];
+const getAccessToken = () => localStorage.getItem('access');
+const getRefreshToken = () => localStorage.getItem('refresh');
 
-const processQueue = (error, token = null) => {
-  failedQueue.forEach((prom) => {
-    if (token) {
-      prom.resolve(token);
-    } else {
-      prom.reject(error);
-    }
-  });
-
-  failedQueue = [];
+const setAccessToken = (token) => localStorage.setItem('access', token);
+const clearTokens = () => {
+  localStorage.removeItem('access');
 };
 
-// Request Interceptor
-api.interceptors.request.use(
+apiClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('access');
+    const token = getAccessToken();
     if (token) {
-      console.log(token);
-      config.headers['Authorization'] = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-// Response Interceptor
-api.interceptors.response.use(
+let isRefreshing = false;
+let refreshQueue = [];
+
+const processQueue = (token = null, error = null) => {
+  refreshQueue.forEach((promise) => {
+    if (token) {
+      promise.resolve(token);
+    } else {
+      promise.reject(error);
+    }
+  });
+  refreshQueue = [];
+};
+
+apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
     if (error.response?.status === 403 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
-          failedQueue.push({ resolve, reject });
-        }).then((token) => {
-            originalRequest.headers['Authorization'] = `Bearer ${token}`;
-            return axios(originalRequest);
-          }).catch((err) => Promise.reject(err));
+          refreshQueue.push({ resolve, reject });
+        })
+          .then((token) => {
+            originalRequest.headers.Authorization = `Bearer ${token}`;
+            return apiClient(originalRequest);
+          })
+          .catch((err) => Promise.reject(err));
       }
 
-      originalRequest._retry = true;
       isRefreshing = true;
 
       try {
-        const refreshToken = localStorage.getItem('refresh');
-        const { data } = await axios.post('https://0-100.community/api/token/refresh', { refresh: refreshToken });
+        const { data } = await axios.post('https://0-100.community/api/refresh/', {
+          refresh: getRefreshToken(),
+        });
 
-        localStorage.setItem('access', data.access);
-        localStorage.setItem('refresh', data.refresh);
+        setAccessToken(data.access);
+        originalRequest.headers.Authorization = `Bearer ${data.access}`;
+        processQueue(data.access);
 
-        api.defaults.headers['Authorization'] = `Bearer ${data.access}`;
-        processQueue(null, data.access);
-
-        return api(originalRequest);
+        return apiClient(originalRequest);
       } catch (refreshError) {
-        processQueue(refreshError, null);
-        localStorage.removeItem('access');
+        clearTokens();
+        window.location.href = '/login';
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
@@ -78,4 +81,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+export default apiClient;
