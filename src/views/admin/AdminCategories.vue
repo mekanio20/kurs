@@ -22,7 +22,7 @@
                             <td class="px-3 py-4">
                                 <img class="w-14 h-14 rounded-lg object-cover" :src="item.image"></td>
                             <td class="px-3 py-4 text-base">{{ item.name }}</td>
-                            <td class="px-3 py-4 text-base">{{ item.kal }}</td>
+                            <td class="px-3 py-4 text-base pl-24">{{ item.courses_count }}</td>
                             <td class="px-3 py-4 text-base">
                                 <span :class="['px-3 py-2 rounded-lg text-xs font-semibold',
                                     item.is_active === true ? 'bg-m_yellow-400 text-m_yellow-500' : 'bg-m_red-100 text-m_red-200']">

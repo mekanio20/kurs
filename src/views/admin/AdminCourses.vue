@@ -17,13 +17,14 @@
                 </div>
             </div>
             <div class="grid grid-cols-3 gap-8 py-4 relative">
-                <Card v-for="item in cards" :key="item.id" />
+                <Card v-for="item in courses" :key="item.id" :course="item" />
             </div>
         </div>
     </Sidebar>
 </template>
 
 <script>
+import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
 import AdminHeader from '@/components/admin/Header.vue';
 import AdminButton from '@/components/base/AdminButton.vue';
@@ -38,15 +39,22 @@ export default {
     },
     data() {
         return {
-            cards: [
-                1, 2, 3, 4, 5, 6, 7, 8
-            ]
+            courses: null,
+            cards: [ 1, 2, 3, 4, 5, 6, 7, 8 ],
         }
     },
+    created() {
+        this.getCourses()
+    },
     methods: {
+        async getCourses() {
+            const response = await api.get('/courses/')
+            console.log(response);
+            this.courses = response.data.results
+        },
         addCourse() {
             this.$router.push('/dashboard/admin/add/course')
-        }
+        },
     }
 }
 </script>

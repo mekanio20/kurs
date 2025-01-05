@@ -27,11 +27,11 @@
                             <td class="px-4 py-6 text-sm font-medium">#{{ user.id }}</td>
                             <td class="px-4 py-6 text-sm">{{ user.full_name }}</td>
                             <td class="px-4 py-6 text-sm">{{ user.email }}</td>
-                            <td class="px-4 py-6 text-sm">{{ user.addedDate }}</td>
+                            <td class="px-4 py-6 text-sm">{{ user.date_joined }}</td>
                             <td class="px-4 py-6 text-sm">
                                 <span :class="['px-4 py-2 rounded-lg text-xs font-semibold',
-                                    user.userType === 'Пользователь' ? 'bg-m_yellow-300 text-m_yellow-100' : 'bg-m_blue-200 text-m_blue-300']">
-                                    {{ user.userType }}
+                                    user.is_teacher == true ? 'bg-m_yellow-300 text-m_yellow-100' : user.is_staff ? 'bg-green-600 text-green-100' : 'bg-m_blue-200 text-m_blue-300']">
+                                    {{ user.is_teacher == true ? 'Наставник' : user.is_staff ? 'Администратор' : 'Пользователь' }}
                                 </span>
                             </td>
                         </tr>
@@ -63,6 +63,7 @@ export default {
     methods: {
         async getUsers() {
             const response = await api.get('/users/')
+            console.log(response);
             this.users = response.data.results
         }
     }
