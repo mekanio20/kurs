@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
 import AdminHeader from '@/components/admin/Header.vue';
 import AdminButton from '@/components/base/AdminButton.vue';
@@ -96,7 +97,14 @@ export default {
             active_status: true
         }
     },
+    created() {
+        this.getMentors()
+    },
     methods: {
+        async getMentors() {
+            const response = await api.get('/mentors/')
+            this.mentors = response.data
+        },
         handleFileUpload(event) {
             this.local = true
             this.imageFile = URL.createObjectURL(event.target.files[0])

@@ -69,8 +69,8 @@
                     </div>
                 </div>
                 <div class="w-full grid xl:grid-cols-4 md:grid-cols-3 mobile:grid-cols-2 grid-cols-1 gap-6 mb-40">
-                    <router-link to="/course/detail" v-for="item in cards" :key="item.id">
-                        <Card />
+                    <router-link v-for="item in courses" :key="item.id" :to="`/course/detail/${item.id}`">
+                        <Card :course="item" />
                     </router-link>
                 </div>
             </div>
@@ -80,6 +80,7 @@
 </template>
 
 <script>
+import api from '@/api/index';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import Card from '@/components/Card.vue';
@@ -92,17 +93,20 @@ export default {
     },
     data() {
         return {
+            courses: null,
             categoryName: 'Do things, tell people',
             sortSelection: false,
             filterSelection: false,
-            cards: [
-                1, 2, 3, 4, 5, 6, 7, 8,
-                1, 2, 3, 4, 5, 6, 7, 8,
-                1, 2, 3, 4, 5, 6, 7, 8,
-            ]
         }
     },
+    created() {
+        this.getCourses()
+    },
     methods: {
+        async getCourses() {
+            const response = await api.get('/courses/')
+            this.courses = response.data.results
+        },
         openSort() {
             this.sortSelection = !this.sortSelection
         },

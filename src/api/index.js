@@ -1,18 +1,13 @@
 import axios from 'axios';
+import { getAccessToken, getRefreshToken, setAccessToken, clearTokens } from '@/utils/token';
+import { setRefreshToken } from '../utils/token';
 
-const apiClient = axios.create({
+const api = axios.create({
   baseURL: 'https://0-100.community/api',
+  timeout: 5000,
 });
 
-const getAccessToken = () => localStorage.getItem('access');
-const getRefreshToken = () => localStorage.getItem('refresh');
-
-const setAccessToken = (token) => localStorage.setItem('access', token);
-const clearTokens = () => {
-  localStorage.removeItem('access');
-};
-
-apiClient.interceptors.request.use(
+api.interceptors.request.use(
   (config) => {
     const token = getAccessToken();
     if (token) {
@@ -24,54 +19,52 @@ apiClient.interceptors.request.use(
 );
 
 let isRefreshing = false;
-let refreshQueue = [];
+let failedQueue = [];
 
-const processQueue = (token = null, error = null) => {
-  refreshQueue.forEach((promise) => {
+const processQueue = (error, token = null) => {
+  failedQueue.forEach((prom) => {
     if (token) {
-      promise.resolve(token);
+      prom.resolve(token);
     } else {
-      promise.reject(error);
+      prom.reject(error);
     }
   });
-  refreshQueue = [];
+  failedQueue = [];
 };
 
-apiClient.interceptors.response.use(
+api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
     if (error.response?.status === 403 && !originalRequest._retry) {
-      originalRequest._retry = true;
-
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
-          refreshQueue.push({ resolve, reject });
-        })
-          .then((token) => {
-            originalRequest.headers.Authorization = `Bearer ${token}`;
-            return apiClient(originalRequest);
-          })
-          .catch((err) => Promise.reject(err));
+          failedQueue.push({ resolve, reject });
+        }).then((token) => {
+          originalRequest.headers.Authorization = `Bearer ${token}`;
+          return api(originalRequest);
+        });
       }
 
+      originalRequest._retry = true;
       isRefreshing = true;
 
       try {
-        const { data } = await axios.post('https://0-100.community/api/refresh/', {
+        const { data } = await axios.post('https://0-100.community/api/token/refresh', {
           refresh: getRefreshToken(),
         });
 
         setAccessToken(data.access);
+        setRefreshToken(data.refresh);
+        processQueue(null, data.access);
         originalRequest.headers.Authorization = `Bearer ${data.access}`;
-        processQueue(data.access);
-
-        return apiClient(originalRequest);
-      } catch (refreshError) {
+        return api(originalRequest);
+      } catch (err) {
+        processQueue(err, null);
         clearTokens();
-        window.location.href = '/login';
-        return Promise.reject(refreshError);
+        this.$router.push('/login');
+        return Promise.reject(err);
       } finally {
         isRefreshing = false;
       }
@@ -81,4 +74,4 @@ apiClient.interceptors.response.use(
   }
 );
 
-export default apiClient;
+export default api;

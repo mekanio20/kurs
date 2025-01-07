@@ -32,7 +32,7 @@
                         <h4 class="font-sf_pro font-medium text-lg text-white">Название курса</h4>
                         <AdminTextInput v-model="post.name" />
                         <h4 class="font-sf_pro font-medium text-lg text-white">Описание</h4>
-                        <textarea class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white resize-none"
+                        <textarea v-model="post.description" class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white resize-none"
                             name="" id="" cols="30" rows="7"></textarea>
                         <div class="!mt-9">
                             <AdminSelection @sendData="selectLang" :options="langs" :name="active_lang" />
@@ -42,7 +42,7 @@
                 <div class="w-full my-10">
                     <h4 class="font-sf_pro font-medium text-lg text-white pb-6">Чему вы научитесь</h4>
                     <div class="grid grid-cols-2 gap-6">
-                        <AdminTextInput v-for="(item, index) in fields" :key="index" v-model="item.value" />
+                        <AdminTextInput v-for="(item, index) in fields" :key="index" v-model="item.name" />
                     </div>
                     <button @click="addField" class="w-full font-sf_pro font-normal text-m_yellow-100 text-lg py-8">
                         + Добавить еще
@@ -131,7 +131,7 @@
                             <!-- Image input -->
                             <div class="relative">
                                 <label :for="'imageInput' + index" class="cursor-pointer">
-                                    <div v-if="!item.imagePreview"
+                                    <div v-if="!item.imagePerview"
                                         class="flex items-center space-x-4 bg-m_black-400 rounded-lg px-12 py-3 text-nowrap">
                                         <!-- Image svg -->
                                         <svg width="25" height="25" viewBox="0 0 37 37" fill="none"
@@ -142,15 +142,15 @@
                                         </svg>
                                         <p class="font-sf_pro font-medium text-lg text-white">Обложка</p>
                                     </div>
-                                    <div v-if="item.imagePreview" class="w-[255px] h-[150px] rounded-xl relative">
-                                        <img class="w-full h-full object-cover rounded-xl" :src="item.imagePreview">
+                                    <div v-if="item.imagePerview" class="w-[255px] h-[150px] rounded-xl relative">
+                                        <img class="w-full h-full object-cover rounded-xl" :src="item.imagePerview">
                                     </div>
                                 </label>
                                 <input :id="'imageInput' + index" accept="image/*"
                                     @change="handleImageUpload($event, index)" type="file" class="hidden">
                             </div>
                             <!-- Name input -->
-                            <input v-model="item.lessonName"
+                            <input v-model="item.name"
                                 class="w-full bg-m_black-400 rounded-lg px-8 py-3 font-sf_pro font-medium text-lg placeholder:text-m_gray-100 text-m_gray-100 outline-none"
                                 type="text" placeholder="Название урока">
                         </div>
@@ -192,6 +192,7 @@ export default {
             imagePerview: null,
             videoFile: null,
             active_category: 'Категория',
+            categoryId: 0,
             active_lang: 'Язык',
             categories: null,
             isLoading: [false],
@@ -206,14 +207,18 @@ export default {
                 description: ''
             },
             fields: [
-                { value: '' },
-                { value: '' },
+                { name: '' },
+                { name: '' },
             ],
             videoFields: [
                 {
+                    name: "",
+                    video: 0,
+                    banner: null,
+                    imagePerview: null,
+                    thumbnail: null,
+                    videoFile: null,
                     videoPreview: null,
-                    imagePreview: null,
-                    lessonName: "",
                 },
             ],
         }
@@ -226,9 +231,11 @@ export default {
         // ---------------
         handleFileUpload(event) {
             this.imageFile = URL.createObjectURL(event.target.files[0])
+            this.img = event.target.files[0]
         },
         handleImageUpload(event, index) {
-            this.videoFields[index].imagePreview = URL.createObjectURL(event.target.files[0])
+            this.videoFields[index].imagePerview = URL.createObjectURL(event.target.files[0])
+            this.videoFields[index].banner = event.target.files[0]
         },
         async handleVideoUpload(event, index) {
             const file = event.target.files[0];
@@ -270,6 +277,7 @@ export default {
 
                 xhr.onload = () => {
                     if (xhr.status >= 200 && xhr.status < 300) {
+                        this.videoFields[index].video = JSON.parse(xhr.responseText).id
                         resolve(JSON.parse(xhr.responseText));
                     } else {
                         reject(new Error(`HTTP Error: ${xhr.status}`));
@@ -305,27 +313,66 @@ export default {
             });
         },
         addField() {
-            this.fields.push({ value: '' });
+            this.fields.push({ name: '' });
         },
         addVideField() {
             this.isLoading.push(false);
             this.uploadProgress.push(0);
             this.videoFields.push({
                 videoPreview: null,
-                imagePreview: null,
-                lessonName: "",
+                videoFile: null,
+                thumbnail: null,
+                banner: null,
+                name: "",
+                id: 0,
+                video: 0,
             });
         },
         async selectCategory(option) {
-            console.log(option);
             this.active_category = option.name
+            this.categoryId = option.id
         },
         async selectLang(option) {
-            console.log(option);
             this.active_lang = option.name
         },
         async saveCourse() {
-            console.log(this.post);
+            console.log({
+                banner: this.img,
+                name: this.post.name,
+                description: this.post.description,
+                language: "ru" || this.active_lang,
+                price: 100,
+                total_duration: 100,
+                themes: this.fields,
+                lessons: this.videoFields.map(item => {
+                    return {
+                        name: item.name,
+                        video: item.video,
+                        banner: item.banner
+                    }
+                }),
+                categories: [this.categoryId],
+                fields: this.fields,
+            });
+
+            const response = await api.post('/courses/', {
+                banner: this.img,
+                name: this.post.name,
+                description: this.post.description,
+                language: "ru" || this.active_lang,
+                price: 100,
+                total_duration: 100,
+                themes: this.fields,
+                lessons: this.videoFields.map(item => {
+                    return {
+                        name: item.name,
+                        video: item.video,
+                        banner: item.banner
+                    }
+                }),
+                categories: [this.categoryId],
+                fields: this.fields,
+            })
         },
 
     },

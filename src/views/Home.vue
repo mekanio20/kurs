@@ -112,8 +112,10 @@
                         :modules="modules" :loop="true" :speed="1000"
                         :autoplay="{ delay: 2000, duration: 2000, disableOnInteraction: false }"
                         class="w-full flex items-center space-x-20 select-none">
-                        <swiper-slide v-for="item in cards" :key="item.id">
-                            <Card />
+                        <swiper-slide v-for="item in courses" :key="item.id">
+                            <router-link :to="`/course/detail/${item.id}`">
+                                <Card :course="item" />
+                            </router-link>
                         </swiper-slide>
                     </swiper>
                     <router-link to="/"
@@ -230,6 +232,7 @@
 </template>
 
 <script>
+import api from '@/api/index';
 import { mapState } from 'vuex';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
@@ -256,6 +259,7 @@ export default {
         return {
             slidesPerView: null,
             activeIndex: null,
+            courses: null,
             items: [
                 { id: 1, question: 'Lorem ipsum dolar sit', answer: 'Hawa shol lorem ipsum dolar sit bolya' },
                 { id: 2, question: 'Lorem ipsum dolar sit', answer: 'Hawa shol lorem ipsum dolar sit bolya' },
@@ -391,7 +395,14 @@ export default {
             ]
         }
     },
+    created() {
+        this.getCourses()
+    },
     methods: {
+        async getCourses() {
+            const response = await api.get('/courses/')
+            this.courses = response.data.results
+        },
         toggleAccordion(index) {
             this.activeIndex = this.activeIndex === index ? null : index;
         },

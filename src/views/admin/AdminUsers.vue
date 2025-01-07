@@ -63,7 +63,6 @@ export default {
     methods: {
         async getUsers() {
             const response = await api.get('/users/')
-            console.log(response);
             this.users = response.data.results
         }
     }

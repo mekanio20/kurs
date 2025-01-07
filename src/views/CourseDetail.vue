@@ -42,36 +42,34 @@
         <div class="w-full relative z-50">
             <Navbar />
             <div class="container bg-transparent sm:mt-44 mt-36">
-                <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center">
+                <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center mb-20">
                     <div class="lg:w-[540px] sm:w-[600px] w-full lg:mr-20">
-                        <img class="w-full h-full object-cover rounded-xl" src="/imgs/person5.png">
+                        <img class="lg:flex-1 w-full h-full object-cover rounded-xl" :src="course?.banner">
                     </div>
-                    <div class="lg:flex-1 w-full flex lg:items-start items-center flex-col space-y-10">
-                        <h1 class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white lg:text-start text-center">Эффективно общайтесь и работайте в
-                            командах</h1>
+                    <div class="lg:w-[540px] sm:w-[600px] w-full  flex lg:items-start items-center flex-col space-y-10">
+                        <h1 class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white lg:text-start text-center">{{ course?.name }}</h1>
                         <p class="lg:w-3/4 w-full font-sf_pro font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 lg:text-start text-center">
-                            Продвигайте себя, ясно выражайте идеи
-                            и используйте приемы, которые сделают вас более убедительными.
+                            {{ course?.description }}
                         </p>
-                        <div class="flex sm:flex-row flex-col sm:space-y-0 space-y-4 items-center sm:space-x-4">
+                        <div class="flex flex-wrap sm:flex-row flex-col sm:space-y-0 space-y-4 items-center sm:gap-x-6 sm:gap-y-6">
+                            <div v-for="item in course?.categories" :key="item.id"
+                                class="px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-m_gray-100 text-nowrap">
+                                {{ item.name }}</div>
                             <div
                                 class="px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-m_gray-100 text-nowrap">
-                                Бизнес & предпринимательство</div>
+                                {{ course?.lessons_count || 0 }} уроков</div>
                             <div
                                 class="px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-m_gray-100 text-nowrap">
-                                17 уроков</div>
-                            <div
-                                class="px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-m_gray-100 text-nowrap">
-                                2h 10m</div>
+                                {{ course?.total_duration || 0 }}</div>
                         </div>
                         <div class="flex items-center space-x-8">
                             <div class="flex items-center">
                                 <span class="lg:text-base text-sm text-m_yellow-100">★</span>
-                                <span class="ml-1 text-white lg:text-base text-sm font-medium">4.8</span>
-                                <span class="ml-2 text-m_gray-100 lg:text-base text-sm font-medium">(82 827 отзывов)</span>
+                                <span class="ml-1 text-white lg:text-base text-sm font-medium">{{ course?.rating || 0 }}</span>
+                                <span class="ml-2 text-m_gray-100 lg:text-base text-sm font-medium">({{ course?.total_ratings || 0 }} отзывов)</span>
                             </div>
                             <div class="flex items-center font-sf_pro font-medium lg:text-base text-sm text-white">
-                                237 студентов
+                                {{ course?.students_count || 0 }} студентов
                             </div>
                         </div>
                         <button
@@ -79,58 +77,25 @@
                             сейчас</button>
                     </div>
                 </div>
-                <div class="my-20 text-center">
+                <div v-if="course?.themes.length > 0" class="text-center">
                     <h2 class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white">Чему вы научитесь</h2>
                     <div class="my-10 flex items-center justify-center flex-wrap gap-x-6 gap-y-4">
-                        <div
+                        <div v-for="item in course?.themes" :key="item.id"
                             class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
-                            Создавать уникальный фирменный стиль.
-                        </div>
-                        <div
-                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
-                            Превращение обыденного в культовое
-                        </div>
-                        <div
-                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
-                            Как вырасти из неудач
-                        </div>
-                        <div
-                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
-                            Создание продуктов, которые нравятся рынку
-                        </div>
-                        <div
-                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
-                            Масштабирование идей до крупных успехов
+                            {{ item.name }}
                         </div>
                     </div>
                 </div>
-                <div class="sm:pb-20 text-center">
+                <div class="sm:pb-20 mt-20 text-center">
                     <h2 class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white">Программа курса</h2>
                     <div class="flex lg:flex-row flex-col items-center lg:space-x-20 lg:my-20 my-14 space-y-6">
                         <div class="lg:flex-1 w-full flex flex-col space-y-6">
-                            <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
-                                <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
-                                <div class="flex items-start flex-col space-y-2">
-                                    <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: 1</p>
-                                    <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
-                                </div>
-                            </div>
-                            <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
-                                <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
-                                <div class="flex items-start flex-col space-y-2">
-                                    <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: 1</p>
-                                    <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
-                                </div>
-                            </div>
-                            <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
-                                <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
-                                <div class="flex items-start flex-col space-y-2">
-                                    <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: 1</p>
-                                    <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
-                                </div>
+                            <div v-for="item in course?.lessons" class="p-4 bg-m_black-500 rounded-xl flex items-center">
+                                <img :src="item.banner" class="w-28 rounded-xl object-cover mr-8">
+                                <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">{{ item.name }}</p>
                             </div>
                         </div>
-                        <div class="lg:flex-1 w-full flex flex-col space-y-6">
+                        <!-- <div class="lg:flex-1 w-full flex flex-col space-y-6">
                             <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
                                 <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
                                 <div class="flex items-start flex-col space-y-2">
@@ -152,9 +117,9 @@
                                     <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-                    <router-link to="/"
+                    <router-link to="#"
                         class="px-7 py-3 rounded-lg border border-white font-sf_pro font-medium text-white lg:text-base text-sm">
                         Посмотреть все
                     </router-link>
@@ -217,24 +182,21 @@
                     <div class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 sm:my-28 my-20">
                         <div class="sm:w-[400px] w-full h-[200px] rounded-lg bg-m_black-500 relative">
                             <img class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]"
-                                src="/imgs/person1.png">
+                                :src="course?.mentor?.avatar">
                             <div class="absolute top-4 right-4">
                                 <div class="flex items-center">
                                     <span class="lg:text-base text-sm text-m_yellow-100">★</span>
-                                    <span class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">4.8</span>
+                                    <span class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">{{ course?.owner?.rating || 0 }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="flex-1 flex lg:items-start items-center flex-col space-y-3">
-                            <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">Marques Brownlee</h3>
-                            <p class="font-sf_pro font-normal lg:text-base text-sm text-m_yellow-200">Youtuber, Podcaster</p>
+                            <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">{{ course?.owner?.full_name }}</h3>
+                            <p class="font-sf_pro font-normal lg:text-base text-sm text-m_yellow-200">{{ course?.owner?.profession }}</p>
                             <div class="text-m_gray-100 lg:text-start text-center">
                                 <p class="lg:text-base text-sm leading-relaxed mb-4">
-                                    Я также являюсь онлайн-инструктором с опытом преподавания более 3 лет и преподаю
-                                    веб-разработку и деловое письмо более чем 14 000 студентам со всего мира на
-                                    нескольких глобальных платформах. Я больше сосредоточен на творческих вещах и
-                                    презентациях. Преподавание — это то, что я люблю делать...
-                                    <a href="#" class="text-m_yellow-100 hover:underline">Читать далее</a>
+                                    {{ course?.owner?.bio }}
+                                    <a v-if="course?.owner?.bio.length > 200" href="#" class="text-m_yellow-100 hover:underline">Читать далее</a>
                                 </p>
                             </div>
                         </div>
@@ -384,8 +346,10 @@
                             :modules="modules" :loop="true" :speed="1000"
                             :autoplay="{ delay: 2000, duration: 2000, disableOnInteraction: false }"
                             class="w-full flex items-center space-x-20 select-none">
-                            <swiper-slide v-for="item in cards" :key="item.id">
-                                <Card />
+                            <swiper-slide v-for="item in courses" :key="item.id">
+                                <router-link :to="`/course/detail/${item.id}`">
+                                    <Card :course="item" />
+                                </router-link>
                             </swiper-slide>
                         </swiper>
                     </div>
@@ -397,6 +361,7 @@
 </template>
 
 <script>
+import api from '@/api/index';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import Card from '@/components/Card.vue';
@@ -417,14 +382,31 @@ export default {
     },
     data() {
         return {
-            cards: [1, 2, 3, 4, 5, 6, 7, 8],
+            course: null,
+            courses: null,
             modules: [Pagination, Navigation, Autoplay],
+            slidesPerView: 1,
             cource_breakpoints: {
                 200: { slidesPerView: 1 },
                 500: { slidesPerView: 2 },
                 950: { slidesPerView: 3 },
                 1200: { slidesPerView: 4 },
             },
+        }
+    },
+    created() {
+        this.getCourse(),
+        this.allCourses()
+    },
+    methods: {
+        async getCourse() {
+            const response = await api.get(`/courses/${this.$route.params.id}`);
+            console.log(response.data);
+            this.course = response.data
+        },
+        async allCourses() {
+            const response = await api.get('/courses/')
+            this.courses = response.data.results
         }
     },
 }

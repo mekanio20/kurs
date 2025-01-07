@@ -89,23 +89,30 @@
                 </div>
 
                 <!-- Message Input -->
-                <div class="p-4 border-t border-m_gray-400 border-opacity-10 flex items-center space-x-2">
-                    <input v-model="message" type="text" placeholder="Write message"
+                <div class="p-4 border-t border-gray-400 border-opacity-10 flex items-center space-x-2">
+                    <input v-model="message" @keydown.enter="sendMessage" type="text" placeholder="Write message"
                         class="flex-1 bg-transparent text-white rounded-lg p-2 focus:outline-none" />
-                    <div class="flex items-center space-x-6">
-                        <svg class="cursor-pointer" width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M2.14095 17.668C0.0667286 15.5234 0.101885 12.1133 2.1761 10.0039L9.55892 2.44531C11.1058 0.863281 13.637 0.863281 15.2191 2.44531C16.7308 4.02734 16.7659 6.59375 15.2191 8.17578L8.78548 14.75C7.73079 15.8047 6.00813 15.8047 4.9886 14.7148C3.96907 13.6602 4.00423 11.9727 5.02376 10.9531L10.0863 5.78516C10.2972 5.57422 10.6488 5.53906 10.8949 5.78516L11.6683 6.55859C11.9144 6.76953 11.9144 7.12109 11.7034 7.36719L6.64095 12.5C6.46517 12.6758 6.46517 12.9922 6.60579 13.168C6.78157 13.3086 7.02767 13.3086 7.16829 13.168L13.6019 6.59375C14.2699 5.89062 14.2699 4.73047 13.6019 4.02734C12.9339 3.35938 11.8441 3.35938 11.1761 4.02734L3.79329 11.5859C2.56282 12.8164 2.56282 14.8555 3.75813 16.0859C4.95345 17.3164 6.88704 17.3164 8.08235 16.0859L14.1292 9.89844C14.3402 9.6875 14.6917 9.6875 14.9027 9.89844L15.7113 10.707C15.9574 10.918 15.9574 11.2695 15.7464 11.4805L9.69954 17.668C7.59017 19.8125 4.21517 19.7773 2.14095 17.668Z"
-                                fill="#D9D9D9" />
-                        </svg>
-                        <svg class="cursor-pointer" width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M14.4234 4.53906V4.75H9.92338V0.25H10.1343C10.3453 0.25 10.5562 0.355469 10.732 0.53125L14.1421 3.94141C14.3179 4.11719 14.4234 4.32812 14.4234 4.53906ZM9.64213 5.875H14.4234V17.4062C14.4234 17.8984 14.0367 18.25 13.5796 18.25H1.76713C1.27494 18.25 0.923379 17.8984 0.923379 17.4062V1.09375C0.923379 0.636719 1.27494 0.25 1.76713 0.25H8.79838V5.03125C8.79838 5.52344 9.14994 5.875 9.64213 5.875ZM4.86088 6.4375C3.94682 6.4375 3.17338 7.21094 3.17338 8.125C3.17338 9.07422 3.94682 9.8125 4.86088 9.8125C5.8101 9.8125 6.54838 9.07422 6.54838 8.125C6.54838 7.21094 5.8101 6.4375 4.86088 6.4375ZM12.1734 14.875V10.9375L10.8023 9.56641C10.6265 9.39062 10.3453 9.39062 10.2046 9.56641L6.54838 13.1875L5.17729 11.8164C5.0015 11.6406 4.75541 11.6406 4.57963 11.7812L3.20854 13.1875L3.17338 14.875H12.1734Z"
-                                fill="#D9D9D9" />
-                        </svg>
+
+                    <div class="flex items-center space-x-4">
+                        <div class="relative w-5 h-10 flex items-center justify-center">
+                            <div class="curposor-pointer">
+                                <fileIcon />
+                            </div>
+                            <input type="file" ref="fileInput" @change="handleFileUpload"
+                                class="absolute top-0 left-0 w-full h-full opacity-0" />
+                        </div>
+
+                        <div class="relative w-5 h-10 flex items-center justify-center">
+                            <div class="curposor-pointer">
+                                <imageIcon />
+                            </div>
+                            <input type="file" accept="image/*" ref="imageInput" @change="handleImageUpload"
+                                class="absolute top-0 left-0 w-full h-full opacity-0" />
+                        </div>
+
                         <button @click="sendMessage"
                             class="bg-yellow-400 text-black py-2 px-4 rounded-lg hover:bg-yellow-500 flex items-center space-x-2">
-                            <span>Send</span> 
+                            <span>Send</span>
                             <svg width="14" height="13" viewBox="0 0 14 13" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -124,14 +131,21 @@
 import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
 import AdminHeader from '@/components/admin/Header.vue'
+import fileIcon from '@/components/icons/file.vue';
+import imageIcon from '@/components/icons/img.vue';
 export default {
     name: "Chat",
     components: {
         Sidebar,
-        AdminHeader
+        AdminHeader,
+        fileIcon,
+        imageIcon
     },
     data() {
         return {
+            selectedFile: null,
+            selectedImage: null,
+            message: null,
             users: [
                 {
                     id: 1,
@@ -157,12 +171,22 @@ export default {
             ]
         }
     },
-    created() {
-        this.getUsers()
-    },
     methods: {
-        async getUsers() {
-
+        async handleFileUpload(event) {
+            this.selectedFile = event.target.files[0]
+        },
+        async handleImageUpload(event) {
+            this.selectedImage = event.target.files[0]
+        },
+        async sendMessage() {
+            if (this.selectedFile) {
+                const formData = new FormData();
+                formData.append('path', this.selectedFile);
+            }
+            if (this.selectedImage) {
+                const formData = new FormData();
+                formData.append('path', this.selectedImage);
+            }
         }
     }
 }

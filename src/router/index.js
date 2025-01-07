@@ -4,7 +4,7 @@ import axios from "axios";
 axios.interceptors.request.use((config) => {
   const authUser = localStorage.getItem("access");
   if (authUser) {
-    config.headers['Authorization'] = `Bearer ${authUser}`;
+    config.headers["Authorization"] = `Bearer ${authUser}`;
   }
   return config;
 });
@@ -38,7 +38,7 @@ const router = createRouter({
       component: () => import("@/views/UserProfile.vue"),
     },
     {
-      path: "/course/detail",
+      path: "/course/detail/:id",
       name: "CourseDetail",
       component: () => import("@/views/CourseDetail.vue"),
     },
@@ -105,6 +105,9 @@ const router = createRouter({
       component: () => import("@/views/teachers/Chat.vue"),
     },
   ],
+  scrollBehavior() {
+    document.getElementById("app").scrollIntoView({ behavior: "smooth" });
+  },
 });
 
 export default router;

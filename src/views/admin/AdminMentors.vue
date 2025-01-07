@@ -5,13 +5,14 @@
                 <AdminButton name="Добавить нового наставника" @click="addMentor"></AdminButton>
             </AdminHeader>
             <div class="w-full grid grid-cols-4 gap-6">
-                <Mentor v-for="(item, index) in mentors" :key="index" :name="item.name" :email="item.email" :rating="item.ratin" :img="item.img" />
+                <Mentor v-for="(item, index) in mentors" :key="index" :name="item.full_name" :email="item.email" :rating="item.rating" :img="item.avatar" />
             </div>
         </div>
     </Sidebar>
 </template>
 
 <script>
+import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
 import AdminHeader from '@/components/admin/Header.vue'
 import AdminButton from '@/components/base/AdminButton.vue';
@@ -26,17 +27,17 @@ export default {
     },
     data() {
         return {
-            mentors: [
-                { id: 1, name: 'Jukkoe Sisao', img: '/imgs/person4.png', email: 'sibyl_kozey@gmail.com', ratin: 4.8 },
-                { id: 2, name: 'Jukkoe Sisao', img: '/imgs/person4.png', email: 'sibyl_kozey@gmail.com', ratin: 4.8 },
-                { id: 3, name: 'Jukkoe Sisao', img: '/imgs/person4.png', email: 'sibyl_kozey@gmail.com', ratin: 4.8 },
-                { id: 4, name: 'Jukkoe Sisao', img: '/imgs/person4.png', email: 'sibyl_kozey@gmail.com', ratin: 4.8 },
-                { id: 5, name: 'Jukkoe Sisao', img: '/imgs/person4.png', email: 'sibyl_kozey@gmail.com', ratin: 4.8 },
-                { id: 6, name: 'Jukkoe Sisao', img: '/imgs/person4.png', email: 'sibyl_kozey@gmail.com', ratin: 4.8 },
-            ]
+            mentors: null
         }
     },
+    created() {
+        this.getMentors()
+    },
     methods: {
+        async getMentors() {
+            const response = await api.get('/users/?is_teacher=true')
+            this.mentors = response.data.results
+        },
         addMentor() {
             this.$router.push('/dashboard/admin/add/mentor')
         }
