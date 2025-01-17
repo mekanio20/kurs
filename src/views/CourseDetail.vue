@@ -47,11 +47,15 @@
                         <img class="lg:flex-1 w-full h-full object-cover rounded-xl" :src="course?.banner">
                     </div>
                     <div class="lg:w-[540px] sm:w-[600px] w-full  flex lg:items-start items-center flex-col space-y-10">
-                        <h1 class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white lg:text-start text-center">{{ course?.name }}</h1>
-                        <p class="lg:w-3/4 w-full font-sf_pro font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 lg:text-start text-center">
+                        <h1
+                            class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white lg:text-start text-center">
+                            {{ course?.name }}</h1>
+                        <p
+                            class="lg:w-3/4 w-full font-sf_pro font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 lg:text-start text-center">
                             {{ course?.description }}
                         </p>
-                        <div class="flex flex-wrap sm:flex-row flex-col sm:space-y-0 space-y-4 items-center sm:gap-x-6 sm:gap-y-6">
+                        <div
+                            class="flex flex-wrap sm:flex-row flex-col sm:space-y-0 space-y-4 items-center sm:gap-x-6 sm:gap-y-6">
                             <div v-for="item in course?.categories" :key="item.id"
                                 class="px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-m_gray-100 text-nowrap">
                                 {{ item.name }}</div>
@@ -65,8 +69,10 @@
                         <div class="flex items-center space-x-8">
                             <div class="flex items-center">
                                 <span class="lg:text-base text-sm text-m_yellow-100">★</span>
-                                <span class="ml-1 text-white lg:text-base text-sm font-medium">{{ course?.rating || 0 }}</span>
-                                <span class="ml-2 text-m_gray-100 lg:text-base text-sm font-medium">({{ course?.total_ratings || 0 }} отзывов)</span>
+                                <span class="ml-1 text-white lg:text-base text-sm font-medium">{{ course?.rating || 0
+                                    }}</span>
+                                <span class="ml-2 text-m_gray-100 lg:text-base text-sm font-medium">({{
+                            course?.total_ratings || 0 }} отзывов)</span>
                             </div>
                             <div class="flex items-center font-sf_pro font-medium lg:text-base text-sm text-white">
                                 {{ course?.students_count || 0 }} студентов
@@ -78,7 +84,9 @@
                     </div>
                 </div>
                 <div v-if="course?.themes.length > 0" class="text-center">
-                    <h2 class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white">Чему вы научитесь</h2>
+                    <h2
+                        class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white">
+                        Чему вы научитесь</h2>
                     <div class="my-10 flex items-center justify-center flex-wrap gap-x-6 gap-y-4">
                         <div v-for="item in course?.themes" :key="item.id"
                             class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
@@ -87,46 +95,36 @@
                     </div>
                 </div>
                 <div class="sm:pb-20 mt-20 text-center">
-                    <h2 class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white">Программа курса</h2>
-                    <div class="flex lg:flex-row flex-col items-center lg:space-x-20 lg:my-20 my-14 space-y-6">
-                        <div class="lg:flex-1 w-full flex flex-col space-y-6">
-                            <div v-for="item in course?.lessons" class="p-4 bg-m_black-500 rounded-xl flex items-center">
-                                <img :src="item.banner" class="w-28 rounded-xl object-cover mr-8">
-                                <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">{{ item.name }}</p>
-                            </div>
-                        </div>
-                        <!-- <div class="lg:flex-1 w-full flex flex-col space-y-6">
-                            <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
-                                <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
-                                <div class="flex items-start flex-col space-y-2">
-                                    <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: 1</p>
-                                    <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
+                    <h2
+                        class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white">
+                        Программа курса</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 px-4 sm:px-8 py-10">
+                        <router-link v-for="(item, index) in visibleLessons" :key="index" to="/video/detail/1"
+                            class="p-4 bg-m_black-500 rounded-xl overflow-hidden flex items-center space-x-4 cursor-pointer">
+                            <div class="relative w-32">
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                    <playIcon :w="32" :h="32" />
                                 </div>
+                                <img :src="item.banner" class="w-full rounded-xl object-cover mr-8">
                             </div>
-                            <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
-                                <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
-                                <div class="flex items-start flex-col space-y-2">
-                                    <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: 1</p>
-                                    <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
-                                </div>
+                            <div class="flex items-start flex-col space-y-2">
+                                <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: {{ index +
+                            1 }}</p>
+                                <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">{{ item.name
+                                    }}</p>
                             </div>
-                            <div class="p-4 bg-m_black-500 rounded-xl flex items-center">
-                                <img src="/imgs/person5.png" class="w-28 rounded-xl object-cover mr-8">
-                                <div class="flex items-start flex-col space-y-2">
-                                    <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: 1</p>
-                                    <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">Определите своих клиентов</p>
-                                </div>
-                            </div>
-                        </div> -->
+                        </router-link>
                     </div>
-                    <router-link to="#"
+                    <button @click="showAll = !showAll"
                         class="px-7 py-3 rounded-lg border border-white font-sf_pro font-medium text-white lg:text-base text-sm">
-                        Посмотреть все
-                    </router-link>
+                        {{ showAll ? "Скрыть" : "Посмотреть все" }}
+                    </button>
                 </div>
                 <div class="w-full flex lg:flex-row flex-col lg:space-y-0 space-y-10 py-20">
                     <div class="lg:flex-1 w-full lg:mr-20">
-                        <h2 class="lg:w-3/4 font-sf_pro font-bold lg:text-[44px] lg:leading-[60px] text-3xl leading-[50px] text-white">Этот курс включает в себя:</h2>
+                        <h2
+                            class="lg:w-3/4 font-sf_pro font-bold lg:text-[44px] lg:leading-[60px] text-3xl leading-[50px] text-white">
+                            Этот курс включает в себя:</h2>
                     </div>
                     <div class="lg:flex-1 w-full flex flex-col space-y-8">
                         <div class="flex items-center space-x-4">
@@ -140,7 +138,8 @@
                                 <path d="M12 15V3" stroke="white" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-white">Скачивайте и смотрите оффлайн</p>
+                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-white">Скачивайте и
+                                смотрите оффлайн</p>
                         </div>
                         <div class="flex items-center space-x-4">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -152,7 +151,8 @@
                                     d="M5 15H4C3.46957 15 2.96086 14.7893 2.58579 14.4142C2.21071 14.0391 2 13.5304 2 13V4C2 3.46957 2.21071 2.96086 2.58579 2.58579C2.96086 2.21071 3.46957 2 4 2H13C13.5304 2 14.0391 2.21071 14.4142 2.58579C14.7893 2.96086 15 3.46957 15 4V5"
                                     stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-white">Доступ на мобильном телефоне и
+                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-white">Доступ на
+                                мобильном телефоне и
                                 телевизоре</p>
                         </div>
                         <div class="flex items-center space-x-4">
@@ -164,7 +164,8 @@
                                 <path d="M22 4L12 14.01L9 11.01" stroke="white" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-white">Доступ на 3 месяца</p>
+                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-white">Доступ на 3
+                                месяца</p>
                         </div>
                         <div class="flex items-center space-x-4">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -173,37 +174,79 @@
                                     d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
                                     stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-white">Сертификат об окончании</p>
+                            <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-white">Сертификат об
+                                окончании</p>
                         </div>
                     </div>
                 </div>
-                <div class="w-full lg:py-20">
-                    <h2 class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center">Ментор</h2>
-                    <div class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 sm:my-28 my-20">
+                <div class="w-full lg:pt-20">
+                    <h2
+                        class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center">
+                        Ментор</h2>
+                    <div
+                        class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 sm:my-28 my-20">
                         <div class="sm:w-[400px] w-full h-[200px] rounded-lg bg-m_black-500 relative">
                             <img class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]"
                                 :src="course?.mentor?.avatar">
                             <div class="absolute top-4 right-4">
                                 <div class="flex items-center">
                                     <span class="lg:text-base text-sm text-m_yellow-100">★</span>
-                                    <span class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">{{ course?.owner?.rating || 0 }}</span>
+                                    <span class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">{{
+                            course?.owner?.rating || 0 }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="flex-1 flex lg:items-start items-center flex-col space-y-3">
-                            <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">{{ course?.owner?.full_name }}</h3>
-                            <p class="font-sf_pro font-normal lg:text-base text-sm text-m_yellow-200">{{ course?.owner?.profession }}</p>
+                            <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">{{ course?.owner?.full_name
+                                }}</h3>
+                            <p class="font-sf_pro font-normal lg:text-base text-sm text-m_yellow-200">{{
+                            course?.owner?.profession }}</p>
                             <div class="text-m_gray-100 lg:text-start text-center">
                                 <p class="lg:text-base text-sm leading-relaxed mb-4">
                                     {{ course?.owner?.bio }}
-                                    <a v-if="course?.owner?.bio.length > 200" href="#" class="text-m_yellow-100 hover:underline">Читать далее</a>
+                                    <a v-if="course?.owner?.bio.length > 200" href="#"
+                                        class="text-m_yellow-100 hover:underline">Читать далее</a>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="w-full lg:pb-20">
+                    <h2 class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center">
+                        Отзывы пользователей</h2>
+                    <div class="w-full text-white p-6 rounded-lg justify-center items-center flex flex-col lg:flex-row gap-8 mt-20">
+                        <!-- Rating Overview -->
+                        <div class="w-full lg:h-[152px] flex lg:flex-row flex-col items-center justify-center px-10">
+                            <div class="h-full lg:pr-6 lg:mr-3 lg:border-r-2 lg:border-white lg:pb-0 pb-6 opacity-80 flex flex-col items-center justify-center">
+                                <div class="text-4xl font-bold font-sf_pro tracking-wider text-nowrap">4.6 <span class="font-normal text-base">/</span><sub class="font-normal text-base">5</sub></div>
+                                <div class="fonst-sf_pro text-lg opacity-80 text-white">86 Ком.</div>
+                            </div>
+                            <div class="w-full h-full space-y-2">
+                                <RatingBar :stars="5" :count="70" />
+                                <RatingBar :stars="4" :count="5" />
+                                <RatingBar :stars="3" :count="8" />
+                                <RatingBar :stars="2" :count="2" />
+                                <RatingBar :stars="1" :count="1" />
+                            </div>
+                        </div>
+                        <!-- Review Form -->
+                        <div class="w-full bg-m_black-500 py-8 px-10 rounded-lg flex flex-col gap-4">
+                            <div class="flex items-center gap-2 pb-5">
+                                <StarRating :selectedStars="3" />
+                            </div>
+                            <h4 class="font-sf_pro font-medium text-base text-m_gray-100">Комментарий</h4>
+                            <textarea cols="5" rows="4" v-model="comment"
+                                class="w-full py-4 px-6 rounded-lg bg-m_black-300 text-white placeholder-gray-400 focus:outline-none resize-none"></textarea>
+                            <button class="mt-6 bg-transparent hover:bg-m_yellow-100 hover:text-black border border-m_yellow-100 text-m_yellow-100 font-sf_pro font-bold text-lg py-3 rounded-lg duration-300">
+                                Отправить комментарий
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="w-full text-center">
-                    <h2 class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center pb-20">Отзывы
+                    <h2
+                        class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center pb-20">
+                        Отзывы
                         пользователей</h2>
                     <div class="md:columns-3 mobile:columns-2 columns-1 gap-6 sm:pb-20 pb-10">
                         <div class="bg-m_black-500 rounded-lg p-8 mb-6">
@@ -212,7 +255,8 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex flex-col items-start space-y-1">
-                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария
+                                        Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -232,7 +276,8 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария
+                                        Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -252,7 +297,8 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария
+                                        Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -274,7 +320,8 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария
+                                        Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -294,7 +341,8 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария
+                                        Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -314,7 +362,8 @@
                                     <img src="/imgs/person4.png">
                                 </div>
                                 <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария Смирнова</p>
+                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария
+                                        Смирнова</p>
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm text-m_yellow-100">★</span>
                                         <span class="text-sm text-m_yellow-100">★</span>
@@ -365,6 +414,9 @@ import api from '@/api/index';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import Card from '@/components/Card.vue';
+import RatingBar from '@/components/RatingBar.vue';
+import StarRating from '@/components/StarRating.vue';
+import playIcon from '@/components/icons/play.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import 'swiper/css';
@@ -379,11 +431,15 @@ export default {
         Card,
         Swiper,
         SwiperSlide,
+        playIcon,
+        RatingBar,
+        StarRating
     },
     data() {
         return {
             course: null,
             courses: null,
+            showAll: false,
             modules: [Pagination, Navigation, Autoplay],
             slidesPerView: 1,
             cource_breakpoints: {
@@ -392,6 +448,7 @@ export default {
                 950: { slidesPerView: 3 },
                 1200: { slidesPerView: 4 },
             },
+            comment: 'Этот курс предназначен для тех, кто хочет освоить основные концепции и стратегии маркетинга! 😀🩷'
         }
     },
     created() {
@@ -408,6 +465,11 @@ export default {
             const response = await api.get('/courses/')
             this.courses = response.data.results
         }
+    },
+    computed: {
+        visibleLessons() {
+            return this.showAll ? this.course?.lessons : this.course?.lessons.slice(0, 4);
+        },
     },
 }
 </script>

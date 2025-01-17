@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 public/imgs
 public/svgs
+public/videos
 dist
 dist-ssr
 *.local

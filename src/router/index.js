@@ -42,6 +42,11 @@ const router = createRouter({
       name: "CourseDetail",
       component: () => import("@/views/CourseDetail.vue"),
     },
+    {
+      path: "/video/detail/:id",
+      name: "VideoPlayer",
+      component: () => import("@/views/VideoPlayer.vue"),
+    },
     // {
     //   path: "/payment",
     //   name: "Payment",

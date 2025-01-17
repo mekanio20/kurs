@@ -3,6 +3,7 @@
         <div class="container">
             <AdminHeader name="Добавить нового курса"></AdminHeader>
             <form @submit.prevent="saveCourse" class="w-full">
+                <!-- Info -->
                 <div class="flex items-start space-x-20">
                     <div class="flex-1 flex flex-col space-y-6">
                         <h4 class="font-sf_pro font-medium text-lg text-white">Обложка</h4>
@@ -39,6 +40,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Themes -->
                 <div class="w-full my-10">
                     <h4 class="font-sf_pro font-medium text-lg text-white pb-6">Чему вы научитесь</h4>
                     <div class="grid grid-cols-2 gap-6">
@@ -48,6 +50,7 @@
                         + Добавить еще
                     </button>
                 </div>
+                <!-- Video -->
                 <div class="w-full my-10">
                     <h4 class="font-sf_pro font-medium text-lg text-white pb-6">Чему вы научитесь</h4>
                     <div v-for="(item, index) in videoFields" :key="index"
@@ -60,30 +63,7 @@
                                     <div v-if="!item.thumbnail"
                                         class="flex items-center space-x-4 bg-m_black-400 rounded-lg px-10 py-3 text-nowrap">
                                         <!-- Play svg -->
-                                        <svg width="25" height="25" viewBox="0 0 29 29" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_1270_12575)">
-                                                <mask id="mask0_1270_12575" style="mask-type:luminance"
-                                                    maskUnits="userSpaceOnUse" x="0" y="0" width="29" height="29">
-                                                    <path
-                                                        d="M14.5013 26.5827C21.1749 26.5827 26.5846 21.173 26.5846 14.4993C26.5846 7.82572 21.1749 2.41602 14.5013 2.41602C7.82768 2.41602 2.41797 7.82572 2.41797 14.4993C2.41797 21.173 7.82768 26.5827 14.5013 26.5827Z"
-                                                        fill="white" stroke="white" stroke-width="4"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12.0859 14.4982V10.3125L15.7109 12.4053L19.3359 14.4982L15.7109 16.591L12.0859 18.6838V14.4982Z"
-                                                        fill="black" stroke="black" stroke-width="4"
-                                                        stroke-linejoin="round" />
-                                                </mask>
-                                                <g mask="url(#mask0_1270_12575)">
-                                                    <path d="M0 0H29V29H0V0Z" fill="#B3B3B3" />
-                                                </g>
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_1270_12575">
-                                                    <rect width="29" height="29" fill="white" />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
+                                        <playIcon :w="25" :h="25" />
                                         <p class="font-sf_pro font-medium text-lg text-white">Добавить видео</p>
                                     </div>
                                     <div v-if="item.thumbnail" class="w-[255px] h-[150px] rounded-xl relative">
@@ -91,30 +71,7 @@
                                         <div
                                             class="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
                                             <!-- Play svg -->
-                                            <svg v-if="!isLoading[index]" width="40" height="40" viewBox="0 0 29 29" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <g clip-path="url(#clip0_1270_12575)">
-                                                    <mask id="mask0_1270_12575" style="mask-type:luminance"
-                                                        maskUnits="userSpaceOnUse" x="0" y="0" width="29" height="29">
-                                                        <path
-                                                            d="M14.5013 26.5827C21.1749 26.5827 26.5846 21.173 26.5846 14.4993C26.5846 7.82572 21.1749 2.41602 14.5013 2.41602C7.82768 2.41602 2.41797 7.82572 2.41797 14.4993C2.41797 21.173 7.82768 26.5827 14.5013 26.5827Z"
-                                                            fill="white" stroke="white" stroke-width="4"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M12.0859 14.4982V10.3125L15.7109 12.4053L19.3359 14.4982L15.7109 16.591L12.0859 18.6838V14.4982Z"
-                                                            fill="black" stroke="black" stroke-width="4"
-                                                            stroke-linejoin="round" />
-                                                    </mask>
-                                                    <g mask="url(#mask0_1270_12575)">
-                                                        <path d="M0 0H29V29H0V0Z" fill="#B3B3B3" />
-                                                    </g>
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_1270_12575">
-                                                        <rect width="29" height="29" fill="white" />
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
+                                            <playIcon v-if="!isLoading[index]" :w="32" :h="32" />
                                         </div>
                                     </div>
                                 </label>
@@ -159,8 +116,21 @@
                         class="w-full font-sf_pro font-normal text-m_yellow-100 text-lg pt-10">
                         + Добавить еще
                     </button>
+
                     <div class="w-fit py-10 mx-auto">
                         <AdminButton :bold="true" name="Загрузить" @click="saveCourse"></AdminButton>
+                    </div>
+                </div>
+                <!-- Price -->
+                <div class="w-full my-10">
+                    <h4 class="font-sf_pro font-medium text-2xl text-white pb-10">Установите цену на свой курс</h4>
+                    <div class="max-w-md">
+                        <h4 class="font-sf_pro font-medium text-lg text-white pb-5">Название курса</h4>
+                        <AdminTextInput />
+                    </div>
+                    <div class="max-w-md">
+                        <h4 class="font-sf_pro font-medium text-lg text-white pb-5">Ценовая категория</h4>
+                        <AdminSelection @sendData="selectOption" :options="['Бесплатно', 'Платно']" :name="'Платно'" />
                     </div>
                 </div>
             </form>
@@ -175,6 +145,7 @@ import AdminHeader from '@/components/admin/Header.vue';
 import AdminButton from '@/components/base/AdminButton.vue';
 import AdminSelection from '@/components/base/AdminSelection.vue';
 import AdminTextInput from '@/components/base/AdminTextInput.vue';
+import playIcon from '@/components/icons/play.vue';
 export default {
     name: "AddMentor",
     components: {
@@ -182,7 +153,8 @@ export default {
         AdminHeader,
         AdminButton,
         AdminSelection,
-        AdminTextInput
+        AdminTextInput,
+        playIcon
     },
     data() {
         return {
@@ -191,9 +163,10 @@ export default {
             videoPreview: null,
             imagePerview: null,
             videoFile: null,
+            locked: false,
             active_category: 'Категория',
-            categoryId: 0,
             active_lang: 'Язык',
+            categoryId: 0,
             categories: null,
             isLoading: [false],
             uploadProgress: [0],
@@ -219,6 +192,7 @@ export default {
                     thumbnail: null,
                     videoFile: null,
                     videoPreview: null,
+                    locked: true
                 },
             ],
         }
@@ -334,6 +308,9 @@ export default {
         },
         async selectLang(option) {
             this.active_lang = option.name
+        },
+        async selectOption(option) {
+            this.locked = option == 'Бесплатно' ? true : false
         },
         async saveCourse() {
             console.log({

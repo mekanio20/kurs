@@ -650,6 +650,11 @@ core-js@^3.22.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.39.0.tgz#57f7647f4d2d030c32a72ea23a0555b2eaa30f83"
   integrity sha512-raM0ew0/jJUqkJ0E6e8UDtl+y/7ktFivgWvqw8dNSQeNWoSDLvQ1H/RN3aPXB9tBd4/FhyR4RDPGhsNIMsAn7g==
 
+core-js@^3.26.1:
+  version "3.40.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.40.0.tgz#2773f6b06877d8eda102fc42f828176437062476"
+  integrity sha512-7vsMc/Lty6AGnn7uFpYT56QesI5D2Y/UkgKounk87OP9Z2H9Z8kj6jzcSGAxFmUtDOS0ntK6lbQz+Nsa0Jj6mQ==
+
 cross-spawn@^7.0.0:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
@@ -1120,6 +1125,17 @@ pkcs7@^1.0.4:
   integrity sha512-afRERtHn54AlwaF2/+LFszyAANTCggGilmcmILUzEjvs3XgFZT+xE6+QWQcAGmu4xajy+Xtj7acLOPdx5/eXWQ==
   dependencies:
     "@babel/runtime" "^7.5.5"
+
+plyr@^3.7.8:
+  version "3.7.8"
+  resolved "https://registry.yarnpkg.com/plyr/-/plyr-3.7.8.tgz#b79bccc23687705b5d9a283b2a88c124bf7471ed"
+  integrity sha512-yG/EHDobwbB/uP+4Bm6eUpJ93f8xxHjjk2dYcD1Oqpe1EcuQl5tzzw9Oq+uVAzd2lkM11qZfydSiyIpiB8pgdA==
+  dependencies:
+    core-js "^3.26.1"
+    custom-event-polyfill "^1.0.7"
+    loadjs "^4.2.0"
+    rangetouch "^2.0.1"
+    url-polyfill "^1.1.12"
 
 "plyr@github:sampotts/plyr#develop":
   version "3.7.0"
