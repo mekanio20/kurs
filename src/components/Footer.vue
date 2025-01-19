@@ -30,8 +30,8 @@
                 </div>
                 <p
                     class="font-sf_pro font-normal lg:text-lg sm:text-end text-center sm:text-base text-sm my-10 text-m_gray-100 lg:hidden block">
-                    All Rights Reserved | <span class="text-m_yellow-100">Terms and Conditions</span> | <span
-                        class="text-m_yellow-100">Privacy Policy</span>
+                    All Rights Reserved | <router-link to="/terms" class="text-m_yellow-100 cursor-pointer hover:underline">Terms and Conditions</router-link> | <router-link to="/privacy"
+                        class="text-m_yellow-100 cursor-pointer hover:underline">Privacy Policy</router-link>
                 </p>
             </div>
             <div class="lg:flex-1 w-full flex flex-col items-end">
@@ -122,8 +122,8 @@
         </div>
         <p
             class="font-sf_pro font-normal lg:text-lg text-end sm:text-base text-sm py-10 text-m_gray-100 lg:block hidden">
-            All Rights Reserved | <span class="text-m_yellow-100">Terms and Conditions</span> | <span
-                class="text-m_yellow-100">Privacy Policy</span>
+            All Rights Reserved | <router-link to="/terms" class="text-m_yellow-100 cursor-pointer hover:underline">Terms and Conditions</router-link> | <router-link to="/privacy"
+                        class="text-m_yellow-100 cursor-pointer hover:underline">Privacy Policy</router-link>
         </p>
     </div>
 </template>
