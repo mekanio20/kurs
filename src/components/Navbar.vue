@@ -130,32 +130,32 @@
         <div v-if="rotate" class="w-full bg-black container">
             <div class="w-full flex items-start justify-between pt-5 pb-10">
                 <div class="flex flex-col space-y-8">
-                    <router-link to="/category"
+                    <router-link to="/category/1"
                         class=" font-sf_pro font-medium text-white text-lg">Маркетинг</router-link>
-                    <router-link to="/category" class=" font-sf_pro font-medium text-white text-lg">Искусство и
+                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Искусство и
                         дизайн</router-link>
-                    <router-link to="/category" class=" font-sf_pro font-medium text-white text-lg">Бизнес и
+                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Бизнес и
                         предпринимательство</router-link>
-                    <router-link to="/category" class=" font-sf_pro font-medium text-white text-lg">Сообщество и
+                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Сообщество и
                         правительство</router-link>
-                    <router-link to="/category" class=" font-sf_pro font-medium text-white text-lg">Музыка</router-link>
+                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Музыка</router-link>
                 </div>
                 <div class="flex flex-col space-y-8">
-                    <router-link to="/category"
+                    <router-link to="/category/1"
                         class=" font-sf_pro font-medium text-white text-lg">Маркетинг</router-link>
-                    <router-link to="/category" class=" font-sf_pro font-medium text-white text-lg">Искусство и
+                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Искусство и
                         дизайн</router-link>
-                    <router-link to="/category" class=" font-sf_pro font-medium text-white text-lg">Бизнес и
+                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Бизнес и
                         предпринимательство</router-link>
-                    <router-link to="/category" class=" font-sf_pro font-medium text-white text-lg">Сообщество и
+                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Сообщество и
                         правительство</router-link>
                 </div>
                 <div class="flex flex-col space-y-8">
-                    <router-link to="/category"
+                    <router-link to="/category/1"
                         class=" font-sf_pro font-medium text-white text-lg">Маркетинг</router-link>
-                    <router-link to="/category" class=" font-sf_pro font-medium text-white text-lg">Искусство и
+                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Искусство и
                         дизайн</router-link>
-                    <router-link to="/category" class=" font-sf_pro font-medium text-white text-lg">Бизнес и
+                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Бизнес и
                         предпринимательство</router-link>
                 </div>
             </div>
@@ -207,7 +207,7 @@ export default {
             isBurger: false,
             rotate: false,
             searchQuery: null,
-            hasNotification: true,
+            hasNotification: false,
             cats: [
                 { id: 1, name: 'Маркетинг', url: '/category' },
                 { id: 2, name: 'Искусство и дизайн', url: '/category' },

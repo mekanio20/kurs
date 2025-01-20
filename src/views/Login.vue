@@ -85,56 +85,18 @@ export default {
             email: '',
             password: '',
             galleryItems: [
-                {
-                    img: 'https://via.placeholder.com/400x400',
-                    title: 'Я таргетолог',
-                    description: 'Targeting Specialist',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x400',
-                    title: 'Кем же работать?',
-                    description: 'Career Options',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x600',
-                    title: 'Точка Б',
-                    description: '150,000 Сом',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x600',
-                    title: 'Пример работы',
-                    description: 'Work Example',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x400',
-                    title: 'Кем же работать?',
-                    description: 'Career Options',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x600',
-                    title: 'Точка Б',
-                    description: '150,000 Сом',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x600',
-                    title: 'Пример работы',
-                    description: 'Work Example',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x400',
-                    title: 'Кем же работать?',
-                    description: 'Career Options',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x600',
-                    title: 'Точка Б',
-                    description: '150,000 Сом',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x600',
-                    title: 'Пример работы',
-                    description: 'Work Example',
-                },
+                { id: 1, img: '/imgs/home-1.webp' },
+                { id: 2, img: '/imgs/home-2.webp' },
+                { id: 3, img: '/imgs/home-3.webp' },
+                { id: 4, img: '/imgs/home-4.webp' },
+                { id: 5, img: '/imgs/home-1.webp' },
+                { id: 6, img: '/imgs/home-2.webp' },
+                { id: 7, img: '/imgs/home-3.webp' },
+                { id: 8, img: '/imgs/home-1.webp' },
+                { id: 9, img: '/imgs/home-2.webp' },
+                { id: 10, img: '/imgs/home-3.webp' },
+                { id: 11, img: '/imgs/home-4.webp' },
+                { id: 12, img: '/imgs/home-3.webp' },
             ],
         }
     },

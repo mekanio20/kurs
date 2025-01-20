@@ -90,9 +90,8 @@
                             class="font-bold">20K+</span> команд, таких как:
                     </p>
                     <div class="w-full flex items-center justify-between mt-4 mb-16 overflow-x-auto no-scrollbar">
-                        <div class="flex items-center mr-10 px-6 py-4 rounded-lg mt-4" v-for="item in partners"
-                            :key="item.id">
-                            <div class="w-[200px] h-[100px] bg-m_yellow-100"></div>
+                        <div class="flex items-center mr-10 px-6 py-4 rounded-lg mt-4" v-for="item in partners" :key="item.id">
+                            <img class="object-cover" :src="item.img">
                         </div>
                     </div>
                 </div>
@@ -101,10 +100,10 @@
                         Найдите свой источник вдохновения, когда угодно
                     </h2>
                     <div class="flex items-center justify-center flex-wrap pt-16 pb-10">
-                        <p class="font-sf_pro font-medium lg:px-10 lg:py-3 px-6 py-2 sm:mr-4 sm:mb-4 mr-3 mb-3 lg:text-base text-sm bg-m_black-200 rounded-md text-m_gray-200 hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer"
-                            v-for="item in cats" :key="item.id">
+                        <router-link v-for="item in cats" :key="item.id" :to="`/category/${item.id}`"
+                            class="font-sf_pro font-medium lg:px-10 lg:py-3 px-6 py-2 sm:mr-4 sm:mb-4 mr-3 mb-3 lg:text-base text-sm bg-m_black-200 rounded-md text-m_gray-200 hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer">
                             {{ item.name }}
-                        </p>
+                        </router-link>
                     </div>
                 </div>
                 <div class="w-full flex flex-col items-center space-y-20">
@@ -118,7 +117,7 @@
                             </router-link>
                         </swiper-slide>
                     </swiper>
-                    <router-link to="/"
+                    <router-link to="/category/1"
                         class="px-7 py-3 rounded-lg border border-white font-sf_pro font-medium text-white lg:text-lg text-base">
                         Больше курсов
                     </router-link>
@@ -133,21 +132,20 @@
                             :modules="modules" :loop="true" :speed="1000"
                             :autoplay="{ delay: 2500, duration: 1000, disableOnInteraction: false }"
                             class="w-full flex items-center space-x-20 select-none">
-                            <swiper-slide v-for="item in cards" :key="item.id">
+                            <swiper-slide v-for="item in cats" :key="item.id">
                                 <img class="w-full h-[380px] object-cover rounded-lg"
-                                    src="https://via.placeholder.com/400x400" />
+                                   :src="item.image" />
                             </swiper-slide>
                         </swiper>
                     </div>
                 </div>
                 <div class="w-full pb-5">
                     <!-- Title -->
-                    <h2
-                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-32 mt-20 mb-20">
+                    <h2 class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-32 mt-20 mb-14">
                         Получайте знания от творческих специалистов
                     </h2>
                     <!-- Arrow icons -->
-                    <div class="flex items-center justify-end md:mb-20">
+                    <div class="flex items-center justify-end md:mb-12">
                         <div class="hidden md:flex items-center space-x-2">
                             <svg class="p-3 lg:w-[65px] w-[50px] rounded-full cursor-pointer duration-200 bg-m_black-300 text-m_gray-100"
                                 viewBox="0 0 24 24" stroke="#B3B3B3"
@@ -169,10 +167,11 @@
                         :autoplay="{ delay: 2000, duration: 2000, disableOnInteraction: false }"
                         class="w-full grid grid-cols-3 gap-x-20">
                         <swiper-slide v-for="item in masters" :key="item.id" class="flex flex-col">
-                            <div class="h-[200px] rounded-lg bg-m_black-500 relative">
-                                <img class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[250px] object-cover"
+                            <div class="h-[300px] rounded-lg relative">
+                                <div class="absolute bottom-0 left-0 w-full h-[260px] rounded-xl bg-m_black-500"></div>
+                                <img class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] object-cover"
                                     :src="item.img">
-                                <div class="absolute top-4 right-4">
+                                <div class="absolute top-14 right-4">
                                     <div class="flex items-center">
                                         <span class="text-lg text-m_yellow-100">★</span>
                                         <span class="ml-1 text-white text-base font-bold font-sf_pro">{{ item.star }}</span>
@@ -185,24 +184,6 @@
                             </p>
                         </swiper-slide>
                     </swiper>
-                    <!-- <div class="w-full grid grid-cols-3 gap-x-20">
-                        <div v-for="item in masters" :key="item.id" class="flex flex-col">
-                            <div class="h-[200px] rounded-lg bg-m_black-500 relative">
-                                <img class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[250px]"
-                                    :src="item.img">
-                                <div class="absolute top-4 right-4">
-                                    <div class="flex items-center">
-                                        <span class="text-lg text-m_yellow-100">★</span>
-                                        <span class="ml-1 text-white text-base font-bold font-sf_pro">{{ item.star }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3 class="font-sf_pro font-bold text-2xl text-white text-center mt-10 mb-4">{{ item.name }}</h3>
-                            <p class="font-sf_pro font-normal text-lg text-m_yellow-200 text-center">
-                                {{ item.position }}
-                            </p>
-                        </div>
-                    </div> -->
                 </div>
                 <div class="w-full pb-5">
                     <h2
@@ -210,7 +191,7 @@
                         Часто задаваемые вопросы
                     </h2>
                     <div class="sm:p-6 text-white">
-                        <div v-for="(item, index) in items" :key="index" class="mb-4 bg-m_black-200 rounded-lg">
+                        <div v-for="(item, index) in qas" :key="index" class="mb-4 bg-m_black-200 rounded-lg">
                             <button @click="toggleAccordion(index)"
                                 class="w-full text-left py-4 px-6 rounded-lg flex justify-between items-center focus:outline-none">
                                 <span class="sm:text-lg text-base">{{ item.question }}</span>
@@ -260,13 +241,8 @@ export default {
             slidesPerView: null,
             activeIndex: null,
             courses: null,
-            items: [
-                { id: 1, question: 'Lorem ipsum dolar sit', answer: 'Hawa shol lorem ipsum dolar sit bolya' },
-                { id: 2, question: 'Lorem ipsum dolar sit', answer: 'Hawa shol lorem ipsum dolar sit bolya' },
-                { id: 3, question: 'Lorem ipsum dolar sit', answer: 'Hawa shol lorem ipsum dolar sit bolya' },
-                { id: 4, question: 'Lorem ipsum dolar sit', answer: 'Hawa shol lorem ipsum dolar sit bolya' },
-                { id: 5, question: 'Lorem ipsum dolar sit', answer: 'Hawa shol lorem ipsum dolar sit bolya' },
-            ],
+            cats: null,
+            qas: null,
             masters: [
                 {
                     id: 1,
@@ -315,93 +291,46 @@ export default {
             },
             modules: [Pagination, Navigation, Autoplay],
             galleryItems: [
-                {
-                    img: 'https://via.placeholder.com/400x400',
-                    title: 'Я таргетолог',
-                    description: 'Targeting Specialist',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x400',
-                    title: 'Кем же работать?',
-                    description: 'Career Options',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x600',
-                    title: 'Точка Б',
-                    description: '150,000 Сом',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x600',
-                    title: 'Пример работы',
-                    description: 'Work Example',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x400',
-                    title: 'Кем же работать?',
-                    description: 'Career Options',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x600',
-                    title: 'Точка Б',
-                    description: '150,000 Сом',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x600',
-                    title: 'Пример работы',
-                    description: 'Work Example',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x400',
-                    title: 'Кем же работать?',
-                    description: 'Career Options',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x600',
-                    title: 'Точка Б',
-                    description: '150,000 Сом',
-                },
-                {
-                    img: 'https://via.placeholder.com/400x600',
-                    title: 'Пример работы',
-                    description: 'Work Example',
-                },
+                { id: 1, img: '/imgs/home-1.webp' },
+                { id: 2, img: '/imgs/home-2.webp' },
+                { id: 3, img: '/imgs/home-3.webp' },
+                { id: 4, img: '/imgs/home-4.webp' },
+                { id: 5, img: '/imgs/home-1.webp' },
+                { id: 6, img: '/imgs/home-2.webp' },
+                { id: 7, img: '/imgs/home-3.webp' },
+                { id: 8, img: '/imgs/home-1.webp' },
+                { id: 9, img: '/imgs/home-2.webp' },
+                { id: 10, img: '/imgs/home-3.webp' },
+                { id: 11, img: '/imgs/home-4.webp' },
+                { id: 12, img: '/imgs/home-3.webp' },
             ],
             partners: [
-                { id: 1, img: 'https://via.placeholder.com/400x400' },
-                { id: 2, img: 'https://via.placeholder.com/400x400' },
-                { id: 3, img: 'https://via.placeholder.com/400x400' },
-                { id: 4, img: 'https://via.placeholder.com/400x400' },
-                { id: 5, img: 'https://via.placeholder.com/400x400' },
-                { id: 6, img: 'https://via.placeholder.com/400x400' },
-                { id: 7, img: 'https://via.placeholder.com/400x400' },
+                { id: 1, img: '/svgs/partner-1.svg' },
+                { id: 2, img: '/svgs/partner-2.svg' },
+                { id: 3, img: '/svgs/partner-3.svg' },
+                { id: 4, img: '/svgs/partner-4.svg' },
+                { id: 5, img: '/svgs/partner-5.svg' },
+                { id: 6, img: '/svgs/partner-6.svg' },
             ],
-            cats: [
-                { id: 1, name: 'Featured' },
-                { id: 1, name: 'Marketing' },
-                { id: 1, name: 'Social Media' },
-                { id: 1, name: 'Productivity' },
-                { id: 1, name: 'Film & Tv' },
-                { id: 1, name: 'UI/UX Design' },
-                { id: 1, name: 'Video' },
-                { id: 1, name: 'Marketing' },
-                { id: 1, name: 'Social Media' },
-                { id: 1, name: 'Productivity' },
-                { id: 1, name: 'Film & Tv' },
-                { id: 1, name: 'UI/UX Design' },
-                { id: 1, name: 'Marketing' },
-            ],
-            cards: [
-                1, 2, 3, 4, 5, 6, 7, 8
-            ]
         }
     },
     created() {
         this.getCourses()
+        this.getCategories()
+        this.getQaz()
     },
     methods: {
         async getCourses() {
             const response = await api.get('/courses/')
             this.courses = response.data.results
+        },
+        async getCategories() {
+            const response = await api.get('/categories/')
+            this.cats = response.data.results
+        },
+        async getQaz() {
+            const response = await api.get('/qas/')
+            this.qas = response.data
         },
         toggleAccordion(index) {
             this.activeIndex = this.activeIndex === index ? null : index;
