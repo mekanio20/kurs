@@ -37,7 +37,7 @@
                 </p>
                 <div
                     class="w-full flex sm:flex-row flex-col sm:items-center sm:space-y-0 space-y-4 items-start sm:space-x-6 sm:my-20 my-10 select-none">
-                    <div @click="openFilter"
+                    <!-- <div @click="openFilter"
                         class="flex items-center space-x-6 px-8 py-2 font-sf_pro font-medium text-xl rounded-md cursor-pointer"
                         :class="[filterSelection ? 'bg-m_yellow-200 text-black' : 'text-white border border-m_gray-100']">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,7 +46,7 @@
                                 stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />
                         </svg>
                         <div class="font-sf_pro font-medium text-base text-white">Filters</div>
-                    </div>
+                    </div> -->
                     <div @click="openSort"
                         class="w-fit relative flex items-center space-x-6 px-8 py-2 font-sf_pro font-medium lg:text-lg sm:text-base text-sm rounded-md cursor-pointer"
                         :class="[sortSelection ? 'bg-m_yellow-200 text-black' : 'text-white border border-m_gray-100']">

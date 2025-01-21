@@ -44,7 +44,7 @@
             <div class="container bg-transparent sm:mt-44 mt-36">
                 <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center mb-20">
                     <div class="lg:w-[540px] sm:w-[600px] w-full lg:mr-20">
-                        <img class="lg:flex-1 w-full h-full object-cover rounded-xl" :src="course?.banner">
+                        <img :src="course?.banner" class="lg:flex-1 w-full h-full object-cover rounded-xl">
                     </div>
                     <div class="lg:w-[540px] sm:w-[600px] w-full  flex lg:items-start items-center flex-col space-y-10">
                         <h1
@@ -81,17 +81,6 @@
                         <button
                             class="w-fit px-10 py-3 rounded-lg bg-m_yellow-100 font-helvetica font-bold lg:text-xl sm:text-lg text-base">Купить
                             сейчас</button>
-                    </div>
-                </div>
-                <div v-if="course?.themes.length > 0" class="text-center">
-                    <h2
-                        class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white">
-                        Чему вы научитесь</h2>
-                    <div class="my-10 flex items-center justify-center flex-wrap gap-x-6 gap-y-4">
-                        <div v-for="item in course?.themes" :key="item.id"
-                            class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
-                            {{ item.name }}
-                        </div>
                     </div>
                 </div>
                 <div class="sm:pb-20 mt-20 text-center">
@@ -186,8 +175,7 @@
                     <div
                         class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 sm:my-28 my-20">
                         <div class="sm:w-[400px] w-full h-[200px] rounded-lg bg-m_black-500 relative">
-                            <img class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]"
-                                :src="course?.mentor?.avatar">
+                            <img :src="ownerAvatar" class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]">
                             <div class="absolute top-4 right-4">
                                 <div class="flex items-center">
                                     <span class="lg:text-base text-sm text-m_yellow-100">★</span>
@@ -429,18 +417,17 @@ export default {
         Navbar,
         Footer,
         Card,
-        Swiper,
-        SwiperSlide,
         playIcon,
         RatingBar,
-        StarRating
+        StarRating,
+        Swiper,
+        SwiperSlide,
     },
     data() {
         return {
             course: null,
             courses: null,
             showAll: false,
-            modules: [Pagination, Navigation, Autoplay],
             slidesPerView: 1,
             cource_breakpoints: {
                 200: { slidesPerView: 1 },
@@ -448,7 +435,9 @@ export default {
                 950: { slidesPerView: 3 },
                 1200: { slidesPerView: 4 },
             },
-            comment: 'Этот курс предназначен для тех, кто хочет освоить основные концепции и стратегии маркетинга! 😀🩷'
+            modules: [Pagination, Navigation, Autoplay],
+            comment: 'Этот курс предназначен для тех, кто хочет освоить основные концепции и стратегии маркетинга! 😀🩷',
+            ownerAvatar: null
         }
     },
     created() {
@@ -458,17 +447,19 @@ export default {
     methods: {
         async getCourse() {
             const response = await api.get(`/courses/${this.$route.params.id}`);
-            console.log(response.data);
+            this.ownerAvatar = await response?.data?.owner?.avatar
             this.course = response.data
+            console.log(response.data);
         },
         async allCourses() {
             const response = await api.get('/courses/')
-            this.courses = response.data.results
+            this.courses = response?.data?.results
         }
     },
     computed: {
         visibleLessons() {
-            return this.showAll ? this.course?.lessons : this.course?.lessons.slice(0, 4);
+            return this.course?.modules;
+            // return this.showAll ? this.course?.modules?.lessons : this.course.modules.lessons.slice(0, 4);
         },
     },
 }

@@ -7,7 +7,7 @@
                     <div class="flex-1 flex flex-col space-y-6">
                         <h4 class="font-sf_pro font-medium text-lg text-white">Фото</h4>
                         <div class="relative bg-m_black-700 rounded-lg">
-                            <label for="imageUpload" :class="[imageFile && local ? 'py-5 px-5' : 'py-32 px-40']"
+                            <label for="imageUpload" :class="[imageFile ? 'py-5 px-5' : 'py-32 px-40']"
                                 class="cursor-pointer border-dashed rounded-lg flex items-center justify-center text-gray-500">
                                 <div v-if="!imageFile" class="text-center">
                                     <svg class="h-20 w-20 mx-auto mb-2" viewBox="0 0 72 72" fill="none"
@@ -17,57 +17,37 @@
                                             fill="#B3B3B3" />
                                     </svg>
                                 </div>
-                                <div v-if="imageFile && local">
+                                <div v-if="imageFile">
                                     <img class="w-[400px] object-cover" crossorigin="anonymous" :src="`${imageFile}`">
-                                </div>
-                                <div v-if="imageFile && !local">
-                                    <img class="w-[400px] object-cover" crossorigin="anonymous"
-                                        :src="`${$uploadUrl}/${imageFile}`">
                                 </div>
                             </label>
                             <input id="imageUpload" type="file" class="hidden" @change="handleFileUpload"
                                 accept="image/*">
                         </div>
                         <div class="mt-10">
-                            <div class="px-8 py-4 bg-m_black-700 rounded-lg w-full flex items-center justify-between cursor-pointer relative"
-                                @click="handleOpenDropdown">
-                                <p class="font-sf_pro font-medium text-lg text-white">{{ active_status ? 'Профессия' : 'Без Профессия' }}</p>
-                                <svg :class="{ 'rotate-180': openDropdown, 'transition-transform duration-200': true }"
-                                    width="12" height="8" viewBox="0 0 10 6" fill="#fff"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M0.646447 0.659675C0.841709 0.446775 1.15829 0.446775 1.35355 0.659675L4.64645 4.25C4.84171 4.4629 5.15829 4.4629 5.35355 4.25L8.64645 0.659676C8.84171 0.446776 9.15829 0.446776 9.35355 0.659676C9.54882 0.872575 9.54882 1.21775 9.35355 1.43065L6.06066 5.02098C5.47487 5.65967 4.52513 5.65968 3.93934 5.02098L0.646447 1.43065C0.451184 1.21775 0.451184 0.872574 0.646447 0.659675Z"
-                                        fill="#fff" fill-opacity="0.8" />
-                                </svg>
-                                <div v-if="openDropdown"
-                                    class="w-full flex flex-col absolute top-16 left-0 select-none">
-                                    <div class="px-8 py-4 bg-m_black-700 w-full hover:bg-m_black-600 duration-300"
-                                        @click="active_status = true">
-                                        <p class="font-sf_pro font-medium text-lg text-white">Профессия</p>
-                                    </div>
-                                    <div class="px-8 py-4 bg-m_black-700 w-full rounded-bl-lg rounded-br-lg hover:bg-m_black-600 duration-300"
-                                        @click="active_status = false">
-                                        <p class="font-sf_pro font-medium text-lg text-white">Без Профессия</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="flex flex-col">
+                            <h4 class="font-sf_pro font-medium text-lg text-white pb-4 pt-3">Профессия</h4>
+                            <input v-model="profession" class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white">
+                        </div>
                         </div>
                         <div class="flex flex-col">
                             <h4 class="font-sf_pro font-medium text-lg text-white pb-4 pt-3">Электронная почта</h4>
-                            <input class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white" type="email"
-                                name="" id="">
+                            <input v-model="email" class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white" type="email">
                         </div>
                     </div>
                     <div class="flex-1 flex flex-col space-y-6">
                         <h4 class="font-sf_pro font-medium text-lg text-white">Полное имя</h4>
-                        <input class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white" type="email" name=""
-                            id="">
+                        <input v-model="fullName" class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white">
+                        <!-- Password -->
+                        <h4 class="font-sf_pro font-medium text-lg text-white">Пароль</h4>
+                        <input v-model="password" class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white"
+                            type="password">
                         <h4 class="font-sf_pro font-medium text-lg text-white">Информация</h4>
-                        <textarea class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white resize-none" name="" id=""
+                        <textarea v-model="bio" class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white resize-none"
                             cols="30" rows="10"></textarea>
-                        <div class="pt-[87px] flex items-center space-x-6">
+                        <div class="pt-[50px] flex items-center space-x-6">
                             <AdminButton :color="true" :bg_color="true" name="Отмена"></AdminButton>
-                            <AdminButton :bold="true" name="Сохранить"></AdminButton>
+                            <AdminButton @click="saveMentor" :bold="true" name="Сохранить"></AdminButton>
                         </div>
                     </div>
                 </div>
@@ -81,6 +61,8 @@ import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
 import AdminHeader from '@/components/admin/Header.vue';
 import AdminButton from '@/components/base/AdminButton.vue';
+import { useToast } from "vue-toastification";
+import { mapActions, mapState } from 'vuex';
 export default {
     name: "AddMentor",
     components: {
@@ -90,19 +72,22 @@ export default {
     },
     data() {
         return {
+            bio: null,
+            email: null,
+            fullName: null,
+            profession: null,
+            password: null,
             imageFile: null,
             img: null,
-            local: false,
-            openDropdown: false,
-            active_status: true
         }
     },
     created() {
         this.getMentors()
     },
     methods: {
+        ...mapActions(['setLoading']),
         async getMentors() {
-            const response = await api.get('/mentors/')
+            const response = await api.get('/users/')
             this.mentors = response.data
         },
         handleFileUpload(event) {
@@ -110,13 +95,31 @@ export default {
             this.imageFile = URL.createObjectURL(event.target.files[0])
             this.img = event.target.files[0]
         },
-        handleOpenDropdown() {
-            this.openDropdown = !this.openDropdown
-        },
         async saveMentor() {
-
+            const toast = useToast();
+            const formData = new FormData()
+            formData.append('bio', this.bio)
+            formData.append('avatar', this.img)
+            formData.append('email', this.email)
+            formData.append('is_teacher', true)
+            formData.append('full_name', this.fullName)
+            formData.append('profession', this.profession)
+            formData.append('password', this.password)
+            this.$store.dispatch('setLoading', true);
+            try {
+                const response = await api.post('/users/', formData)
+                if (response.status === 201) { toast.success('Ментор успешно создан') } 
+            } catch (error) {
+                console.error('Error occurred: ', error);
+                const errorMessage = error.response?.data?.detail || 'Login failed';
+                toast.error(errorMessage);
+            } finally {
+                this.$store.dispatch('setLoading', false);
+            }
         },
-
-    }
+    },
+    computed: {
+        ...mapState(['loading']),
+    },
 }
 </script>
