@@ -59,7 +59,9 @@
                 <div class="w-full flex items-center justify-between">
                     <div class="w-[750px]">
                         <div class="w-full flex flex-col space-y-10 lg:py-40 py-20">
-                            <h1 class="font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white">Получайте знания от
+                            <h1
+                                class="font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white">
+                                Получайте знания от
                                 мастеров, развивайтесь до совершенства.</h1>
                             <p class="font-sf_pro font-medium lg:text-xl sm:text-lg text-base text-m_gray-100">
                                 Учитесь у экспертов, чтобы стать тем, кем всегда мечтали быть.
@@ -91,20 +93,20 @@
                         Доверяют более <span class="font-bold">800K+</span> фрилансеров и <span
                             class="font-bold">20K+</span> команд, таких как:
                     </p>
-                    <div class="w-full flex items-center justify-between mt-4 mb-16 overflow-x-auto no-scrollbar">
-                        <div class="flex items-center mr-10 px-6 py-4 rounded-lg mt-4" v-for="item in partners" :key="item.id">
-                            <img class="object-cover" :src="item.img">
+                    <div class="grid lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 grid-cols-3 gap-4 mt-4 mb-16 pt-10">
+                        <div v-for="item in partners" :key="item.id">
+                            <img class="w-full h-full object-cover" :src="item.img">
                         </div>
                     </div>
                 </div>
                 <!-- Category Courses -->
                 <div class="w-full pb-5">
-                    <h2 class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto">
+                    <h2
+                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto">
                         Найдите свой источник вдохновения, когда угодно
                     </h2>
                     <div class="flex items-center justify-center flex-wrap pt-16 pb-10">
-                        <div v-for="item in cats" :key="item.id"
-                            @click="changeActiveCat(item.id)"
+                        <div v-for="item in cats" :key="item.id" @click="changeActiveCat(item.id)"
                             :class="[active_cat == item.id ? 'bg-m_yellow-100 text-black' : 'bg-m_black-200 text-m_gray-200']"
                             class="font-sf_pro font-medium lg:px-10 lg:py-3 px-6 py-2 sm:mr-4 sm:mb-4 mr-3 mb-3 lg:text-base text-sm rounded-md hover:bg-m_yellow-100 hover:text-black duration-300 cursor-pointer">
                             {{ item.name }}
@@ -129,7 +131,8 @@
                 </div>
                 <!-- Popular Categories -->
                 <div class="w-full pb-5">
-                    <h2 class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-32 mt-20 mb-20">
+                    <h2
+                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-32 mt-20 mb-20">
                         Популярные категории на нашей платформе
                     </h2>
                     <div class="w-full flex flex-col items-center space-y-20">
@@ -139,7 +142,8 @@
                             class="w-full flex items-center space-x-20 select-none">
                             <swiper-slide v-for="item in popular_cats" :key="item.id">
                                 <router-link :to="`/category/${item.id}`">
-                                    <img class="w-full sm:h-[390px] h-[300px] object-cover rounded-lg" :src="item.image" />
+                                    <img class="w-full sm:h-[390px] h-[300px] object-cover rounded-lg"
+                                        :src="item.image" />
                                 </router-link>
                             </swiper-slide>
                         </swiper>
@@ -148,7 +152,8 @@
                 <!-- Masters -->
                 <div class="w-full pb-5">
                     <!-- Title -->
-                    <h2 class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-32 mt-20 mb-14">
+                    <h2
+                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-32 mt-20 mb-14">
                         Получайте знания от творческих специалистов
                     </h2>
                     <!-- Arrow icons -->
@@ -159,14 +164,16 @@
                                 class="p-3 lg:w-[65px] w-[50px] rounded-full cursor-pointer duration-200 prev-master"
                                 viewBox="0 0 24 24" :stroke="[isMaster === 'prev' ? '#000' : '#B3B3B3']"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke-width="1" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                             <svg @click="isMaster = 'next'"
                                 :class="[isMaster === 'next' ? 'bg-m_yellow-100' : 'bg-m_black-300']"
                                 class="p-3 lg:w-[65px] w-[50px] rounded-full cursor-pointer duration-200 next-master"
                                 viewBox="0 0 24 24" :stroke="[isMaster === 'next' ? '#000' : '#B3B3B3']"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke-width="1" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </div>
                     </div>
@@ -179,15 +186,18 @@
                         <swiper-slide v-for="item in masters" :key="item.id" class="flex flex-col">
                             <div class="h-[300px] rounded-lg relative">
                                 <div class="absolute bottom-0 left-0 w-full h-[260px] rounded-xl bg-m_black-500"></div>
-                                <img class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] object-cover" :src="item.avatar">
+                                <img class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] object-cover"
+                                    :src="item.avatar">
                                 <div class="absolute top-14 right-4">
                                     <div class="flex items-center">
                                         <span class="text-lg text-m_yellow-100">★</span>
-                                        <span class="ml-1 text-white text-base font-bold font-sf_pro">{{ item.rating }}</span>
+                                        <span class="ml-1 text-white text-base font-bold font-sf_pro">{{ item.rating
+                                            }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <h3 class="font-sf_pro font-bold text-2xl text-white text-center mt-10 mb-4">{{ item.full_name }}</h3>
+                            <h3 class="font-sf_pro font-bold text-2xl text-white text-center mt-10 mb-4">{{
+                                item.full_name }}</h3>
                             <p class="font-sf_pro font-normal text-lg text-m_yellow-200 text-center">
                                 {{ item.profession }}
                             </p>
@@ -196,10 +206,11 @@
                 </div>
                 <!-- Comments -->
                 <div class="w-full pb-5">
-                    <h2 class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-32 mt-20 sm:mb-40 mb-20">
+                    <h2
+                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-32 mt-20 sm:mb-40 mb-20">
                         Отзывы наших пользователей
                     </h2>
-                    <div class="md:w-[1400px] w-[350px] h-[700px] relative">
+                    <div class="md:w-[1400px] w-[350px] h-[700px] mx-auto relative">
                         <div v-for="item in comments" :key="item.id"
                             class="w-[400px] lg:ml-40 ml-0 absolute px-10 py-6 rounded-lg md:flex hidden flex-col space-y-4"
                             :style="{
@@ -223,7 +234,7 @@
                             </p>
                         </div>
                         <div v-for="item in mobile_comments" :key="item.id"
-                            class="w-[400px] sm:ml-32 ml-5 absolute px-10 py-6 rounded-lg md:hidden flex flex-col space-y-4"
+                            class="w-[350px] absolute px-10 py-6 rounded-lg md:hidden flex flex-col space-y-4"
                             :style="{
                                 backgroundColor: item.bg_color,
                                 color: item.text_color,
@@ -248,7 +259,8 @@
                 </div>
                 <!-- FAQ -->
                 <div class="w-full pb-5">
-                    <h2 class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-20 mt-10 mb-20">
+                    <h2
+                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-20 mt-10 mb-20">
                         Часто задаваемые вопросы
                     </h2>
                     <div class="sm:p-6 text-white">

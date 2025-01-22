@@ -49,7 +49,7 @@
                     <input type="password" v-model="password"
                         class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 lg:text-lg sm:text-base text-sm rounded-lg outline-none"
                         placeholder="Пароль">
-                    <router-link to="#"
+                    <router-link to="/otp"
                         class="font-sf_pro font-normal lg:text-base text-sm text-m_black-400 hover:underline self-start">Забыли
                         пароль?</router-link>
                     <button type="submit" 
@@ -61,7 +61,7 @@
                     </div>
                 </form>
                 <div class="flex-1 lg:flex hidden flex-col items-center space-y-6">
-                    <div class="w-[600px] h-[700px] overflow-y-scroll no-scrollbar relative">
+                    <div class="w-[500px] h-[600px] overflow-y-scroll no-scrollbar relative">
                         <div class="columns-2 gap-8 animate-scroll">
                             <div v-for="(item, index) in galleryItems" :key="index" class="w-full mb-5 overflow-hidden">
                                 <img class="w-full object-cover mb-3 rounded-xl" :src="item.img" />

@@ -74,13 +74,13 @@
                         class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold sm:text-base text-sm !mt-10">Создать
                         аккаунт</button>
                     <div
-                        class="bg-transparent flex items-center space-x-1 font-sf_pro font-normal sm:text-base text-sm !mt-36">
+                        class="bg-transparent flex items-center space-x-1 font-sf_pro font-normal sm:text-base text-sm !mt-28">
                         <p class="text-m_gray-100">Уже есть аккаунт?</p>
                         <router-link to="/login" class="text-m_yellow-200 hover:underline">Войти</router-link>
                     </div>
                 </form>
                 <div class="flex-1 lg:flex hidden flex-col items-center space-y-6">
-                    <div class="w-[600px] h-[700px] overflow-y-scroll no-scrollbar relative">
+                    <div class="w-[500px] h-[600px] overflow-y-scroll no-scrollbar relative">
                         <div class="columns-2 gap-8 animate-scroll">
                             <div v-for="(item, index) in galleryItems" :key="index" class="w-full mb-5 overflow-hidden">
                                 <img class="w-full object-cover mb-3 rounded-xl" :src="item.img" />

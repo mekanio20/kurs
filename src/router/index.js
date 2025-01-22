@@ -28,6 +28,11 @@ const router = createRouter({
       component: () => import("@/views/Login.vue"),
     },
     {
+      path: "/otp",
+      name: "OTP",
+      component: () => import("@/views/OTP.vue"),
+    },
+    {
       path: "/category/:id",
       name: "Category",
       component: () => import("@/views/Category.vue"),

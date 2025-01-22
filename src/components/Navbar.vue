@@ -42,7 +42,7 @@
                     </svg>
                 </div>
                 <!-- Search -->
-                <form @submit.prevent="performSearch" class="w-[500px] mx-10 lg:block hidden">
+                <form @submit.prevent="performSearch" class="w-[500px] ml-20 lg:block hidden">
                     <div class="relative">
                         <div class="absolute inset-y-0 end-6 flex items-center pointer-events-none">
                             <svg class="md:w-5 w-4 text-m_gray-100" aria-hidden="true"
