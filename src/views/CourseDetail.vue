@@ -43,7 +43,7 @@
             <Navbar />
             <div class="container bg-transparent sm:mt-44 mt-36">
                 <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center mb-20">
-                    <div class="lg:w-[540px] sm:w-[600px] w-full lg:mr-20">
+                    <div class="lg:w-[740px] sm:w-[600px] w-full lg:mr-20">
                         <img v-if="course?.banner" :src="course?.banner" class="lg:flex-1 w-full h-full object-cover rounded-xl">
                     </div>
                     <div class="lg:w-[540px] sm:w-[600px] w-full  flex lg:items-start items-center flex-col space-y-10">
@@ -78,18 +78,19 @@
                                 {{ course?.students_count || 0 }} студентов
                             </div>
                         </div>
-                        <button
-                            class="w-fit px-10 py-3 rounded-lg bg-m_yellow-100 font-helvetica font-bold lg:text-xl sm:text-lg text-base">Купить
-                            сейчас</button>
+                        <div class="w-full flex items-center space-x-4">
+                            <button class="w-fit px-10 py-3 rounded-lg bg-m_yellow-100 font-helvetica font-bold lg:text-xl sm:text-lg text-base">Купить сейчас</button>
+                            <bookmarkIcon v-model:isTrue="isIconFilled" />
+                        </div>
                     </div>
                 </div>
                 <div class="sm:pb-20 mt-20 text-center">
                     <h2
-                        class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white">
+                        class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white select-none">
                         Программа курса
                     </h2>
                     <!-- Modules -->
-                    <div class="flex items-center space-x-6 pt-10">
+                    <div class="flex items-center space-x-6 pt-10 select-none">
                         <div v-for="item in video_modules" :key="item.id" @click="changeActiveModule(item)"
                             :class="item.id == active_module?.id ? 'bg-m_yellow-100 text-black font-bold' : 'text-m_gray-200'"
                             class="px-8 py-3 rounded-3xl bg-m_black-300 font-sf_pro lg:text-lg text-base cursor-pointer hover:bg-m_yellow-100 hover:text-black duration-300">
@@ -425,6 +426,7 @@ import Card from '@/components/Card.vue';
 import RatingBar from '@/components/RatingBar.vue';
 import StarRating from '@/components/StarRating.vue';
 import playIcon from '@/components/icons/play.vue';
+import bookmarkIcon from '@/components/icons/bookmark.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import 'swiper/css';
@@ -440,11 +442,13 @@ export default {
         playIcon,
         RatingBar,
         StarRating,
+        bookmarkIcon,
         Swiper,
         SwiperSlide,
     },
     data() {
         return {
+            isIconFilled: false,
             course: null,
             courses: null,
             showAll: false,
@@ -483,7 +487,7 @@ export default {
         },
         async changeActiveModule(obj) {
             this.active_module = { id: obj.id, name: obj.name }
-            this.active_lessons = await this.video_modules.find(item => item.id === id)?.lessons
+            this.active_lessons = await this.video_modules.find(item => item.id === obj.id)?.lessons
         }
     },
 }

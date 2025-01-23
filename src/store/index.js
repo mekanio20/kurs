@@ -4,7 +4,8 @@ export default createStore({
   state: {
     user: null,
     isRegistered: !!localStorage.getItem("access"),
-    loading: false
+    pendingRequests: 0,
+    loading: false,
   },
   mutations: {
     SET_REGISTERED(state, status) {
@@ -15,7 +16,13 @@ export default createStore({
     },
     SET_LOADING(state, status) {
       state.loading = status;
-    }
+    },
+    ADD_PENDING_REQUEST(state) {
+      state.pendingRequests++;
+    },
+    REMOVE_PENDING_REQUEST(state) {
+      state.pendingRequests--;
+    },
   },
   actions: {
     async registerUser({ commit }, user) {
@@ -24,11 +31,18 @@ export default createStore({
     },
     setLoading({ commit }, status) {
       commit("SET_LOADING", status);
-    }
+    },
+    addPendingRequest({ commit }) {
+      commit('ADD_PENDING_REQUEST');
+    },
+    removePendingRequest({ commit }) {
+      commit('REMOVE_PENDING_REQUEST');
+    },
   },
   getters: {
     user: (state) => state.user,
     isRegistered: (state) => state.isRegistered,
-    loading: (state) => state.loading
+    hasPendingRequests: (state) => state.pendingRequests > 0,
+    loading: (state) => state.loading,
   },
 });

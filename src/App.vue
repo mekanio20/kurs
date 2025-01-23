@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import Loader from '@/components/Loader.vue';
 import { mapState } from 'vuex';
 import { RouterView } from 'vue-router'
 
