@@ -44,7 +44,7 @@
             <div class="container bg-transparent sm:mt-44 mt-36">
                 <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center mb-20">
                     <div class="lg:w-[540px] sm:w-[600px] w-full lg:mr-20">
-                        <img :src="course?.banner" class="lg:flex-1 w-full h-full object-cover rounded-xl">
+                        <img v-if="course?.banner" :src="course?.banner" class="lg:flex-1 w-full h-full object-cover rounded-xl">
                     </div>
                     <div class="lg:w-[540px] sm:w-[600px] w-full  flex lg:items-start items-center flex-col space-y-10">
                         <h1
@@ -86,10 +86,25 @@
                 <div class="sm:pb-20 mt-20 text-center">
                     <h2
                         class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white">
-                        Программа курса</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 px-4 sm:px-8 py-10">
-                        <router-link v-for="(item, index) in visibleLessons" :key="index" to="/video/detail/1"
-                            class="p-4 bg-m_black-500 rounded-xl overflow-hidden flex items-center space-x-4 cursor-pointer">
+                        Программа курса
+                    </h2>
+                    <!-- Modules -->
+                    <div class="flex items-center space-x-6 pt-10">
+                        <div v-for="item in video_modules" :key="item.id" @click="changeActiveModule(item)"
+                            :class="item.id == active_module?.id ? 'bg-m_yellow-100 text-black font-bold' : 'text-m_gray-200'"
+                            class="px-8 py-3 rounded-3xl bg-m_black-300 font-sf_pro lg:text-lg text-base cursor-pointer hover:bg-m_yellow-100 hover:text-black duration-300">
+                            {{ item.name }}
+                        </div>
+                    </div>
+                    <!-- Names -->
+                    <div class="text-start pt-10">
+                        <h2 class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white">
+                            {{ active_module?.name }}
+                        </h2>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 py-10 mb-10">
+                        <router-link v-for="(item, index) in active_lessons" :key="index" :to="`/video/detail/${item.id}`"
+                            class="p-4 bg-m_black-500 rounded-lg overflow-hidden flex items-center space-x-4 cursor-pointer">
                             <div class="relative w-32">
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                     <playIcon :w="32" :h="32" />
@@ -97,10 +112,8 @@
                                 <img :src="item.banner" class="w-full rounded-xl object-cover mr-8">
                             </div>
                             <div class="flex items-start flex-col space-y-2">
-                                <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: {{ index +
-                            1 }}</p>
-                                <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">{{ item.name
-                                    }}</p>
+                                <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: {{ index + 1 }}</p>
+                                <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">{{ item.name }}</p>
                             </div>
                         </router-link>
                     </div>
@@ -175,7 +188,8 @@
                     <div
                         class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 sm:my-28 my-20">
                         <div class="sm:w-[400px] w-full h-[200px] rounded-lg bg-m_black-500 relative">
-                            <img :src="ownerAvatar" class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]">
+                            <img :src="ownerAvatar"
+                                class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]">
                             <div class="absolute top-4 right-4">
                                 <div class="flex items-center">
                                     <span class="lg:text-base text-sm text-m_yellow-100">★</span>
@@ -200,13 +214,18 @@
                     </div>
                 </div>
                 <div class="w-full lg:pb-20">
-                    <h2 class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center">
+                    <h2
+                        class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center">
                         Отзывы пользователей</h2>
-                    <div class="w-full text-white p-6 rounded-lg justify-center items-center flex flex-col lg:flex-row gap-8 mt-20">
+                    <div
+                        class="w-full text-white p-6 rounded-lg justify-center items-center flex flex-col lg:flex-row gap-8 mt-20">
                         <!-- Rating Overview -->
                         <div class="w-full lg:h-[152px] flex lg:flex-row flex-col items-center justify-center px-10">
-                            <div class="h-full lg:pr-6 lg:mr-3 lg:border-r-2 lg:border-white lg:pb-0 pb-6 opacity-80 flex flex-col items-center justify-center">
-                                <div class="text-4xl font-bold font-sf_pro tracking-wider text-nowrap">4.6 <span class="font-normal text-base">/</span><sub class="font-normal text-base">5</sub></div>
+                            <div
+                                class="h-full lg:pr-6 lg:mr-3 lg:border-r-2 lg:border-white lg:pb-0 pb-6 opacity-80 flex flex-col items-center justify-center">
+                                <div class="text-4xl font-bold font-sf_pro tracking-wider text-nowrap">4.6 <span
+                                        class="font-normal text-base">/</span><sub class="font-normal text-base">5</sub>
+                                </div>
                                 <div class="fonst-sf_pro text-lg opacity-80 text-white">86 Ком.</div>
                             </div>
                             <div class="w-full h-full space-y-2">
@@ -225,7 +244,8 @@
                             <h4 class="font-sf_pro font-medium text-base text-m_gray-100">Комментарий</h4>
                             <textarea cols="5" rows="4" v-model="comment"
                                 class="w-full py-4 px-6 rounded-lg bg-m_black-300 text-white placeholder-gray-400 focus:outline-none resize-none"></textarea>
-                            <button class="mt-6 bg-transparent hover:bg-m_yellow-100 hover:text-black border border-m_yellow-100 text-m_yellow-100 font-sf_pro font-bold text-lg py-3 rounded-lg duration-300">
+                            <button
+                                class="mt-6 bg-transparent hover:bg-m_yellow-100 hover:text-black border border-m_yellow-100 text-m_yellow-100 font-sf_pro font-bold text-lg py-3 rounded-lg duration-300">
                                 Отправить комментарий
                             </button>
                         </div>
@@ -437,30 +457,34 @@ export default {
             },
             modules: [Pagination, Navigation, Autoplay],
             comment: 'Этот курс предназначен для тех, кто хочет освоить основные концепции и стратегии маркетинга! 😀🩷',
-            ownerAvatar: null
+            active_module: null,
+            video_modules: null,
+            active_lessons: null,
+            ownerAvatar: null,
         }
     },
     created() {
         this.getCourse(),
-        this.allCourses()
+            this.allCourses()
     },
     methods: {
         async getCourse() {
             const response = await api.get(`/courses/${this.$route.params.id}`);
             this.ownerAvatar = await response?.data?.owner?.avatar
+            this.video_modules = await response?.data?.modules
+            this.active_module = await response?.data?.modules[0]
+            this.active_lessons = await response?.data?.modules[0]?.lessons
             this.course = response.data
-            console.log(response.data);
+            console.log(this.active_lessons);
         },
         async allCourses() {
             const response = await api.get('/courses/')
             this.courses = response?.data?.results
-        }
-    },
-    computed: {
-        visibleLessons() {
-            return this.course?.modules;
-            // return this.showAll ? this.course?.modules?.lessons : this.course.modules.lessons.slice(0, 4);
         },
+        async changeActiveModule(obj) {
+            this.active_module = { id: obj.id, name: obj.name }
+            this.active_lessons = await this.video_modules.find(item => item.id === id)?.lessons
+        }
     },
 }
 </script>

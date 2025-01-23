@@ -2,7 +2,7 @@
     <div class="w-full min-h-100vh relative overflow-hidden">
         <div class="w-full h-full relative z-50">
             <!-- Navbar -->
-            <div class="container py-10 flex items-center justify-between">
+            <div class="container pt-10 pb-5 flex items-center justify-between">
                 <div class="flex items-center space-x-4">
                     <!-- Logo -->
                     <router-link to="/" class="lg:w-24 w-20 cursor-pointer mr-10">
@@ -31,7 +31,12 @@
                 </router-link>
             </div>
             <div class="container bg-transparent">
-                <Video videoSource="squid-2-1.mp4" />
+                <!-- Video player -->
+                <div class="video-player-container">
+                    <video id="plyr-video" class="plyr" controls playsinline>
+                        <source v-if="lessons?.video" :src="lessons?.video" type="video/mp4">
+                    </video>
+                </div>
                 <div class="flex items-center justify-center py-10">
                     <p v-for="(item, index) in tabs" @click="activeTab = index"
                         class="font-sf_pro font-medium text-lg px-6 pb-4 cursor-pointer border-b-4"
@@ -139,7 +144,7 @@
                             </div>
                             <div class="flex items-start flex-col space-y-2">
                                 <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: {{ index +
-                        1 }}</p>
+                            1 }}</p>
                                 <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">{{ item.name
                                     }}</p>
                             </div>
@@ -338,6 +343,9 @@
 </template>
 
 <script>
+import Plyr from 'plyr';
+import 'plyr/dist/plyr.css';
+import api from '@/api/index';
 import Footer from '@/components/Footer.vue';
 import closeIcon from '@/components/icons/close.vue';
 import Video from '@/components/Video.vue';
@@ -357,6 +365,7 @@ export default {
     data() {
         return {
             activeTab: 0,
+            lessons: [],
             cats: ['Бизнес & предпринимательство'],
             tabs: ['Информация о курсе', 'Программа курса', 'Отзывы'],
             themes: [
@@ -384,7 +393,74 @@ export default {
             comment: 'Этот курс предназначен для тех, кто хочет освоить основные концепции и стратегии маркетинга! 😀🩷'
         };
     },
+    created() {
+        this.getLessons()
+    },
+    mounted() {
+        this.player = new Plyr('#plyr-video', {
+            controls: [
+                'play-large',
+                'play',
+                'rewind',
+                'fast-forward',
+                'progress',
+                'current-time',
+                'duration',
+                'mute',
+                'volume',
+                'settings',
+                'pip',
+                'fullscreen',
+            ],
+            settings: ['speed'],
+            speed: { selected: 1.0, options: [0.5, 1, 1.5, 2, 4, 10] },
+        });
+
+        document.addEventListener('keydown', this.handleKeyEvents);
+    },
     methods: {
+        handleKeyEvents(event) {
+            if (event.key === 'ArrowRight') {
+                this.player.forward(5);
+            } else if (event.key === 'ArrowLeft') {
+                this.player.rewind(5);
+            } else if (event.key === 'ArrowUp') {
+                this.player.volume = Math.min(this.player.volume + 0.1, 1);
+            } else if (event.key === 'ArrowDown') {
+                this.player.volume = Math.max(this.player.volume - 0.1, 0);
+            }
+        },
+        async getLessons() {
+            const response = await api.get(`/lessons/${this.$route.params.id}`)
+            this.lessons = response.data
+        }
+    },
+    beforeUnmount() {
+        document.removeEventListener('keydown', this.handleKeyEvents);
+        this.player.destroy();
     },
 }
 </script>
+
+<style>
+:root {
+    --plyr-color-main: #FFCC02 !important;
+    --plyr-control-color: #ffffff !important;
+    --plyr-menu-background: #1e293b !important;
+    --plyr-menu-color: #e2e8f0 !important;
+    --plyr-tooltip-background: #475569 !important;
+    --plyr-tooltip-color: #ffffff !important;
+}
+
+.video-player-container {
+    width: 100%;
+    height: 700px;
+}
+
+.plyr {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    overflow: hidden;
+}
+</style>

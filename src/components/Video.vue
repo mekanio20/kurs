@@ -4,9 +4,8 @@
         id="plyr-video"
         class="plyr"
         controls
-        playsinline
-        crossorigin="anonymous">
-        <source :src="`/videos/${videoSource}`" type="video/mp4" />
+        playsinline>
+        <source :src="videoSource" type="video/mp4">
       </video>
     </div>
   </template>
@@ -16,11 +15,6 @@
   import 'plyr/dist/plyr.css';
   
   export default {
-    props: {
-        videoSource: {
-            type: String
-        }
-    },
     mounted() {
       this.player = new Plyr('#plyr-video', {
         controls: [
@@ -37,9 +31,8 @@
           'pip',
           'fullscreen',
         ],
-        settings: ['speed', 'quality'],
+        settings: ['speed'],
         speed: { selected: 1.0, options: [0.5, 1, 1.5, 2] },
-        quality: { default: 480, options: [360, 480, 720, 1080] },
       });
   
       document.addEventListener('keydown', this.handleKeyEvents);
