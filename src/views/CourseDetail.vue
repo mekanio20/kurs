@@ -43,7 +43,7 @@
             <Navbar />
             <div class="container bg-transparent sm:mt-44 mt-36">
                 <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center mb-20">
-                    <div class="lg:w-[740px] sm:w-[600px] w-full lg:mr-20">
+                    <div class="lg:w-[640px] sm:w-[600px] w-full lg:mr-20">
                         <img v-if="course?.banner" :src="course?.banner" class="lg:flex-1 w-full h-full object-cover rounded-xl">
                     </div>
                     <div class="lg:w-[540px] sm:w-[600px] w-full  flex lg:items-start items-center flex-col space-y-10">
@@ -78,8 +78,8 @@
                                 {{ course?.students_count || 0 }} студентов
                             </div>
                         </div>
-                        <div class="w-full flex items-center space-x-4">
-                            <button class="w-fit px-10 py-3 rounded-lg bg-m_yellow-100 font-helvetica font-bold lg:text-xl sm:text-lg text-base">Купить сейчас</button>
+                        <div class="w-full flex items-center space-x-4 select-none">
+                            <router-link to="/payment" class="w-fit px-10 py-3 rounded-lg bg-m_yellow-100 font-helvetica font-bold lg:text-xl sm:text-lg text-base">Купить сейчас</router-link>
                             <bookmarkIcon v-model:isTrue="isIconFilled" />
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                             {{ active_module?.name }}
                         </h2>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 py-10 mb-10">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 py-10">
                         <router-link v-for="(item, index) in active_lessons" :key="index" :to="`/video/detail/${item.id}`"
                             class="p-4 bg-m_black-500 rounded-lg overflow-hidden flex items-center space-x-4 cursor-pointer">
                             <div class="relative w-32">
@@ -118,10 +118,10 @@
                             </div>
                         </router-link>
                     </div>
-                    <button @click="showAll = !showAll"
+                    <!-- <button @click="showAll = !showAll"
                         class="px-7 py-3 rounded-lg border border-white font-sf_pro font-medium text-white lg:text-base text-sm">
                         {{ showAll ? "Скрыть" : "Посмотреть все" }}
-                    </button>
+                    </button> -->
                 </div>
                 <div class="w-full flex lg:flex-row flex-col lg:space-y-0 space-y-10 py-20">
                     <div class="lg:flex-1 w-full lg:mr-20">
@@ -189,7 +189,7 @@
                     <div
                         class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 sm:my-28 my-20">
                         <div class="sm:w-[400px] w-full h-[200px] rounded-lg bg-m_black-500 relative">
-                            <img :src="ownerAvatar"
+                            <img v-if="ownerAvatar" :src="ownerAvatar"
                                 class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]">
                             <div class="absolute top-4 right-4">
                                 <div class="flex items-center">

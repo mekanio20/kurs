@@ -65,11 +65,11 @@ const router = createRouter({
       name: "VideoPlayer",
       component: () => import("@/views/VideoPlayer.vue"),
     },
-    // {
-    //   path: "/payment",
-    //   name: "Payment",
-    //   component: () => import("@/views/Payment.vue"),
-    // },
+    {
+      path: "/payment",
+      name: "Payment",
+      component: () => import("@/views/Payment.vue"),
+    },
     {
       path: "/notification",
       name: "Notification",

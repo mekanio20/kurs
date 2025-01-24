@@ -209,7 +209,7 @@
                     <h2 class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-32 mt-20 sm:mb-40 mb-20">
                         Отзывы наших пользователей
                     </h2>
-                    <div class="md:w-[1400px] w-[350px] h-[700px] mx-auto relative">
+                    <div class="md:w-[1000px] w-[350px] h-[700px] mx-auto relative">
                         <div v-for="item in comments" :key="item.id"
                             class="w-[400px] absolute px-10 py-6 rounded-lg md:flex hidden flex-col space-y-4"
                             :style="{
