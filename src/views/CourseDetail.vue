@@ -443,12 +443,12 @@ export default {
         RatingBar,
         StarRating,
         bookmarkIcon,
-        Swiper,
         SwiperSlide,
+        Swiper,
     },
     data() {
         return {
-            isIconFilled: false,
+            isIconFilled: null,
             course: null,
             courses: null,
             showAll: false,
@@ -460,7 +460,7 @@ export default {
                 1200: { slidesPerView: 4 },
             },
             modules: [Pagination, Navigation, Autoplay],
-            comment: 'Этот курс предназначен для тех, кто хочет освоить основные концепции и стратегии маркетинга! 😀🩷',
+            comment: null,
             active_module: null,
             video_modules: null,
             active_lessons: null,
@@ -469,17 +469,17 @@ export default {
     },
     created() {
         this.getCourse(),
-            this.allCourses()
+        this.allCourses()
     },
     methods: {
         async getCourse() {
             const response = await api.get(`/courses/${this.$route.params.id}`);
+            this.isIconFilled = await response?.data?.is_bookmarked
             this.ownerAvatar = await response?.data?.owner?.avatar
             this.video_modules = await response?.data?.modules
             this.active_module = await response?.data?.modules[0]
             this.active_lessons = await response?.data?.modules[0]?.lessons
             this.course = response.data
-            console.log(this.active_lessons);
         },
         async allCourses() {
             const response = await api.get('/courses/')
@@ -490,5 +490,10 @@ export default {
             this.active_lessons = await this.video_modules.find(item => item.id === obj.id)?.lessons
         }
     },
+    watch: {
+        async isIconFilled(newValue) {
+            const response = await api.post(`/courses/${this.$route.params.id}/bookmark/`, { bookmarked: newValue })
+        }
+    }
 }
 </script>

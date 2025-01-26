@@ -18,6 +18,7 @@
   </template>
   
   <script>
+  import api from "@/api/index";
   export default {
     props: {
       isTrue: {
@@ -26,8 +27,7 @@
       },
     },
     methods: {
-      handleClick() {
-        // Emit an event to the parent to update the state
+      async handleClick() {
         this.$emit("update:isTrue", !this.isTrue);
       },
     },

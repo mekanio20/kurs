@@ -26,11 +26,11 @@
                             About</h3>
                         <div class="flex flex-col items-start space-y-4">
                             <router-link to="/about"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 hover:underline">
                                 About us
                             </router-link>
                             <router-link to="/contact"
-                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
+                                class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 hover:underline">
                                 Contact us
                             </router-link>
                         </div>
@@ -41,22 +41,22 @@
                         <div class="flex flex-col items-start space-y-4">
                             <router-link to="#" class="flex items-center space-x-2">
                                 <InstagramIcon />
-                                <p class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
+                                <p class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 hover:underline">
                                     Instagram</p>
                             </router-link>
                             <router-link to="#" class="flex items-center space-x-2">
                                 <FacebookIcon />
-                                <p class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
+                                <p class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 hover:underline">
                                     Facebook</p>
                             </router-link>
                             <router-link to="#" class="flex items-center space-x-2">
                                 <YoutubeIcon />
-                                <p class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
+                                <p class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 hover:underline">
                                     YouTube</p>
                             </router-link>
                             <router-link to="#" class="flex items-center space-x-2">
                                 <LinkedInIcon />
-                                <p class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100">
+                                <p class="font-dm_sans font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 hover:underline">
                                     LinkedIn</p>
                             </router-link>
                         </div>
