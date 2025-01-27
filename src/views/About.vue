@@ -1,9 +1,9 @@
 <template>
     <div class="w-full min-h-100vh relative overflow-hidden">
-        <div class="absolute right-0 top-40">
+        <div class="absolute right-0 top-40 hidden lg:block">
             <img class="w-[200px] object-cover" src="/imgs/group-2.webp">
         </div>
-        <div class="absolute left-0 top-40">
+        <div class="absolute left-0 top-40 hidden lg:block">
             <img class="w-[200px] object-cover" src="/imgs/group-1.webp">
         </div>
         <div class="w-full h-full relative z-50">
@@ -11,17 +11,17 @@
             <div class="container bg-transparent my-20">
                 <div class="mt-80">
                     <div class="flex flex-col items-center">
-                        <p class="font-sf_pro font-medium lg:text-xl text-lg text-white text-center">Доверяют более
+                        <p class="font-sf_pro font-medium lg:text-xl md:text-lg text-base text-white text-center">Доверяют более
                             <span class="text-m_yellow-100">800K+</span> фрилансеров и <span
                                 class="text-m_yellow-100">20K+</span> команд
                         </p>
                         <h1
-                            class="w-4/5 font-sf_pro font-bold lg:text-6xl sm:text-5xl text-4xl text-white text-center !leading-[65px] mt-10">
+                            class="sm:w-4/5 w-full font-sf_pro font-bold lg:text-6xl sm:text-5xl text-4xl text-white text-center lg:!leading-[65px] mt-10">
                             Осваивайте новые горизонты, становитесь лучшей версией себя</h1>
                     </div>
                 </div>
-                <div class="mt-[400px]">
-                    <div class="grid grid-cols-4 gap-10">
+                <div class="lg:mt-[400px] mt-80">
+                    <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
                         <div v-for="item in statistics" :key="item.id"
                             class="flex flex-col items-center px-4 py-10 bg-m_black-200 rounded-lg">
                             <h1 class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-m_yellow-200">
@@ -31,7 +31,7 @@
                                 }}</p>
                         </div>
                     </div>
-                    <div class="mt-40">
+                    <div class="lg:mt-40 mt-20">
                         <h2 class="font-sf_pro font-bold lg:text-3xl sm:text-2xl text-xl text-white text-center pb-10">О нас
                         </h2>
                         <p class="w-3/4 mx-auto font-sf_pro font-normal lg:text-xl sm:text-lg text-base text-m_gray-100 text-center">
@@ -45,9 +45,9 @@
                             партнером в пути к совершенству. Начнем путь к вашей лучшей версии прямо сейчас.
                         </p>
                     </div>
-                    <div class="my-40">
+                    <div class="lg:my-40 my-20">
                         <h2 class="font-sf_pro font-bold lg:text-3xl sm:text-2xl text-xl text-white text-center">Почему вам стоит выбрать <span class="text-m_yellow-100 font-bold">0 -> 100</span> ?</h2>
-                        <div class="mt-20 grid grid-cols-3 gap-8">
+                        <div class="mt-20 grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
                             <div v-for="item in info" :key="item.id" class="flex flex-col bg-m_black-500 py-8 px-14 rounded-lg">
                                 <div class="flex items-start space-x-2 pb-4">
                                     <img class="w-7 h-7 object-cover" :src="item.icon">
