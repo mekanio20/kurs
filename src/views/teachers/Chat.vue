@@ -1,29 +1,22 @@
 <template>
     <div class="container pt-6 h-full">
         <div class="flex items-center space-x-6 h-full">
-            <div class="py-6 pl-8 pr-10 bg-m_black-700 h-full rounded-lg flex flex-col space-y-6">
-                <h1 class="font-sf_pro font-bold text-base text-white">Социальные</h1>
-                <div class="flex space-x-16 items-center justify-between pt-2">
-                    <div class="flex items-center space-x-2">
-                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M4.81315 16.5C4.02303 16.5 3.26526 16.1861 2.70656 15.6274C2.14786 15.0687 1.83398 14.311 1.83398 13.5208V5.72917C1.83398 4.93904 2.14786 4.18128 2.70656 3.62258C3.26526 3.06388 4.02303 2.75 4.81315 2.75H17.1882C17.5794 2.75 17.9668 2.82706 18.3282 2.97678C18.6897 3.12649 19.0181 3.34594 19.2947 3.62258C19.5714 3.89922 19.7908 4.22764 19.9405 4.58909C20.0903 4.95054 20.1673 5.33794 20.1673 5.72917V13.5208C20.1673 13.9121 20.0903 14.2995 19.9405 14.6609C19.7908 15.0224 19.5714 15.3508 19.2947 15.6274C19.0181 15.9041 18.6897 16.1235 18.3282 16.2732C17.9668 16.4229 17.5794 16.5 17.1882 16.5H11.9283L7.33398 19.9375C7.16375 20.0649 6.96141 20.1424 6.74962 20.1614C6.53783 20.1804 6.32493 20.14 6.13476 20.0449C5.94459 19.9498 5.78464 19.8036 5.67282 19.6227C5.56099 19.4419 5.5017 19.2335 5.50157 19.0208V16.5H4.81315ZM11.4718 15.125H17.1882C17.6136 15.125 18.0216 14.956 18.3225 14.6552C18.6233 14.3543 18.7923 13.9463 18.7923 13.5208V5.72917C18.7923 5.30372 18.6233 4.89569 18.3225 4.59485C18.0216 4.29401 17.6136 4.125 17.1882 4.125H4.81315C4.3877 4.125 3.97967 4.29401 3.67883 4.59485C3.37799 4.89569 3.20898 5.30372 3.20898 5.72917V13.5208C3.20898 14.4063 3.92765 15.125 4.81315 15.125H6.87473V18.5625L11.4718 15.125Z"
-                                fill="white" />
-                        </svg>
-                        <h2 class="font-sf_pro font-medium text-sm text-white">
-                            Комментарии
-                        </h2>
-                    </div>
-                    <p class="font-sf_pro font-bold text-sm text-m_yellow-100">1235</p>
+            <div class="pb-6 pt-2 pl-8 pr-14 bg-m_black-700 h-full rounded-lg flex flex-col space-y-6">
+                <div class="w-full flex items-center justify-between pb-10">
+                    <h2 @click="section = 1"
+                        :class="[section == 1 ? 'text-m_yellow-100 border-b border-m_yellow-100 font-bold' : 'text-m_black-400 border-b border-m_black-400 font-medium']"
+                        class="font-sf_pro text-base py-4 cursor-pointer mr-4 px-1">Чат</h2>
+                    <h2 @click="section = 2"
+                        :class="[section == 2 ? 'text-m_yellow-100 border-b border-m_yellow-100 font-bold' : 'text-m_black-400 border-b border-m_black-400 font-medium']"
+                        class="font-sf_pro text-base py-4 ml-6 cursor-pointer px-1">Домашние задания</h2>
                 </div>
-                <h2 class="font-sf_pro font-bold text-base text-white py-4">Чат</h2>
                 <div class="flex flex-col overflow-y-auto !mt-2 -ml-2 no-scrollbar">
                     <router-link v-for="(item, index) in users" :key="index" to="#"
-                        class="flex items-center space-x-4 pl-2 pr-20 py-3 hover:bg-m_black-400 rounded-lg">
+                        class="flex items-center space-x-4 pl-2 py-3 hover:bg-m_black-400 rounded-lg">
                         <div class="w-12 h-12 rounded-full bg-m_black-400">
                             <img src="/imgs/person5.png" class="w-full h-full object-cover rounded-full">
                         </div>
-                        <h2 class="font-sf_pro font-bold text-base text-white">Алиса Иванова</h2>
+                        <h2 class="font-sf_pro font-bold text-base text-white text-nowrap">Алиса Иванова</h2>
                     </router-link>
                 </div>
             </div>
@@ -95,19 +88,19 @@
 
                     <div class="flex items-center space-x-4">
                         <div class="relative w-5 h-10 flex items-center justify-center">
-                            <div class="curposor-pointer">
+                            <div>
                                 <fileIcon />
                             </div>
                             <input type="file" ref="fileInput" @change="handleFileUpload"
-                                class="absolute top-0 left-0 w-full h-full opacity-0" />
+                                class="absolute cursor-pointer top-0 left-0 w-full h-full opacity-0" />
                         </div>
 
                         <div class="relative w-5 h-10 flex items-center justify-center">
-                            <div class="curposor-pointer">
+                            <div>
                                 <imageIcon />
                             </div>
                             <input type="file" accept="image/*" ref="imageInput" @change="handleImageUpload"
-                                class="absolute top-0 left-0 w-full h-full opacity-0" />
+                                class="absolute cursor-pointer top-0 left-0 w-full h-full opacity-0" />
                         </div>
 
                         <button @click="sendMessage"
@@ -146,6 +139,7 @@ export default {
             selectedFile: null,
             selectedImage: null,
             message: null,
+            section: 1,
             users: [
                 {
                     id: 1,

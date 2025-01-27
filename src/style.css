@@ -19,8 +19,8 @@
 }
 
 @font-face {
-  font-family: 'Helvetica';
-  src: url('@/assets/fonts/helvetica-255/Helvetica.ttf') format('truetype');
+  font-family: "Helvetica";
+  src: url("@/assets/fonts/helvetica-255/Helvetica.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -39,5 +39,13 @@ body,
   }
   .no-scrollbar {
     scrollbar-width: none; /* Firefox */
+  }
+  .no-arrows::-webkit-inner-spin-button,
+  .no-arrows::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .no-arrows {
+    -moz-appearance: textfield; /* Firefox */
   }
 }

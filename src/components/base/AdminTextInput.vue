@@ -1,5 +1,5 @@
 <template>
-    <input class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white"
+    <input class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white no-arrows"
         :type="type" 
         @input="$emit('update:modelValue', $event.target.value)"
         :value="modelValue"

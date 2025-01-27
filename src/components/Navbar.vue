@@ -1,6 +1,6 @@
 <template>
     <div class="fixed w-full top-0 z-50 mx-auto bg-black select-none no-scrollbar">
-        <div class="container lg:py-10 py-6 flex items-center justify-between">
+        <div class="container py-6 flex items-center justify-between">
             <div class="w-full flex items-center justify-start">
                 <!-- Burger -->
                 <div @click="openBurger" class="cursor-pointer lg:hidden block mr-5">
