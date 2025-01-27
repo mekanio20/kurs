@@ -63,7 +63,7 @@ export default {
       screens: {
         sm: '95%',
         md: '1200px',
-        lg: '1480px',
+        lg: '1380px',
       },
     },
   },
