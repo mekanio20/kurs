@@ -122,6 +122,12 @@ export default {
         openFilter() {
             this.filterSelection = !this.filterSelection
         },
+    },
+    watch: {
+        $route() {
+            this.getCourses()
+            this.getCategoryName()
+        }
     }
 }
 </script>

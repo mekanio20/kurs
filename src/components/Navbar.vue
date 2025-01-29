@@ -32,11 +32,7 @@
                 <form @submit.prevent="performSearch" class="w-[500px] ml-20 lg:block hidden">
                     <div class="relative">
                         <div class="absolute inset-y-0 end-6 flex items-center pointer-events-none">
-                            <svg class="md:w-5 w-4 text-m_gray-100" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
+                            <searchIcon />
                         </div>
                         <input type="text" v-model="searchQuery" @keydown.enter="performSearch"
                             class="block w-full p-4 pr-16 pl-6 md:text-sm text-xs text-m_gray-100 border-none rounded-lg placeholder:text-m_gray-100 bg-m_black-100 outline-none"
@@ -44,60 +40,21 @@
                         <div v-if="searchQuery"
                             class="absolute top-16 left-0 right-0 z-10 bg-m_black-500 px-10 py-6 rounded-lg flex flex-col space-y-6">
                             <div class="flex items-start space-x-6">
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M8.25 14.25C11.5637 14.25 14.25 11.5637 14.25 8.25C14.25 4.93629 11.5637 2.25 8.25 2.25C4.93629 2.25 2.25 4.93629 2.25 8.25C2.25 11.5637 4.93629 14.25 8.25 14.25Z"
-                                        stroke="#B3B3B3" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M15.7498 15.7498L12.4873 12.4873" stroke="#B3B3B3" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
+                                <searchIcon />
                                 <div class="font-sf_pro font-medium text-base leading-5 text-white">Do Things, Tell
                                     People: The Power of Personal Branding</div>
-                            </div>
-                            <div class="flex items-start space-x-6">
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M8.25 14.25C11.5637 14.25 14.25 11.5637 14.25 8.25C14.25 4.93629 11.5637 2.25 8.25 2.25C4.93629 2.25 2.25 4.93629 2.25 8.25C2.25 11.5637 4.93629 14.25 8.25 14.25Z"
-                                        stroke="#B3B3B3" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M15.7498 15.7498L12.4873 12.4873" stroke="#B3B3B3" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                <div class="font-sf_pro font-medium text-base leading-5 text-white">Daphne Daniels</div>
-                            </div>
-                            <div class="flex items-start space-x-6">
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M8.25 14.25C11.5637 14.25 14.25 11.5637 14.25 8.25C14.25 4.93629 11.5637 2.25 8.25 2.25C4.93629 2.25 2.25 4.93629 2.25 8.25C2.25 11.5637 4.93629 14.25 8.25 14.25Z"
-                                        stroke="#B3B3B3" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M15.7498 15.7498L12.4873 12.4873" stroke="#B3B3B3" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                <div class="font-sf_pro font-medium text-base leading-5 text-white">Do Things, Tell
-                                    People: The Personal Branding</div>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div v-if="isRegistered" class="flex items-center space-x-8">
-                <router-link to="/notification" class="font-sf_pro font-bold lg:text-lg text-base text-white text-nowrap sm:block hidden">
+                <router-link to="/notification"
+                    class="font-sf_pro font-bold lg:text-lg text-base text-white text-nowrap sm:block hidden">
                     Мое обучение
                 </router-link>
                 <router-link to="/notification" class="text-white relative">
-                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M18.75 8.3335C18.75 6.67589 18.0915 5.08618 16.9194 3.91408C15.7473 2.74198 14.1576 2.0835 12.5 2.0835C10.8424 2.0835 9.25268 2.74198 8.08058 3.91408C6.90848 5.08618 6.25 6.67589 6.25 8.3335C6.25 15.6252 3.125 17.7085 3.125 17.7085H21.875C21.875 17.7085 18.75 15.6252 18.75 8.3335Z"
-                            stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M14.3024 21.875C14.1193 22.1907 13.8564 22.4528 13.5401 22.6349C13.2239 22.8171 12.8653 22.913 12.5003 22.913C12.1353 22.913 11.7768 22.8171 11.4605 22.6349C11.1442 22.4528 10.8814 22.1907 10.6982 21.875"
-                            stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                    <notificationIcon />
                     <div v-if="hasNotification" class="absolute top-0 right-1 w-2 h-2 bg-m_red-200 rounded-full"></div>
                 </router-link>
                 <router-link to="/profile" class="w-[40px]">
@@ -115,36 +72,10 @@
         </div>
         <!-- All category -->
         <div v-if="rotate" class="w-full bg-black container">
-            <div class="w-full flex items-start justify-between pt-5 pb-10">
-                <div class="flex flex-col space-y-8">
-                    <router-link to="/category/1"
-                        class=" font-sf_pro font-medium text-white text-lg">Маркетинг</router-link>
-                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Искусство и
-                        дизайн</router-link>
-                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Бизнес и
-                        предпринимательство</router-link>
-                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Сообщество и
-                        правительство</router-link>
-                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Музыка</router-link>
-                </div>
-                <div class="flex flex-col space-y-8">
-                    <router-link to="/category/1"
-                        class=" font-sf_pro font-medium text-white text-lg">Маркетинг</router-link>
-                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Искусство и
-                        дизайн</router-link>
-                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Бизнес и
-                        предпринимательство</router-link>
-                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Сообщество и
-                        правительство</router-link>
-                </div>
-                <div class="flex flex-col space-y-8">
-                    <router-link to="/category/1"
-                        class=" font-sf_pro font-medium text-white text-lg">Маркетинг</router-link>
-                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Искусство и
-                        дизайн</router-link>
-                    <router-link to="/category/1" class=" font-sf_pro font-medium text-white text-lg">Бизнес и
-                        предпринимательство</router-link>
-                </div>
+            <div class="w-full grid grid-flow-col grid-rows-4 gap-4 pt-5 pb-4">
+                <router-link v-for="item in cats" :key="item.id" :to="`/category/${item.id}`"
+                    class=" font-sf_pro font-medium text-white text-lg py-2 hover:text-m_yellow-100 duration-300">{{ item.name }}
+                </router-link>
             </div>
         </div>
     </div>
@@ -167,13 +98,14 @@
             </div>
             <!-- All category -->
             <div class="w-full flex flex-col items-start overflow-y-scroll scrollbar space-y-6 px-1 mt-10 max-h-[50vh]">
-                <router-link v-for="item in cats" :key="item.id" :to="item.url"
-                    class="text-lg text-white font-sf_pro hover:font-bold duration-500 cursor-pointer pr-4">
+                <router-link v-for="item in cats" :key="item.id" :to="`/category/${item.id}`"
+                    class="text-lg text-white font-sf_pro hover:font-bold hover:text-m_yellow-100 duration-300 cursor-pointer pr-4">
                     {{ item.name }}
                 </router-link>
             </div>
             <div class="my-10 flex flex-col space-y-4">
-                <router-link v-if="isRegistered" to="/notification" class="font-sf_pro font-bold lg:text-lg text-base text-white bg-m_black-400 w-fit py-3 px-6 rounded-lg text-nowrap sm:hidden block">
+                <router-link v-if="isRegistered" to="/notification"
+                    class="font-sf_pro font-bold lg:text-lg text-base text-white bg-m_black-400 w-fit py-3 px-6 rounded-lg text-nowrap sm:hidden block">
                     Мое обучение
                 </router-link>
                 <router-link v-else to="/login"
@@ -187,50 +119,56 @@
 
 <script>
 import { mapState } from 'vuex';
+import api from '@/api/index';
 import logoIcon from '@/components/icons/logo.vue';
+import searchIcon from '@/components/icons/search.vue';
+import notificationIcon from '@/components/icons/notification.vue';
 export default {
     name: "Navbar",
     data() {
         return {
-            isBurger: false,
             rotate: false,
+            isBurger: false,
             searchQuery: null,
             hasNotification: false,
-            cats: [
-                { id: 1, name: 'Маркетинг', url: '/category' },
-                { id: 2, name: 'Искусство и дизайн', url: '/category' },
-                { id: 3, name: 'Бизнес и предпринимательство', url: '/category' },
-                { id: 4, name: 'Сообщество и правительство', url: '/category' },
-                { id: 5, name: 'Сообщество и правительство', url: '/category' },
-                { id: 6, name: 'Музыка', url: '/category' },
-                { id: 7, name: 'Кино и ТВ', url: '/category' },
-                { id: 8, name: 'Еда и напитки', url: '/category' },
-                { id: 9, name: 'Игры и цифровые медиа', url: '/category' },
-                { id: 10, name: 'Актерское мастерство и искусство', url: '/category' },
-                { id: 11, name: 'Здоровье и благополучие', url: '/category' },
-                { id: 12, name: 'Наука и технологии', url: '/category' },
-                { id: 13, name: 'Спорт и легкая атлетика', url: '/category' },
-            ],
+            cats: [],
         }
     },
     components: {
-        logoIcon
+        logoIcon,
+        searchIcon,
+        notificationIcon
+    },
+    created() {
+        this.getCategories()
+    },
+    methods: {
+        async getCategories() {
+            const response = await api.get('/categories/')
+            this.cats = await response.data.results
+        },
+        performSearch() {
+
+        }
     },
     computed: {
         ...mapState(['isRegistered']),
-    },
-    methods: {
-        performSearch() { },
-        openBurger() {
-            this.isBurger = !this.isBurger
-        },
         openCategory() {
             this.rotate = !this.rotate
+        },
+        openBurger() {
+            this.isBurger = !this.isBurger
         }
     },
     props: {
         name: {
             type: String
+        }
+    },
+    watch: {
+        $route() {
+            this.rotate = false
+            this.isBurger = false
         }
     }
 }
@@ -239,9 +177,7 @@ export default {
 <style scoped>
 .scrollbar {
     scrollbar-width: thin;
-    /* Firefox */
     scrollbar-color: white transparent;
-    /* Firefox */
 }
 
 .scrollbar::-webkit-scrollbar {

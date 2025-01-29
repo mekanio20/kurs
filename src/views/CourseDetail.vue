@@ -91,14 +91,16 @@
                     </h2>
                     <!-- Modules -->
                     <div class="flex items-center space-x-6 pt-10 select-none">
-                        <div v-for="item in video_modules" :key="item.id" @click="changeActiveModule(item)"
+                        <div v-for="(item, index) in video_modules" :key="item.id" @click="changeActiveModule(item, index+1)"
                             :class="item.id == active_module?.id ? 'bg-m_yellow-100 text-black font-bold' : 'text-m_gray-200'"
                             class="px-8 py-3 rounded-3xl bg-m_black-300 font-sf_pro lg:text-lg text-base cursor-pointer hover:bg-m_yellow-100 hover:text-black duration-300">
-                            {{ item.name }}
+                            {{ 'Модуль #' + (index + 1) }}
                         </div>
                     </div>
                     <!-- Names -->
                     <div class="text-start pt-10">
+                        <p v-if="!active_module.index" class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #1</p>
+                        <p v-else="active_module.index" class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #{{ active_module.index }}</p>
                         <h2 class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white">
                             {{ active_module?.name }}
                         </h2>
@@ -485,8 +487,8 @@ export default {
             const response = await api.get('/courses/')
             this.courses = response?.data?.results
         },
-        async changeActiveModule(obj) {
-            this.active_module = { id: obj.id, name: obj.name }
+        async changeActiveModule(obj, index) {
+            this.active_module = { id: obj.id, name: obj.name, index: index }
             this.active_lessons = await this.video_modules.find(item => item.id === obj.id)?.lessons
         }
     },

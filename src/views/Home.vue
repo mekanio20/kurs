@@ -223,7 +223,7 @@
                                 <div class="w-[70px] rounded-full">
                                     <img class="w-full h-full object-cover rounded-full" :src="item.img">
                                 </div>
-                                <div class="flex flex-col space-y-2">
+                                <div class="flex flex-col">
                                     <h2 class="font-sf_pro font-medium text-lg">{{ item.name }}</h2>
                                     <p class="font-sf_pro font-normal text-sm">{{ item.nickname }}</p>
                                 </div>
@@ -257,7 +257,7 @@
                     </div>
                 </div>
                 <!-- FAQ -->
-                <div class="w-full pb-5">
+                <div class="w-full pb-5 px-28">
                     <h2
                         class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-20 mt-10 mb-20">
                         Часто задаваемые вопросы
@@ -560,7 +560,7 @@ export default {
         },
         async getPopularCategories() {
             const response = await api.get('/categories/?ordering=students_count')
-            this.popular_cats = await response.data.results
+            this.popular_cats = await response?.data?.results
         },
         async getQaz() {
             const response = await api.get('/qas/')

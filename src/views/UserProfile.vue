@@ -30,10 +30,10 @@
             <Navbar />
             <div class="container bg-transparent my-44">
                 <div class="w-full flex md:flex-row flex-col items-stretch">
-                    <div class="md:w-[550px] w-full min-h-[75vh] lg:p-10 md:p-8 p-6 bg-m_black-500 rounded-xl lg:mr-10 md:mr-5 mb-2">
+                    <div class="md:w-[550px] w-full lg:p-10 md:p-8 p-6 bg-m_black-500 rounded-xl lg:mr-10 md:mr-5 mb-2">
                         <h1 class="font-sf_pro font-bold lg:text-2xl text-xl text-white md:block hidden">Личный кабинет
                         </h1>
-                        <div class="flex md:flex-col flex-row justify-evenly md:space-y-8 md:space-x-0 space-x-6 md:my-20">
+                        <div class="flex md:flex-col flex-row justify-evenly md:space-y-14 md:space-x-0 space-x-6 md:my-20">
                             <div @click="section = 1" class="flex items-center space-x-6 group cursor-pointer">
                                 <svg :class="[section === 1 ? 'stroke-m_yellow-100' : 'stroke-white']"
                                     class="md:w-[25px] w-[20px] group-hover:stroke-m_yellow-100 duration-300" viewBox="0 0 20 20" fill="none"

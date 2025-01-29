@@ -48,11 +48,11 @@
                         Мы отправили код подтверждения на ваш адрес электронной почты, введите его
                     </p>
 
-                    <div class="flex justify-center space-x-4 pb-3">
+                    <div class="w-full flex justify-between pb-3">
                         <input v-for="(_, index) in codeInputs" :key="index" v-model="codeInputs[index]"
                             @input="handleInput(index)" @keydown.backspace="handleBackspace(index)" maxlength="1"
                             :ref="`input-${index}`"
-                            class="sm:w-[120px] w-full h-12 text-center text-base font-sf_pro font-medium text-white rounded-lg bg-m_black-500 focus:outline-none focus:ring-1 focus:ring-m_yellow-100"
+                            class="sm:w-[130px] w-full h-14 text-center text-base font-sf_pro font-medium text-white rounded-lg bg-m_black-500 focus:outline-none focus:ring-1 focus:ring-m_yellow-100"
                             type="text" inputmode="numeric" />
                     </div>
 
