@@ -8,16 +8,18 @@
         </div>
         <div class="absolute -left-96 right-0 -top-80">
             <svg width="2288" height="1742" viewBox="0 0 2288 1742" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="1150.5" cy="942.5" r="631.5" fill="url(#paint0_radial_2511_5260)" fill-opacity="0.28" />
-                <circle cx="1702" cy="700" r="586" fill="url(#paint1_radial_2511_5260)" fill-opacity="0.23" />
-                <circle cx="1138" cy="1156" r="586" fill="url(#paint2_radial_2511_5260)" fill-opacity="0.1" />
-                <circle cx="586" cy="700" r="586" fill="url(#paint3_radial_2511_5260)" fill-opacity="0.25" />
-                <circle cx="633" cy="1128" r="586" fill="url(#paint4_radial_2511_5260)" fill-opacity="0.2" />
-                <circle cx="924" cy="633" r="586" transform="rotate(-90 924 633)" fill="url(#paint5_radial_2511_5260)"
-                    fill-opacity="0.23" />
-                <circle cx="1352" cy="586" r="586" transform="rotate(-90 1352 586)" fill="url(#paint6_radial_2511_5260)"
-                    fill-opacity="0.2" />
-                <circle cx="1658" cy="1134" r="586" fill="url(#paint7_radial_2511_5260)" fill-opacity="0.2" />
+                <g opacity="0.6">
+                    <circle cx="1150.5" cy="942.5" r="631.5" fill="url(#paint0_radial_2511_5260)" fill-opacity="0.28" />
+                    <circle cx="1702" cy="700" r="586" fill="url(#paint1_radial_2511_5260)" fill-opacity="0.23" />
+                    <circle cx="1138" cy="1156" r="586" fill="url(#paint2_radial_2511_5260)" fill-opacity="0.1" />
+                    <circle cx="586" cy="700" r="586" fill="url(#paint3_radial_2511_5260)" fill-opacity="0.25" />
+                    <circle cx="633" cy="1128" r="586" fill="url(#paint4_radial_2511_5260)" fill-opacity="0.2" />
+                    <circle cx="924" cy="633" r="586" transform="rotate(-90 924 633)"
+                        fill="url(#paint5_radial_2511_5260)" fill-opacity="0.23" />
+                    <circle cx="1352" cy="586" r="586" transform="rotate(-90 1352 586)"
+                        fill="url(#paint6_radial_2511_5260)" fill-opacity="0.2" />
+                    <circle cx="1658" cy="1134" r="586" fill="url(#paint7_radial_2511_5260)" fill-opacity="0.2" />
+                </g>
                 <defs>
                     <radialGradient id="paint0_radial_2511_5260" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
                         gradientTransform="translate(1150.5 942.5) rotate(90.0484) scale(592.5)">
@@ -112,7 +114,7 @@
                                 class="flex flex-col bg-m_black-500 py-8 px-14 rounded-lg">
                                 <div class="flex items-start space-x-2 pb-4">
                                     <img class="w-7 h-7 object-cover" :src="item.icon">
-                                    <h3 class="font-sf_pro font-bold lg:text-2xl sm:text-xl text-lg text-white">
+                                    <h3 class="font-sf_pro font-bold lg:text-xl sm:text-lg text-base text-white">
                                         {{ item.title }}
                                     </h3>
                                 </div>

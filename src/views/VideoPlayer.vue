@@ -26,11 +26,65 @@
                         Определите своих клиентов
                     </h1>
                 </div>
-                <router-link to="/course/detail/14">
-                    <closeIcon />
-                </router-link>
+                <div class="flex items-center space-x-10">
+                    <div @click.stop="isOpen = true"
+                        class="px-8 py-2 rounded-lg bg-m_yellow-100 font-bold font-sf_pro text-lg flex items-center space-x-2 cursor-pointer">
+                        <documentIcon />
+                        <p class="font-bold font-sf_pro text-lg">Домашнее задание</p>
+                    </div>
+                    <router-link to="#" @click.prevent="$router.go(-1)">
+                        <closeIcon />
+                    </router-link>
+                </div>
             </div>
             <div class="container bg-transparent">
+                <!-- Popup -->
+                <div @click="isOpen = false">
+                    <div v-if="isOpen"
+                        class="fixed inset-0 z-50 flex items-center justify-center bg-black text-white bg-opacity-50"
+                        @click.self="isOpen = false">
+                        <div class="bg-m_black-300 px-12 py-10 rounded-lg shadow-lg w-2/4" @click.stop>
+                            <div class="flex items-center justify-between pb-12">
+                                <h1 class="font-sf_pro font-bold text-2xl">Домашнее задание</h1>
+                                <span @click="isOpen = false" class="cursor-pointer">
+                                    <closeIcon />
+                                </span>
+                            </div>
+                            <div class="flex flex-col">
+                                <h4 class="font-sf_pro font-medium text-sm text-m_gray-600 uppercase pb-4">Заметки
+                                    наставника</h4>
+                                <p class="font-sf_pro font-normal text-base text-m_gray-100">Продвигайте себя, ясно
+                                    выражайте идеи и используйте приемы, которые сделают вас более убедительными. </p>
+                            </div>
+                            <button
+                                class="w-full bg-m_yellow-100 flex items-center justify-center space-x-4 py-4 rounded-lg mt-12">
+                                <downloadIcon />
+                                <p class="font-sf_pro font-bold text-lg text-black">Скачать домашнее задание</p>
+                            </button>
+                            <div class="border border-dashed rounded-lg border-m_black-400 mt-10 py-6 flex flex-col items-center">
+                                <button
+                                    class="w-fit border border-m_yellow-100 flex items-center justify-center space-x-4 px-32 py-3 rounded-lg">
+                                    <uploadIcon />
+                                    <p class="font-sf_pro font-bold text-lg text-m_yellow-100">Загрузить файл</p>
+                                </button>
+                                <p class="font-sf_pro font-normal text-base text-m_gray-100 pt-6">Максимальный размер - до  <span class="font-bold text-white">30MB</span></p>
+                            </div>
+                            <div class="w-full rounded-lg px-6 py-3 bg-m_black-600 flex items-center justify-between mt-10">
+                                <div class="flex items-center space-x-6">
+                                    <documentIcon color="white" />
+                                    <p class="font-sf_pro font-medium text-lg text-white">Homework.docx</p>
+                                </div>
+                                <span class="cursor-pointer">
+                                    <closeIcon :w="24" :h="24" />
+                                </span>
+                            </div>
+                            <div class="w-full mt-12 flex items-center space-x-6 font-sf_pro text-lg">
+                                <button class="w-full border border-m_gray-100 text-m_gray-100 py-3 rounded-lg">Назад</button>
+                                <button class="w-full bg-m_yellow-100 text-black font-bold py-3 rounded-lg">Сохранить </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Video player -->
                 <div class="video-player-container">
                     <video id="plyr-video" class="plyr" controls playsinline>
@@ -144,7 +198,7 @@
                             </div>
                             <div class="flex items-start flex-col space-y-2">
                                 <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: {{ index +
-                            1 }}</p>
+                        1 }}</p>
                                 <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">{{ item.name
                                     }}</p>
                             </div>
@@ -348,6 +402,9 @@ import 'plyr/dist/plyr.css';
 import api from '@/api/index';
 import Footer from '@/components/Footer.vue';
 import closeIcon from '@/components/icons/close.vue';
+import documentIcon from '@/components/icons/document.vue';
+import downloadIcon from '@/components/icons/download.vue';
+import uploadIcon from '@/components/icons/upload.vue';
 import Video from '@/components/Video.vue';
 import playIcon from '@/components/icons/play.vue';
 import StarRating from '@/components/StarRating.vue';
@@ -360,10 +417,14 @@ export default {
         closeIcon,
         playIcon,
         StarRating,
-        RatingBar
+        RatingBar,
+        documentIcon,
+        downloadIcon,
+        uploadIcon
     },
     data() {
         return {
+            isOpen: false,
             activeTab: 0,
             lessons: [],
             cats: ['Бизнес & предпринимательство'],
