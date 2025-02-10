@@ -88,7 +88,7 @@
                 <!-- Video player -->
                 <div class="video-player-container">
                     <video id="plyr-video" class="plyr" controls playsinline>
-                        <source v-if="lessons?.video" :src="lessons?.video" type="video/mp4">
+                        <source v-if="lessons.video?.path" :src="lessons.video?.path" type="video/mp4">
                     </video>
                 </div>
                 <div class="flex items-center justify-center py-10">
@@ -493,6 +493,7 @@ export default {
         },
         async getLessons() {
             const response = await api.get(`/lessons/${this.$route.params.id}`)
+            console.log(response);
             this.lessons = response.data
         }
     },

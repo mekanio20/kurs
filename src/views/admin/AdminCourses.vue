@@ -40,7 +40,6 @@ export default {
     data() {
         return {
             courses: null,
-            cards: [ 1, 2, 3, 4, 5, 6, 7, 8 ],
         }
     },
     created() {
@@ -49,7 +48,6 @@ export default {
     methods: {
         async getCourses() {
             const response = await api.get('/courses/')
-            console.log(response);
             this.courses = response.data.results
         },
         addCourse() {

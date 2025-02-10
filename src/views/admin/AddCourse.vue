@@ -373,7 +373,7 @@ export default {
             formData.append('path', this.videoFields[index].videoFile);
 
             try {
-                await this.uploadWithProgress('https://0-100.community/api/videos/', formData, index);
+                await this.uploadWithProgress('https://0-100.community/api/files/', formData, index);
             } catch (error) {
                 console.error('Error occurred: ', error);
             } finally {
@@ -458,14 +458,14 @@ export default {
             if (this.img && this.post.name && this.post.description && this.post.price && this.section === 1) {
                 this.sectionLoad = true
                 try {
-                    const response = await api.post('/courses/', {
-                        banner: this.img,
-                        name: this.post.name,
-                        description: this.post.description,
-                        language: this.active_lang.code || "ru",
-                        price: this.post.price,
-                        categories: [...this.selectedTags.map(item => item.id)],
-                    }, { headers: { 'Content-Type': 'multipart/form-data' } })
+                    const formData = new FormData();
+                    formData.append('banner', this.img);
+                    formData.append('name', this.post.name);
+                    formData.append('price', this.post.price);
+                    formData.append('description', this.post.description);
+                    formData.append('language', this.active_lang.code || "ru");
+                    formData.append('categories', [...this.selectedTags.map(item => item.id)]);
+                    const response = await api.post('/courses/', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                     if (response.status === 201) {
                         this.courseId = response.data.id
                         this.section = 2
@@ -481,7 +481,7 @@ export default {
                 this.sectionLoad = true
                 try {
                     this.fields.forEach(async (item) => { await api.post('/modules/', { course: this.courseId, name: item.name, }) })
-                    this.getModules()
+                    await this.getModules()
                     this.section = 3
                 } catch (error) {
                     console.error('Error occurred: ', error);
@@ -492,26 +492,44 @@ export default {
                 }
             } else if (this.videoFields[0].name && this.section === 3) {
                 this.sectionLoad = true
-                console.log('videoFields', this.videoFields);
                 try {
                     this.videoFields.forEach(async (item) => {
-                        await api.post('/lessons/', {
-                            module: item.module,
-                            name: item.name,
-                            video: item.video,
-                            banner: item.banner
-                        }, { headers: { 'Content-Type': 'multipart/form-data' } })
+                        const formData = new FormData();
+                        formData.append('module', item.module);
+                        formData.append('name', item.name);
+                        formData.append('video', item.video);
+                        formData.append('banner', item.banner);
+                        const lesson = await api.post('/lessons/', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                     })
                 } catch (error) {
                     console.error('Error occurred: ', error);
                     const errorMessage = error.response?.data?.detail || 'Request failed';
                     toast.error(errorMessage);
                 } finally {
-                    this.section = 1
+                    this.clearFields()
+                    toast.success('Курс успешно создан!')
                     this.sectionLoad = false
                 }
             }
         },
+        clearFields() {
+            this.img = null
+            this.imageFile = null
+            this.imagePerview = null
+            this.post.name = ''
+            this.post.description = ''
+            this.post.price = null
+            this.selectedTags = []
+            this.videoPreview = null
+            this.fields = [{ name: '' }]
+            this.videoFields = [{ videoPreview: null, videoFile: null, thumbnail: null, locked: false, banner: null, name: "", video: 0, module: 0 }]
+            this.active_lang = { name: 'Язык' }
+            this.uploadProgress = [0]
+            this.isLoading = [false]
+            this.courseId = null
+            this.modules = null
+            this.section = 1
+        }
 
     },
     async created() {

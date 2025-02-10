@@ -78,7 +78,7 @@
                                 {{ course?.students_count || 0 }} студентов
                             </div>
                         </div>
-                        <div class="w-full flex items-center space-x-4 select-none">
+                        <div class="w-full flex items-center lg:justify-start justify-center space-x-4 select-none">
                             <router-link to="/payment" class="w-fit px-10 py-3 rounded-lg bg-m_yellow-100 font-helvetica font-bold lg:text-xl sm:text-lg text-base">Купить сейчас</router-link>
                             <bookmarkIcon v-model:isTrue="isIconFilled" />
                         </div>
@@ -99,8 +99,8 @@
                     </div>
                     <!-- Names -->
                     <div class="text-start pt-10">
-                        <p v-if="!active_module.index" class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #1</p>
-                        <p v-else="active_module.index" class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #{{ active_module.index }}</p>
+                        <p v-if="!active_module?.index" class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #1</p>
+                        <p v-else="active_module?.index" class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #{{ active_module.index }}</p>
                         <h2 class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white">
                             {{ active_module?.name }}
                         </h2>
@@ -476,6 +476,7 @@ export default {
     methods: {
         async getCourse() {
             const response = await api.get(`/courses/${this.$route.params.id}`);
+            console.log(response);
             this.isIconFilled = await response?.data?.is_bookmarked
             this.ownerAvatar = await response?.data?.owner?.avatar
             this.video_modules = await response?.data?.modules

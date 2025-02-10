@@ -1,10 +1,14 @@
-import axios from 'axios';
-import { getAccessToken, getRefreshToken, setAccessToken, clearTokens } from '@/utils/token';
-import { setRefreshToken } from '../utils/token';
+import axios from "axios";
+import {
+  getAccessToken,
+  getRefreshToken,
+  setRefreshToken,
+  setAccessToken,
+  clearTokens,
+} from "@/utils/token";
 
 const api = axios.create({
-  baseURL: 'https://0-100.community/api',
-  timeout: 5000,
+  baseURL: "https://0-100.community/api",
 });
 
 api.interceptors.request.use(
@@ -51,9 +55,12 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const { data } = await axios.post('https://0-100.community/api/token/refresh', {
-          refresh: getRefreshToken(),
-        });
+        const { data } = await axios.post(
+          "https://0-100.community/api/token/refresh",
+          {
+            refresh: getRefreshToken(),
+          }
+        );
 
         setAccessToken(data.access);
         setRefreshToken(data.refresh);
@@ -63,7 +70,7 @@ api.interceptors.response.use(
       } catch (err) {
         processQueue(err, null);
         clearTokens();
-        this.$router.push('/login');
+        this.$router.push("/login");
         return Promise.reject(err);
       } finally {
         isRefreshing = false;
