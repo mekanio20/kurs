@@ -69,7 +69,7 @@
                                 </button>
                                 <p class="font-sf_pro font-normal text-base text-m_gray-100 pt-6">Максимальный размер - до  <span class="font-bold text-white">30MB</span></p>
                             </div>
-                            <div class="w-full rounded-lg px-6 py-3 bg-m_black-600 flex items-center justify-between mt-10">
+                            <!-- <div class="w-full rounded-lg px-6 py-3 bg-m_black-600 flex items-center justify-between mt-10">
                                 <div class="flex items-center space-x-6">
                                     <documentIcon color="white" />
                                     <p class="font-sf_pro font-medium text-lg text-white">Homework.docx</p>
@@ -77,9 +77,8 @@
                                 <span class="cursor-pointer">
                                     <closeIcon :w="24" :h="24" />
                                 </span>
-                            </div>
+                            </div> -->
                             <div class="w-full mt-12 flex items-center space-x-6 font-sf_pro text-lg">
-                                <button class="w-full border border-m_gray-100 text-m_gray-100 py-3 rounded-lg">Назад</button>
                                 <button class="w-full bg-m_yellow-100 text-black font-bold py-3 rounded-lg">Сохранить </button>
                             </div>
                         </div>
@@ -123,7 +122,7 @@
                             <p class="px-8 py-3 bg-m_black-300 rounded-full text-m_gray-100 font-sf_pro text-lg">2h 10m
                             </p>
                         </div>
-                        <div class="flex items-center space-x-8 py-10">
+                        <div class="flex items-center space-x-8 pt-10">
                             <div class="flex items-center">
                                 <span class="lg:text-base text-sm text-m_yellow-100">★</span>
                                 <span class="ml-1 text-white lg:text-base text-sm font-medium">4.8</span>
@@ -134,18 +133,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <h2
-                            class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white pb-6">
-                            Чему вы научитесь</h2>
-                        <div class="my-10 flex items-center justify-center flex-wrap gap-x-6 gap-y-4">
-                            <div v-for="item in themes" :key="item.id"
-                                class="w-fit px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-white">
-                                {{ item.name }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full lg:py-16">
+                    <div class="w-full">
                         <h2
                             class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center">
                             Ментор</h2>
@@ -180,14 +168,14 @@
                     </div>
                 </div>
                 <!-- About -->
-                <div v-if="activeTab === 1" class="py-16">
+                <div v-if="activeTab === 1" class="pt-10">
                     <div class="flex items-center space-x-6">
                         <div v-for="item in modules" :key="item.id"
                             class="px-8 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-lg text-base text-white">
                             {{ item.name }}
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 py-20">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-20">
                         <router-link v-for="(item, index) in visibleLessons" :key="index" to="/video/detail/1"
                             class="p-4 bg-m_black-500 rounded-xl overflow-hidden flex items-center space-x-4 cursor-pointer">
                             <div class="relative w-24">
@@ -206,8 +194,8 @@
                     </div>
                 </div>
                 <!-- Comments -->
-                <div v-if="activeTab === 2" class="py-16">
-                    <div class="w-full lg:pb-20">
+                <div v-if="activeTab === 2">
+                    <div class="w-full lg:pb-10">
                         <div
                             class="w-full text-white p-6 rounded-lg justify-center items-center flex flex-col lg:flex-row gap-8">
                             <!-- Rating Overview -->
@@ -244,7 +232,7 @@
                         </div>
                     </div>
                     <div class="w-full text-center">
-                        <div class="md:columns-3 mobile:columns-2 columns-1 gap-6 sm:pb-20 pb-10">
+                        <div class="md:columns-3 mobile:columns-2 columns-1 gap-6 sm:pb-16 pb-8">
                             <div class="bg-m_black-500 rounded-lg p-8 mb-6">
                                 <div class="w-full flex space-x-6 items-center">
                                     <div class="w-16 rounded-full">
@@ -429,13 +417,6 @@ export default {
             lessons: [],
             cats: ['Бизнес & предпринимательство'],
             tabs: ['Информация о курсе', 'Программа курса', 'Отзывы'],
-            themes: [
-                { id: 1, name: 'Превращение обыденного в культовое' },
-                { id: 2, name: 'Создавать уникальный фирменный стиль.' },
-                { id: 3, name: 'Как вырасти из неудач' },
-                { id: 4, name: 'Создание продуктов, которые нравятся рынку' },
-                { id: 5, name: 'Масштабирование идей до крупных успехов' },
-            ],
             modules: [
                 { id: 1, name: 'Модуль #1' },
                 { id: 2, name: 'Модуль #2' },

@@ -1,5 +1,5 @@
 <template>
-    <div class="container ">
+    <footer class="container ">
         <div
             class="flex lg:flex-row flex-col-reverse items-start justify-between sm:py-20 py-10 border-b border-m_black-300">
             <div
@@ -83,7 +83,7 @@
             <router-link to="/privacy" class="text-m_yellow-100 cursor-pointer hover:underline">Privacy
                 Policy</router-link>
         </p>
-    </div>
+    </footer>
 </template>
 
 <script>

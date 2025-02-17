@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed w-full top-0 z-50 mx-auto bg-black select-none no-scrollbar">
+    <nav class="fixed w-full top-0 z-50 mx-auto bg-black select-none no-scrollbar">
         <div class="container py-6 flex items-center justify-between">
             <div class="w-full flex items-center justify-start">
                 <!-- Burger -->
@@ -78,9 +78,9 @@
                 </router-link>
             </div>
         </div>
-    </div>
+    </nav>
     <!-- Mobile -->
-    <div class="select-none w-full fixed z-20 top-0 overflow-hidden duration-200 bg-black"
+    <nav class="select-none w-full fixed z-20 top-0 overflow-hidden duration-200 bg-black"
         :class="[isBurger ? 'h-full' : 'h-0']">
         <div class="w-full h-full mt-28 px-4">
             <!-- Search -->
@@ -114,7 +114,7 @@
                 </router-link>
             </div>
         </div>
-    </div>
+    </nav>
 </template>
 
 <script>
