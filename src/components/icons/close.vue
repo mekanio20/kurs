@@ -9,11 +9,11 @@
 export default {
     props: {
         w: {
-            type: Number,
+            type: String,
             default: "32"
         },
         h: {
-            type: Number,
+            type: String,
             default: "32"
         },
     }

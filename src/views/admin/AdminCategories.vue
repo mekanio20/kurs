@@ -32,7 +32,13 @@
                         </tr>
                     </tbody>
                 </table>
-                
+                <div class="mt-10 flex justify-end">
+                    <Pagination 
+                        :totalPages="totalPages" 
+                        v-model:currentPage="currentPage" 
+                        @update:currentPage="handlePageChange"
+                    />
+                </div>
             </div>
         </div>
     </Sidebar>
@@ -43,15 +49,19 @@ import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
 import AdminHeader from '@/components/admin/Header.vue'
 import AdminButton from '@/components/base/AdminButton.vue';
+import Pagination from '@/components/Pagination.vue';
 export default {
     name: "AdminCategories",
     components: {
         Sidebar,
         AdminHeader,
-        AdminButton
+        AdminButton,
+        Pagination
     },
     data() {
         return {
+            currentPage: 1,
+            totalPages: 10,
             categories: null
         }
     },
@@ -59,6 +69,10 @@ export default {
         this.getCategories()
     },
     methods: {
+        handlePageChange(newPage) {
+            this.currentPage = newPage;
+            console.log('Sahypa:', newPage);
+        },
         addCategory() {
             this.$router.push('/dashboard/admin/add/category')
         },

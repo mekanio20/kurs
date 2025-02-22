@@ -37,6 +37,10 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="mt-10 flex justify-end">
+                    <Pagination :totalPages="totalPages" v-model:currentPage="currentPage"
+                        @update:currentPage="handlePageChange" />
+                </div>
             </div>
         </div>
     </Sidebar>
@@ -45,15 +49,19 @@
 <script>
 import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
+import Pagination from '@/components/Pagination.vue';
 import AdminHeader from '@/components/admin/Header.vue'
 export default {
     name: "AdminUsers",
     components: {
         Sidebar,
-        AdminHeader
+        AdminHeader,
+        Pagination,
     },
     data() {
         return {
+            currentPage: 1,
+            totalPages: 10,
             users: null
         }
     },
@@ -61,6 +69,10 @@ export default {
         this.getUsers()
     },
     methods: {
+        handlePageChange(newPage) {
+            this.currentPage = newPage;
+            console.log('Sahypa:', newPage);
+        },
         async getUsers() {
             const response = await api.get('/users/')
             this.users = response.data.results

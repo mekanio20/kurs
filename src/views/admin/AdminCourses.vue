@@ -19,6 +19,10 @@
             <div class="grid grid-cols-3 gap-8 py-4 relative">
                 <Card v-for="item in courses" :key="item.id" :course="item" />
             </div>
+            <div class="mt-10 flex justify-end">
+                <Pagination :totalPages="totalPages" v-model:currentPage="currentPage"
+                    @update:currentPage="handlePageChange" />
+            </div>
         </div>
     </Sidebar>
 </template>
@@ -26,6 +30,7 @@
 <script>
 import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
+import Pagination from '@/components/Pagination.vue';
 import AdminHeader from '@/components/admin/Header.vue';
 import AdminButton from '@/components/base/AdminButton.vue';
 import Card from '@/components/Card.vue';
@@ -35,10 +40,13 @@ export default {
         Sidebar,
         AdminHeader,
         AdminButton,
+        Pagination,
         Card
     },
     data() {
         return {
+            currentPage: 1,
+            totalPages: 10,
             courses: null,
         }
     },
@@ -46,6 +54,10 @@ export default {
         this.getCourses()
     },
     methods: {
+        handlePageChange(newPage) {
+            this.currentPage = newPage;
+            console.log('Sahypa:', newPage);
+        },
         async getCourses() {
             const response = await api.get('/courses/')
             this.courses = response.data.results

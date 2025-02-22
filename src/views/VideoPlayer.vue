@@ -43,7 +43,7 @@
                     <div v-if="isOpen"
                         class="fixed inset-0 z-50 flex items-center justify-center bg-black text-white bg-opacity-50"
                         @click.self="isOpen = false">
-                        <div class="bg-m_black-300 px-12 py-10 rounded-lg shadow-lg w-2/4" @click.stop>
+                        <div class="bg-m_black-300 px-12 py-10 rounded-lg shadow-lg sm:w-[600px]" @click.stop>
                             <div class="flex items-center justify-between pb-12">
                                 <h1 class="font-sf_pro font-bold text-2xl">Домашнее задание</h1>
                                 <span @click="isOpen = false" class="cursor-pointer">
@@ -59,27 +59,36 @@
                             <button
                                 class="w-full bg-m_yellow-100 flex items-center justify-center space-x-4 py-4 rounded-lg mt-12">
                                 <downloadIcon />
-                                <p class="font-sf_pro font-bold text-lg text-black">Скачать домашнее задание</p>
+                                <a :download="lesson?.task_file"
+                                    class="font-sf_pro font-bold text-lg text-black">Скачать домашнее задание</a>
                             </button>
-                            <div class="border border-dashed rounded-lg border-m_black-400 mt-10 py-6 flex flex-col items-center">
-                                <button
-                                    class="w-fit border border-m_yellow-100 flex items-center justify-center space-x-4 px-32 py-3 rounded-lg">
-                                    <uploadIcon />
-                                    <p class="font-sf_pro font-bold text-lg text-m_yellow-100">Загрузить файл</p>
-                                </button>
-                                <p class="font-sf_pro font-normal text-base text-m_gray-100 pt-6">Максимальный размер - до  <span class="font-bold text-white">30MB</span></p>
+                            <div
+                                class="relative border border-dashed rounded-lg border-m_black-400 mt-10 flex flex-col items-center">
+                                <label for="fileUpload"
+                                    class="w-full cursor-pointer border-dashed rounded-lg justify-center text-gray-500 py-10 px-5 flex flex-col items-center">
+                                    <div
+                                        class="w-fit border border-m_yellow-100 flex items-center justify-center space-x-4 px-32 py-3 rounded-lg">
+                                        <uploadIcon />
+                                        <p class="font-sf_pro font-bold text-lg text-m_yellow-100 text-nowrap">Загрузить файл</p>
+                                    </div>
+                                    <p class="font-sf_pro font-normal text-base text-m_gray-100 pt-6">Максимальный
+                                        размер -
+                                        до <span class="font-bold text-white">30MB</span></p>
+                                </label>
+                                <input id="fileUpload" type="file" required class="hidden" @change="handleFileUpload">
                             </div>
-                            <!-- <div class="w-full rounded-lg px-6 py-3 bg-m_black-600 flex items-center justify-between mt-10">
+                            <div v-if="file" class="w-full rounded-lg px-6 py-3 bg-m_black-600 flex items-center justify-between mt-10">
                                 <div class="flex items-center space-x-6">
                                     <documentIcon color="white" />
-                                    <p class="font-sf_pro font-medium text-lg text-white">Homework.docx</p>
+                                    <p class="font-sf_pro font-medium text-lg text-white">{{ file?.name }}</p>
                                 </div>
-                                <span class="cursor-pointer">
-                                    <closeIcon :w="24" :h="24" />
+                                <span class="cursor-pointer" @click="file = null">
+                                    <closeIcon :w="'24'" :h="'24'" />
                                 </span>
-                            </div> -->
+                            </div>
                             <div class="w-full mt-12 flex items-center space-x-6 font-sf_pro text-lg">
-                                <button class="w-full bg-m_yellow-100 text-black font-bold py-3 rounded-lg">Сохранить </button>
+                                <button class="w-full bg-m_yellow-100 text-black font-bold py-3 rounded-lg">Сохранить
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -87,7 +96,7 @@
                 <!-- Video player -->
                 <div class="video-player-container">
                     <video id="plyr-video" class="plyr" controls playsinline>
-                        <source v-if="lessons.video?.path" :src="lessons.video?.path" type="video/mp4">
+                        <source v-if="lesson.video?.path" :src="lesson.video?.path" type="video/mp4">
                     </video>
                 </div>
                 <div class="flex items-center justify-center py-10">
@@ -98,27 +107,20 @@
                     </p>
                 </div>
                 <!-- Information -->
-                <div v-if="activeTab === 0" class="py-16">
+                <div v-if="activeTab === 0" class="pb-16 pt-6">
                     <div class="pb-10">
-                        <h1 class="font-sf_pro font-bold text-5xl text-white pb-4">Эффективно общайтесь и работайте в
-                            командах</h1>
-                        <p class="font-sf_pro font-normal text-lg text-m_gray-100 py-10">Продвигайте себя, ясно
-                            выражайте идеи и используйте приемы, которые сделают вас более
-                            убедительными. Продвигайте себя, ясно выражайте идеи и используйте приемы, которые сделают
-                            вас более убедительными. Продвигайте себя, ясно выражайте идеи и используйте приемы, которые
-                            сделают вас более убедительными. Продвигайте себя, ясно выражайте идеи и используйте приемы,
-                            которые сделают вас более убедительными. Продвигайте себя, ясно выражайте идеи и используйте
-                            приемы, которые сделают вас более убедительными. Продвигайте себя, ясно выражайте идеи и
-                            используйте приемы, которые сделают вас более убедительными. Продвигайте себя, ясно
-                            выражайте идеи и используйте приемы... <span class="text-m_yellow-100">Читать далее</span>
+                        <h1 class="font-sf_pro font-bold text-5xl text-white pb-4">
+                            {{ lesson?.name }}
+                        </h1>
+                        <p class="font-sf_pro font-normal text-lg text-m_gray-100 py-10">
+                            {{ lesson?.description }} <span v-if="lesson?.description?.length > 100"
+                                class="text-m_yellow-100">Читать далее</span>
                         </p>
                         <div class="flex items-center space-x-6">
                             <p v-for="item in cats"
                                 class="px-8 py-3 bg-m_black-300 rounded-full text-m_gray-100 font-sf_pro text-lg">
                                 {{ item }}
                             </p>
-                            <p class="px-8 py-3 bg-m_black-300 rounded-full text-m_gray-100 font-sf_pro text-lg">17
-                                уроков</p>
                             <p class="px-8 py-3 bg-m_black-300 rounded-full text-m_gray-100 font-sf_pro text-lg">2h 10m
                             </p>
                         </div>
@@ -139,27 +141,24 @@
                             Ментор</h2>
                         <div class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 pt-20">
                             <div class="sm:w-[400px] w-full h-[200px] rounded-lg bg-m_black-500 relative">
-                                <img class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]"
-                                    src="/imgs/person1.png">
+                                <img class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]" :src="owner?.avatar">
                                 <div class="absolute top-4 right-4">
                                     <div class="flex items-center">
                                         <span class="lg:text-base text-sm text-m_yellow-100">★</span>
                                         <span
-                                            class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">4.8</span>
+                                            class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">{{ owner?.rating }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="flex-1 flex lg:items-start items-center flex-col space-y-3">
-                                <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">Marques Brownlee</h3>
-                                <p class="font-sf_pro font-normal lg:text-base text-sm text-m_yellow-200">Youtuber,
-                                    Podcaster</p>
+                                <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">{{ owner?.full_name }}</h3>
+                                <p class="font-sf_pro font-normal lg:text-base text-sm text-m_yellow-200">
+                                    {{ owner?.profession }}
+                                </p>
                                 <div class="text-m_gray-100 lg:text-start text-center">
                                     <p class="lg:text-base text-sm leading-relaxed mb-4">
-                                        Я также являюсь онлайн-инструктором с опытом преподавания более 3 лет и преподаю
-                                        веб-разработку и деловое письмо более чем 14 000 студентам со всего мира на
-                                        нескольких глобальных платформах. Я больше сосредоточен на творческих вещах и
-                                        презентациях. Преподавание — это то, что я люблю делать
-                                        <a v-if="100 < 200" href="#" class="text-m_yellow-100 hover:underline">...Читать
+                                        {{ owner?.bio }}
+                                        <a v-if="owner?.bio.length > 200" href="#" class="text-m_yellow-100 hover:underline">...Читать
                                             далее</a>
                                     </p>
                                 </div>
@@ -170,13 +169,14 @@
                 <!-- About -->
                 <div v-if="activeTab === 1" class="pt-10">
                     <div class="flex items-center space-x-6">
-                        <div v-for="item in modules" :key="item.id"
-                            class="px-8 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-lg text-base text-white">
+                        <div v-for="item in modules" :key="item.id" @click="moduleLessons(item.id)"
+                            class="px-8 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-lg text-base text-white cursor-pointer">
                             {{ item.name }}
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-20">
-                        <router-link v-for="(item, index) in visibleLessons" :key="index" to="/video/detail/1"
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-14">
+                        <router-link v-for="(item, index) in lessons" :key="index"
+                            :to="`/video/detail/${item.id}/${this.$route.params.courseId}`"
                             class="p-4 bg-m_black-500 rounded-xl overflow-hidden flex items-center space-x-4 cursor-pointer">
                             <div class="relative w-24">
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -412,31 +412,22 @@ export default {
     },
     data() {
         return {
+            file: null,
+            owner: null,
             isOpen: false,
             activeTab: 0,
+            lesson: [],
             lessons: [],
+            modules: [],
             cats: ['Бизнес & предпринимательство'],
             tabs: ['Информация о курсе', 'Программа курса', 'Отзывы'],
-            modules: [
-                { id: 1, name: 'Модуль #1' },
-                { id: 2, name: 'Модуль #2' },
-                { id: 3, name: 'Модуль #3' },
-                { id: 4, name: 'Модуль #4' },
-                { id: 5, name: 'Модуль #5' }
-            ],
-            visibleLessons: [
-                { id: 1, banner: '/imgs/person5.png', name: 'Определите своих клиентов' },
-                { id: 2, banner: '/imgs/person5.png', name: 'Зажгите большую идею' },
-                { id: 3, banner: '/imgs/person5.png', name: 'Определите своих клиентов' },
-                { id: 4, banner: '/imgs/person5.png', name: 'Зажгите большую идею' },
-                { id: 5, banner: '/imgs/person5.png', name: 'Определите своих клиентов' },
-                { id: 6, banner: '/imgs/person5.png', name: 'Зажгите большую идею' },
-            ],
             comment: 'Этот курс предназначен для тех, кто хочет освоить основные концепции и стратегии маркетинга! 😀🩷'
         };
     },
-    created() {
-        this.getLessons()
+    async created() {
+        await this.getLessons()
+        await this.getModules()
+        await this.moduleLessons(this.modules[0].id)
     },
     mounted() {
         this.player = new Plyr('#plyr-video', {
@@ -474,9 +465,21 @@ export default {
         },
         async getLessons() {
             const response = await api.get(`/lessons/${this.$route.params.id}`)
-            console.log(response);
-            this.lessons = response.data
-        }
+            this.owner = response.data.course.owner
+            console.log(this.owner);
+            this.lesson = response.data
+        },
+        async getModules() {
+            const response = await api.get(`/modules/?course=${this.$route.params.courseId}`)
+            this.modules = response.data.results
+        },
+        async moduleLessons(id) {
+            this.lessons = this.modules.find(item => item.id === id)?.lessons
+        },
+        handleFileUpload(event) {
+            this.file = event.target.files[0]
+            console.log(this.file);
+        },
     },
     beforeUnmount() {
         document.removeEventListener('keydown', this.handleKeyEvents);

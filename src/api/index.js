@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "@/router/index.js";
 import {
   getAccessToken,
   getRefreshToken,
@@ -41,7 +42,7 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 403 && !originalRequest._retry) {
+    if (error.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
@@ -70,7 +71,7 @@ api.interceptors.response.use(
       } catch (err) {
         processQueue(err, null);
         clearTokens();
-        this.$router.push("/login");
+        router.push("/login");;
         return Promise.reject(err);
       } finally {
         isRefreshing = false;

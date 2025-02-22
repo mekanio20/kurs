@@ -550,7 +550,6 @@ export default {
         async getCourses(id) {
             let query = '/courses/'
             if (id) query = `/courses/?categories=${id}`
-            console.log(query);
             const response = await api.get(query)
             this.courses = await response.data.results
         },

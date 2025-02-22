@@ -84,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="sm:pb-20 mt-20 text-center">
+                <div class="mt-20 text-center">
                     <h2
                         class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white select-none">
                         Программа курса
@@ -106,7 +106,7 @@
                         </h2>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 py-10">
-                        <router-link v-for="(item, index) in active_lessons" :key="index" :to="`/video/detail/${item.id}`"
+                        <router-link v-for="(item, index) in active_lessons" :key="index" :to="`/video/detail/${item.id}/${course?.id}`"
                             class="p-4 bg-m_black-500 rounded-lg overflow-hidden flex items-center space-x-4 cursor-pointer">
                             <div class="relative w-32">
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -197,19 +197,19 @@
                                 <div class="flex items-center">
                                     <span class="lg:text-base text-sm text-m_yellow-100">★</span>
                                     <span class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">{{
-                            course?.owner?.rating || 0 }}</span>
+                            course?.owner.rating || 0 }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="flex-1 flex lg:items-start items-center flex-col space-y-3">
-                            <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">{{ course?.owner?.full_name
+                            <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">{{ course?.owner.full_name
                                 }}</h3>
                             <p class="font-sf_pro font-normal lg:text-base text-sm text-m_yellow-200">{{
-                            course?.owner?.profession }}</p>
+                            course?.owner.profession }}</p>
                             <div class="text-m_gray-100 lg:text-start text-center">
                                 <p class="lg:text-base text-sm leading-relaxed mb-4">
-                                    {{ course?.owner?.bio }}
-                                    <a v-if="course?.owner?.bio.length > 200" href="#"
+                                    {{ course?.owner.bio }}
+                                    <a v-if="course?.owner.bio.length > 200" href="#"
                                         class="text-m_yellow-100 hover:underline">Читать далее</a>
                                 </p>
                             </div>
@@ -221,7 +221,7 @@
                         class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center">
                         Отзывы пользователей</h2>
                     <div
-                        class="w-full text-white p-6 rounded-lg justify-center items-center flex flex-col lg:flex-row gap-8 mt-20">
+                        class="w-full text-white p-6 rounded-lg justify-center items-center flex flex-col lg:flex-row gap-8 lg:mt-14 mt-8">
                         <!-- Rating Overview -->
                         <div class="w-full lg:h-[152px] flex lg:flex-row flex-col items-center justify-center px-10">
                             <div
@@ -495,7 +495,8 @@ export default {
     },
     watch: {
         async isIconFilled(newValue) {
-            const response = await api.post(`/courses/${this.$route.params.id}/bookmark/`, { bookmarked: newValue })
+            const id = this.$route.params.id
+            await api.post(`/courses/${id}/bookmark/`, { bookmarked: newValue })
         }
     }
 }

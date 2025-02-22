@@ -65,6 +65,7 @@ export default {
                 { name: 'Наставники', link: '/dashboard/admin/mentors', component: MentorsIcon },
                 { name: 'Категории', link: '/dashboard/admin/categories', component: CategoryIcon },
                 { name: 'Пользователи', link: '/dashboard/admin/users', component: UsersIcon },
+                { name: 'Доступ', link: '/dashboard/admin/permissions', component: MentorsIcon },
             ]
         }
     },

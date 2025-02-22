@@ -71,7 +71,7 @@ const router = createRouter({
       component: () => import("@/views/CourseDetail.vue"),
     },
     {
-      path: "/video/detail/:id",
+      path: "/video/detail/:id/:courseId",
       name: "VideoPlayer",
       component: () => import("@/views/VideoPlayer.vue"),
     },
@@ -125,6 +125,11 @@ const router = createRouter({
       path: "/dashboard/admin/courses",
       name: "AdminCourses",
       component: () => import("@/views/admin/AdminCourses.vue"),
+    },
+    {
+      path: "/dashboard/admin/permissions",
+      name: "AdminPermissions",
+      component: () => import("@/views/admin/AdminPermissions.vue"),
     },
     {
       path: "/dashboard/admin/add/category",
