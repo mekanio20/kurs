@@ -1,6 +1,6 @@
 <template>
     <nav class="fixed w-full top-0 z-50 mx-auto bg-black select-none no-scrollbar">
-        <div class="container py-6 flex items-center justify-between">
+        <div class="container pt-6 px-6 flex items-center justify-between">
             <div class="w-full flex items-center justify-start">
                 <!-- Burger -->
                 <div @click="openBurger" class="cursor-pointer lg:hidden block mr-5">
@@ -72,7 +72,7 @@
         </div>
         <!-- All category -->
         <div v-if="rotate" class="w-full bg-black container">
-            <div class="w-full grid grid-flow-col grid-rows-4 gap-4 pt-5 pb-4">
+            <div class="w-full grid grid-flow-col grid-rows-4 gap-4 py-8">
                 <router-link v-for="item in cats" :key="item.id" :to="`/category/${item.id}`"
                     class=" font-sf_pro font-medium text-white text-lg py-2 hover:text-m_yellow-100 duration-300">{{ item.name }}
                 </router-link>

@@ -41,18 +41,29 @@
         </div>
         <div class="w-full relative z-50">
             <Navbar />
-            <div class="container bg-transparent sm:mt-44 mt-36">
-                <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center mb-20">
-                    <div class="lg:w-[640px] sm:w-[600px] w-full lg:mr-20">
-                        <img v-if="course?.banner" :src="course?.banner" class="lg:flex-1 w-full h-full object-cover rounded-xl">
+            <div class="container bg-transparent sm:mt-20 mt-40">
+                <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center">
+                    <div class="lg:w-[640px] lg:h-[640px] sm:w-[600px] sm:h-[600px] w-full h-full lg:mr-20">
+                        <img v-if="course?.banner" :src="course?.banner"
+                            class="lg:flex-1 w-full h-full object-contain rounded-xl">
                     </div>
                     <div class="lg:w-[540px] sm:w-[600px] w-full  flex lg:items-start items-center flex-col space-y-10">
                         <h1
                             class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white lg:text-start text-center">
                             {{ course?.name }}</h1>
                         <p
-                            class="lg:w-3/4 w-full font-sf_pro font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 lg:text-start text-center">
-                            {{ course?.description }}
+                            class="break-all lg:w-4/5 w-full font-sf_pro font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 lg:text-start text-center overflow-hidden">
+                            <span v-if="course?.description.length > 200 && !isReadMore">{{ course?.description.slice(0,
+                            200) }}<p class="cursor-pointer inline-block text-m_yellow-100 hover:underline"
+                                    @click="isReadMore = !isReadMore">...Читать далее</p></span>
+                            <span v-else-if="course?.description.length > 200 && isReadMore">
+                                {{ course?.description }}
+                                <p class="cursor-pointer inline-block text-m_yellow-100 hover:underline"
+                                    @click="isReadMore = !isReadMore">Скрыть</p>
+                            </span>
+                            <span v-else-if="course?.description.length < 200">
+                                {{ course?.description }}
+                            </span>
                         </p>
                         <div
                             class="flex flex-wrap sm:flex-row flex-col sm:space-y-0 space-y-4 items-center sm:gap-x-6 sm:gap-y-6">
@@ -79,19 +90,22 @@
                             </div>
                         </div>
                         <div class="w-full flex items-center lg:justify-start justify-center space-x-4 select-none">
-                            <router-link to="/payment" class="w-fit px-10 py-3 rounded-lg bg-m_yellow-100 font-helvetica font-bold lg:text-xl sm:text-lg text-base">Купить сейчас</router-link>
+                            <button @click="redirectToWhatsApp(course?.id)"
+                                class="w-fit px-10 py-3 rounded-lg bg-m_yellow-100 font-helvetica font-bold lg:text-xl sm:text-lg text-base">Купить
+                                сейчас</button>
                             <bookmarkIcon v-model:isTrue="isIconFilled" />
                         </div>
                     </div>
                 </div>
-                <div class="mt-20 text-center">
+                <div class="text-center">
                     <h2
                         class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white select-none">
                         Программа курса
                     </h2>
                     <!-- Modules -->
                     <div class="flex items-center space-x-6 pt-10 select-none">
-                        <div v-for="(item, index) in video_modules" :key="item.id" @click="changeActiveModule(item, index+1)"
+                        <div v-for="(item, index) in video_modules" :key="item.id"
+                            @click="changeActiveModule(item, index + 1)"
                             :class="item.id == active_module?.id ? 'bg-m_yellow-100 text-black font-bold' : 'text-m_gray-200'"
                             class="px-8 py-3 rounded-3xl bg-m_black-300 font-sf_pro lg:text-lg text-base cursor-pointer hover:bg-m_yellow-100 hover:text-black duration-300">
                             {{ 'Модуль #' + (index + 1) }}
@@ -99,14 +113,19 @@
                     </div>
                     <!-- Names -->
                     <div class="text-start pt-10">
-                        <p v-if="!active_module?.index" class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #1</p>
-                        <p v-else="active_module?.index" class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #{{ active_module.index }}</p>
-                        <h2 class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white">
+                        <p v-if="!active_module?.index"
+                            class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #1</p>
+                        <p v-else="active_module?.index"
+                            class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #{{
+                            active_module.index }}</p>
+                        <h2
+                            class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white">
                             {{ active_module?.name }}
                         </h2>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 py-10">
-                        <router-link v-for="(item, index) in active_lessons" :key="index" :to="`/video/detail/${item.id}/${course?.id}`"
+                        <router-link v-for="(item, index) in active_lessons" :key="index"
+                            :to="`/video/detail/${item.id}/${course?.id}`"
                             class="p-4 bg-m_black-500 rounded-lg overflow-hidden flex items-center space-x-4 cursor-pointer">
                             <div class="relative w-32">
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -115,8 +134,10 @@
                                 <img :src="item.banner" class="w-full rounded-xl object-cover mr-8">
                             </div>
                             <div class="flex items-start flex-col space-y-2">
-                                <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: {{ index + 1 }}</p>
-                                <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">{{ item.name }}</p>
+                                <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: {{ index +
+                            1 }}</p>
+                                <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">{{ item.name
+                                    }}</p>
                             </div>
                         </router-link>
                     </div>
@@ -454,6 +475,7 @@ export default {
             course: null,
             courses: null,
             showAll: false,
+            isReadMore: false,
             slidesPerView: 1,
             cource_breakpoints: {
                 200: { slidesPerView: 1 },
@@ -471,9 +493,14 @@ export default {
     },
     created() {
         this.getCourse(),
-        this.allCourses()
+            this.allCourses()
     },
     methods: {
+        async redirectToWhatsApp(id) {
+            const phoneNumber = "996502262623"; 
+            const message = encodeURIComponent(`Здравствуйте, я хочу купить этот курс: ${id}`);
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+        },
         async getCourse() {
             const response = await api.get(`/courses/${this.$route.params.id}`);
             console.log(response);
