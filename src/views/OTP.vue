@@ -68,14 +68,7 @@
                         class="w-full py-3 lg:text-lg sm:text-base text-sm font-bold text-black bg-yellow-500 rounded-lg hover:bg-yellow-600 disabled:cursor-not-allowed">
                         <span v-if="!isLoading">Продолжить</span>
                         <span v-else>
-                            <svg class="h-6 w-6 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
-                                fill="none">
-                                <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="10"
-                                    stroke-dasharray="60 20" stroke-linecap="round">
-                                    <animateTransform attributeName="transform" type="rotate" from="0 50 50"
-                                        to="360 50 50" dur="1s" repeatCount="indefinite" />
-                                </circle>
-                            </svg>
+                            Продолжить
                         </span>
                     </button>
                     <div
@@ -99,15 +92,17 @@
 </template>
 
 <script>
+import api from '@/api/index';
+import { mapState, mapActions } from 'vuex';
+import { useToast } from 'vue-toastification';
 export default {
     name: "OTP",
     data() {
         return {
-            timer: 185,
+            timer: 300,
             codeInputs: ["", "", "", ""],
             timerInterval: null,
             isTimerActive: true,
-            isLoading: false,
             galleryItems: [
                 { id: 1, img: '/imgs/home-1.webp' },
                 { id: 2, img: '/imgs/home-2.webp' },
@@ -135,6 +130,7 @@ export default {
         },
     },
     methods: {
+        ...mapActions(['registerUser', 'setLoading']),
         startTimer() {
             this.timerInterval = setInterval(() => {
                 if (this.timer > 0) {
@@ -146,7 +142,7 @@ export default {
             }, 1000);
         },
         resetTimer() {
-            this.timer = 185;
+            this.timer = 300;
             this.isTimerActive = true;
             clearInterval(this.timerInterval);
             this.startTimer();
@@ -159,8 +155,6 @@ export default {
             }
             if (index < this.codeInputs.length - 1) {
                 this.$refs[`input-${index + 1}`][0].focus();
-            } else if (this.isCodeComplete) {
-                this.handleSubmit()
             }
         },
         handleBackspace(index) {
@@ -169,12 +163,35 @@ export default {
             }
         },
         async handleSubmit() {
-            if (this.isCodeComplete) {
-                this.isLoading = true;
-                setTimeout(() => {
-                    alert(`Код отправлен: ${this.codeInputs.join("")}`);
-                    this.isLoading = false;
-                }, 2000);
+            const toast = useToast()
+            this.$store.dispatch('setLoading', true)
+            try {
+                if (this.isCodeComplete) {
+                    const fullName = sessionStorage.getItem('fullName');
+                    const password = sessionStorage.getItem('password');
+                    const email = sessionStorage.getItem('email');
+                    const formData = new FormData();
+                    formData.append('email', email);
+                    formData.append('full_name', fullName);
+                    formData.append('password', password);
+                    formData.append('otp', this.codeInputs.join(''));
+                    await api.post('/users/', formData);
+                    
+                    const user = { email: email, password: password };
+                    const token = await api.post('/token/', user);
+                    await this.registerUser({ access: token.access, refresh: token.refresh });
+                    
+                    sessionStorage.removeItem('fullName');
+                    sessionStorage.removeItem('password');
+                    sessionStorage.removeItem('email');
+                    this.$router.push({ name: "Home" })
+                }
+            } catch (error) {
+                console.error(error);
+                const errorMessage = error.message || 'OTP failed';
+                toast.error(errorMessage);
+            } finally {
+                this.$store.dispatch('setLoading', false);
             }
         },
     },

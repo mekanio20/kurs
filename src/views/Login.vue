@@ -41,7 +41,7 @@
         </div>
         <div class="w-full relative z-50">
             <div class="container bg-transparent flex lg:items-start items-center">
-                <form @submit.prevent="handleRegister" class="lg:flex-1 w-full flex flex-col items-center space-y-4 mt-40 lg:mr-40 lg:mx-0 sm:mx-40">
+                <form @submit.prevent="handleLogin" class="lg:flex-1 w-full flex flex-col items-center space-y-4 mt-40 lg:mr-40 lg:mx-0 sm:mx-40">
                     <h1 class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white mb-10">Авторизоваться</h1>
                     <input type="email" v-model="email"
                         class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 lg:text-lg sm:text-base text-sm rounded-lg outline-none"
@@ -102,7 +102,7 @@ export default {
     },
     methods: {
         ...mapActions(['registerUser', 'setLoading']),
-        async handleRegister() {
+        async handleLogin() {
             const toast = useToast();
             this.$store.dispatch('setLoading', true);
             try {

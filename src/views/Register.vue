@@ -94,7 +94,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import api from '@/api/index';
+import { mapState } from 'vuex';
+import { useToast } from 'vue-toastification';
 export default {
     name: "Register",
     data() {
@@ -120,15 +122,33 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['registerUser']),
         async handleRegister() {
+            const toast = useToast()
+            this.$store.dispatch('setLoading', true)
             try {
-                await this.registerUser({ fullName: this.fullName, email: this.email, password: this.password, checked: this.checked });
-                this.$router.push({ name: "Home" })
+                if (this.password.length < 8) {
+                    toast.error('Пароль должен содержать не менее 8 символов');
+                    return
+                }
+                const user_data = { email: this.email, purpose: 'registration' }
+                sessionStorage.setItem('fullName', this.fullName)
+                sessionStorage.setItem('password', this.password)
+                sessionStorage.setItem('email', this.email)
+
+                await api.post('/otp/', user_data);
+                this.$router.push({ name: "OTP" })
+
             } catch (error) {
-                console.error("Error occurred: ", error);
+                console.error(error);
+                const errorMessage = error.message || 'Register failed';
+                toast.error(errorMessage);
+            } finally {
+                this.$store.dispatch('setLoading', false);
             }
         },
+    },
+    computed: {
+        ...mapState(['loading']),
     },
 }
 </script>
