@@ -97,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center">
+                <div class="text-center pt-10">
                     <h2
                         class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white select-none">
                         Программа курса
@@ -492,12 +492,17 @@ export default {
         }
     },
     created() {
+        if (this.$route.query.access && this.$route.query.refresh) {
+            console.log('Setting tokens');
+            localStorage.setItem('access', this.$route.query.access)
+            localStorage.setItem('refresh', this.$route.query.refresh)
+        }
         this.getCourse(),
-            this.allCourses()
+        this.allCourses()
     },
     methods: {
         async redirectToWhatsApp(id) {
-            const phoneNumber = "996502262623"; 
+            const phoneNumber = "996502262623";
             const message = encodeURIComponent(`Здравствуйте, я хочу купить этот курс: ${id}`);
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
         },
