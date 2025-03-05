@@ -1,30 +1,8 @@
 <template>
-  <div class="p-4">
-    <Pagination 
-      :totalPages="totalPages" 
-      v-model:currentPage="currentPage" 
-      @update:currentPage="handlePageChange"
-    />
+  <div class="bg-white h-full">
+    <div class="relative w-64 h-40 bg-white rounded-lg overflow-hidden flex items-center justify-center">
+      <div class="absolute bottom-0 left-0 w-full h-1/2 bg-black opacity-30 blur-lg"></div>
+      <span class="relative z-10">İçeriye yayılan alt gölge</span>
+    </div>
   </div>
 </template>
-
-<script>
-import Pagination from '@/components/Pagination.vue';
-export default {
-    components: {
-        Pagination,
-    },
-    data() {
-        return {
-            totalPages: 10,
-            currentPage: 1,
-        };
-    },
-    methods: {
-        handlePageChange(newPage) {
-            this.currentPage = newPage;
-            console.log('Seçilen Sayfa:', newPage);
-        },
-    },
-}
-</script>
