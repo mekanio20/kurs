@@ -42,19 +42,29 @@
         <div class="w-full relative z-50">
             <Navbar />
             <div class="container bg-transparent sm:mt-20 mt-40">
-                <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center">
-                    <div class="lg:w-[640px] lg:h-[640px] sm:w-[600px] sm:h-[600px] w-full h-full lg:mr-20">
-                        <img v-if="course?.banner" :src="course?.banner"
-                            class="lg:flex-1 w-full h-full object-contain rounded-xl">
+                <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center py-10">
+                    <div class="relative lg:mr-20">
+                        <!-- Video Elementi -->
+                        <video :key="course?.preview_video" ref="videoPlayer" class="lg:w-[640px] lg:h-[440px] sm:w-[600px] sm:h-[600px] w-full h-full rounded-lg pt-10">
+                            <source v-if="course?.preview_video" :src="course?.preview_video" />
+                        </video>
+
+                        <!-- Play/Pause Butonu -->
+                        <button @click="togglePlay"
+                            class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
+                            <svg v-if="!isPlaying" class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4l12 6-12 6V4z" />
+                            </svg>
+                        </button>
                     </div>
-                    <div class="lg:w-[540px] sm:w-[600px] w-full  flex lg:items-start items-center flex-col space-y-10">
+                    <div class="lg:w-[540px] sm:w-[600px] w-full  flex lg:items-start items-center flex-col space-y-8">
                         <h1
                             class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white lg:text-start text-center">
                             {{ course?.name }}</h1>
                         <p
                             class="break-all lg:w-4/5 w-full font-sf_pro font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 lg:text-start text-center overflow-hidden">
                             <span v-if="course?.description.length > 200 && !isReadMore">{{ course?.description.slice(0,
-                            200) }}<p class="cursor-pointer inline-block text-m_yellow-100 hover:underline"
+                                200) }}<p class="cursor-pointer inline-block text-m_yellow-100 hover:underline"
                                     @click="isReadMore = !isReadMore">...Читать далее</p></span>
                             <span v-else-if="course?.description.length > 200 && isReadMore">
                                 {{ course?.description }}
@@ -83,7 +93,7 @@
                                 <span class="ml-1 text-white lg:text-base text-sm font-medium">{{ course?.rating || 0
                                     }}</span>
                                 <span class="ml-2 text-m_gray-100 lg:text-base text-sm font-medium">({{
-                            course?.total_ratings || 0 }} отзывов)</span>
+                                course?.total_ratings || 0 }} отзывов)</span>
                             </div>
                             <div class="flex items-center font-sf_pro font-medium lg:text-base text-sm text-white">
                                 {{ course?.students_count || 0 }} студентов
@@ -117,7 +127,7 @@
                             class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #1</p>
                         <p v-else="active_module?.index"
                             class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #{{
-                            active_module.index }}</p>
+                                active_module.index }}</p>
                         <h2
                             class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white">
                             {{ active_module?.name }}
@@ -135,7 +145,7 @@
                             </div>
                             <div class="flex items-start flex-col space-y-2">
                                 <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: {{ index +
-                            1 }}</p>
+                                1 }}</p>
                                 <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">{{ item.name
                                     }}</p>
                             </div>
@@ -218,7 +228,7 @@
                                 <div class="flex items-center">
                                     <span class="lg:text-base text-sm text-m_yellow-100">★</span>
                                     <span class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">{{
-                            course?.owner.rating || 0 }}</span>
+                                course?.owner.rating || 0 }}</span>
                                 </div>
                             </div>
                         </div>
@@ -226,7 +236,7 @@
                             <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">{{ course?.owner.full_name
                                 }}</h3>
                             <p class="font-sf_pro font-normal lg:text-base text-sm text-m_yellow-200">{{
-                            course?.owner.profession }}</p>
+                                course?.owner.profession }}</p>
                             <div class="text-m_gray-100 lg:text-start text-center">
                                 <p class="lg:text-base text-sm leading-relaxed mb-4">
                                     {{ course?.owner.bio }}
@@ -471,6 +481,7 @@ export default {
     },
     data() {
         return {
+            isPlaying: false,
             isIconFilled: null,
             course: null,
             courses: null,
@@ -498,9 +509,21 @@ export default {
             localStorage.setItem('refresh', this.$route.query.refresh)
         }
         this.getCourse(),
-        this.allCourses()
+            this.allCourses()
     },
     methods: {
+        togglePlay() {
+            const video = this.$refs.videoPlayer;
+            if (!video) return;
+
+            if (video.paused) {
+                video.play();
+                this.isPlaying = true;
+            } else {
+                video.pause();
+                this.isPlaying = false;
+            }
+        },
         async redirectToWhatsApp(id) {
             const phoneNumber = "996502262623";
             const message = encodeURIComponent(`Здравствуйте, я хочу купить этот курс: ${id}`);
@@ -529,7 +552,10 @@ export default {
         async isIconFilled(newValue) {
             const id = this.$route.params.id
             await api.post(`/courses/${id}/bookmark/`, { bookmarked: newValue })
-        }
+        },
+        "$route.params.id"() {
+            this.getCourse();
+        },
     }
 }
 </script>

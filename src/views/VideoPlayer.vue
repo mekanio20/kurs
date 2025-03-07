@@ -69,7 +69,8 @@
                                     <div
                                         class="w-fit border border-m_yellow-100 flex items-center justify-center space-x-4 px-32 py-3 rounded-lg">
                                         <uploadIcon />
-                                        <p class="font-sf_pro font-bold text-lg text-m_yellow-100 text-nowrap">Загрузить файл</p>
+                                        <p class="font-sf_pro font-bold text-lg text-m_yellow-100 text-nowrap">Загрузить
+                                            файл</p>
                                     </div>
                                     <p class="font-sf_pro font-normal text-base text-m_gray-100 pt-6">Максимальный
                                         размер -
@@ -77,7 +78,8 @@
                                 </label>
                                 <input id="fileUpload" type="file" required class="hidden" @change="handleFileUpload">
                             </div>
-                            <div v-if="file" class="w-full rounded-lg px-6 py-3 bg-m_black-600 flex items-center justify-between mt-10">
+                            <div v-if="file"
+                                class="w-full rounded-lg px-6 py-3 bg-m_black-600 flex items-center justify-between mt-10">
                                 <div class="flex items-center space-x-6">
                                     <documentIcon color="white" />
                                     <p class="font-sf_pro font-medium text-lg text-white">{{ file?.name }}</p>
@@ -95,7 +97,7 @@
                 </div>
                 <!-- Video player -->
                 <div class="video-player-container">
-                    <video id="plyr-video" class="plyr" controls playsinline>
+                    <video :key="lesson.video?.path" id="plyr-video" class="plyr" controls playsinline>
                         <source v-if="lesson.video?.path" :src="lesson.video?.path" type="video/mp4">
                     </video>
                 </div>
@@ -141,24 +143,27 @@
                             Ментор</h2>
                         <div class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 pt-20">
                             <div class="sm:w-[400px] w-full h-[200px] rounded-lg bg-m_black-500 relative">
-                                <img class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]" :src="owner?.avatar">
+                                <img class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]"
+                                    :src="owner?.avatar">
                                 <div class="absolute top-4 right-4">
                                     <div class="flex items-center">
                                         <span class="lg:text-base text-sm text-m_yellow-100">★</span>
-                                        <span
-                                            class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">{{ owner?.rating }}</span>
+                                        <span class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">{{
+                        owner?.rating }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="flex-1 flex lg:items-start items-center flex-col space-y-3">
-                                <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">{{ owner?.full_name }}</h3>
+                                <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">{{ owner?.full_name }}
+                                </h3>
                                 <p class="font-sf_pro font-normal lg:text-base text-sm text-m_yellow-200">
                                     {{ owner?.profession }}
                                 </p>
                                 <div class="text-m_gray-100 lg:text-start text-center">
                                     <p class="lg:text-base text-sm leading-relaxed mb-4">
                                         {{ owner?.bio }}
-                                        <a v-if="owner?.bio.length > 200" href="#" class="text-m_yellow-100 hover:underline">...Читать
+                                        <a v-if="owner?.bio.length > 200" href="#"
+                                            class="text-m_yellow-100 hover:underline">...Читать
                                             далее</a>
                                     </p>
                                 </div>
@@ -466,7 +471,6 @@ export default {
         async getLessons() {
             const response = await api.get(`/lessons/${this.$route.params.id}`)
             this.owner = response.data.course.owner
-            console.log(this.owner);
             this.lesson = response.data
         },
         async getModules() {
@@ -485,6 +489,11 @@ export default {
         document.removeEventListener('keydown', this.handleKeyEvents);
         this.player.destroy();
     },
+    watch: {
+        "$route.params.id"() {
+            this.getLessons();
+        },
+    }
 }
 </script>
 
