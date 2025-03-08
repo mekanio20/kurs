@@ -70,8 +70,9 @@ export default {
     },
     data() {
         return {
+            offset: 0,
             currentPage: 1,
-            totalPages: 10,
+            totalPages: null,
             users: null,
             isOpen: false,
             currentFilter: 'Все',
@@ -94,10 +95,12 @@ export default {
         },
         handlePageChange(newPage) {
             this.currentPage = newPage;
-            console.log('Sahypa:', newPage);
+            this.offset = (this.currentPage - 1) * 10
+            this.getUsers()
         },
         async getUsers() {
-            const response = await api.get('/users/')
+            const response = await api.get(`/users/?offset=${this.offset}&limit=10`)
+            this.totalPages = Math.ceil(response.data.count / 10)
             this.users = response.data.results
         }
     }

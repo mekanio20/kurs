@@ -34,8 +34,9 @@ export default {
     },
     data() {
         return {
+            offset: 0,
             currentPage: 1,
-            totalPages: 10,
+            totalPages: null,
             mentors: null
         }
     },
@@ -45,10 +46,12 @@ export default {
     methods: {
         handlePageChange(newPage) {
             this.currentPage = newPage;
-            console.log('Sahypa:', newPage);
+            this.offset = (this.currentPage - 1) * 10
+            this.getMentors()
         },
         async getMentors() {
-            const response = await api.get('/users/?is_teacher=true')
+            const response = await api.get(`/users/?is_teacher=true&offset=${this.offset}&limit=10`)
+            this.totalPages = Math.ceil(response.data.count / 10)
             this.mentors = response.data.results
         },
         addMentor() {

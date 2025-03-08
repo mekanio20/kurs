@@ -5,12 +5,12 @@
                 <AdminButton name="Дать доступ" @click="addMentor"></AdminButton>
             </AdminHeader>
             <div class="flex space-x-6">
-                <div class="flex flex-col space-y-4">
+                <div class="flex-1 flex flex-col space-y-4">
                     <div class="pb-4 border-m_black-300">
-                        <input type="text" placeholder="Поиск"
-                            class="py-2 px-4 rounded-lg bg-m_black-600 text-gray-300 focus:outline-none w-96" />
+                        <input type="text" placeholder="Поиск пользователей"
+                            class="py-3 px-6 rounded-lg bg-m_black-600 text-gray-300 focus:outline-none w-96" />
                     </div>
-                    <div class="flex-1 p-6 bg-m_black-700 rounded-lg">
+                    <div class="px-6 bg-m_black-700 rounded-lg">
                         <table class="w-full text-left text-gray-200">
                             <thead>
                                 <tr class="text-base font-bold uppercase border-b border-m_black-800">
@@ -23,10 +23,10 @@
                             <tbody>
                                 <tr v-for="item in users" :key="item.id"
                                     class="border-b border-m_black-800 hover:bg-m_black-800">
-                                    <td class="px-3 py-4 text-base font-medium">
+                                    <td v-if="users?.length > 0" class="pt-2 text-base text-center font-medium">
                                         <div class="inline-flex items-center">
                                             <label class="flex items-center cursor-pointer relative">
-                                                <input type="checkbox"
+                                                <input :ref="`checkboxRef-${item.id}`" type="checkbox" :checked="selectUser === item.id" @click="getPermissions(item.id)"
                                                     class="peer rounded-full h-5 w-5 cursor-pointer transition-all appearance-none border border-white shadow hover:shadow-md checked:border-m_yellow-100 checked:bg-m_yellow-100" />
                                                 <span
                                                     class="absolute text-black opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -42,19 +42,19 @@
                                         </div>
                                     </td>
                                     <td class="px-3 py-4 text-base font-medium">#{{ item.id }}</td>
-                                    <td class="px-3 py-4 text-base">{{ item.name }}</td>
+                                    <td class="px-3 py-4 text-base">{{ item.full_name }}</td>
                                     <td class="px-3 py-4 text-base">{{ item.email }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="flex flex-col space-y-4">
+                <div class="flex-1 flex flex-col space-y-4">
                     <div class="pb-4 border-m_black-300">
-                        <input type="text" placeholder="Поиск"
-                            class="py-2 px-4 rounded-lg bg-m_black-600 text-gray-300 focus:outline-none w-96" />
+                        <input type="text" placeholder="Поиск курсов"
+                            class="py-3 px-6 rounded-lg bg-m_black-600 text-gray-300 focus:outline-none w-96" />
                     </div>
-                    <div class="flex-1 p-6 bg-m_black-700 rounded-lg">
+                    <div class="px-6 bg-m_black-700 rounded-lg">
                         <table class="w-full text-left text-gray-200">
                             <thead>
                                 <tr class="text-base font-bold uppercase border-b border-m_black-800">
@@ -66,7 +66,7 @@
                             <tbody>
                                 <tr v-for="item in courses" :key="item.id"
                                     class="border-b border-m_black-800 hover:bg-m_black-800">
-                                    <td class="px-3 py-4 text-base font-medium">
+                                    <td class="pt-2 text-base font-medium">
                                         <div class="inline-flex items-center">
                                             <label class="flex items-center cursor-pointer relative">
                                                 <input type="checkbox"
@@ -114,103 +114,13 @@ export default {
         return {
             currentPage: 1,
             totalPages: 10,
-            users: [
-                {
-                    id: 123,
-                    name: "Мария Смирнова",
-                    email: "randommail@gmail.com",
-                },
-                {
-                    id: 123,
-                    name: "Мария Смирнова",
-                    email: "randommail@gmail.com",
-                },
-                {
-                    id: 123,
-                    name: "Мария Смирнова",
-                    email: "randommail@gmail.com",
-                },
-                {
-                    id: 123,
-                    name: "Мария Смирнова",
-                    email: "randommail@gmail.com",
-                },
-                {
-                    id: 123,
-                    name: "Мария Смирнова",
-                    email: "randommail@gmail.com",
-                },
-                {
-                    id: 123,
-                    name: "Мария Смирнова",
-                    email: "randommail@gmail.com",
-                },
-                {
-                    id: 123,
-                    name: "Мария Смирнова",
-                    email: "randommail@gmail.com",
-                },
-                {
-                    id: 123,
-                    name: "Мария Смирнова",
-                    email: "randommail@gmail.com",
-                },
-                {
-                    id: 123,
-                    name: "Мария Смирнова",
-                    email: "randommail@gmail.com",
-                },
-                {
-                    id: 123,
-                    name: "Мария Смирнова",
-                    email: "randommail@gmail.com",
-                },
-            ],
-            courses: [
-                {
-                    id: 123,
-                    name: "Do Things, Tell People: The Power of Personal Bran..",
-                },
-                {
-                    id: 123,
-                    name: "Do Things, Tell People: The Power of Personal Bran..",
-                },
-                {
-                    id: 123,
-                    name: "Do Things, Tell People: The Power of Personal Bran..",
-                },
-                {
-                    id: 123,
-                    name: "Do Things, Tell People: The Power of Personal Bran..",
-                },
-                {
-                    id: 123,
-                    name: "Do Things, Tell People: The Power of Personal Bran..",
-                },
-                {
-                    id: 123,
-                    name: "Do Things, Tell People: The Power of Personal Bran..",
-                },
-                {
-                    id: 123,
-                    name: "Do Things, Tell People: The Power of Personal Bran..",
-                },
-                {
-                    id: 123,
-                    name: "Do Things, Tell People: The Power of Personal Bran..",
-                },
-                {
-                    id: 123,
-                    name: "Do Things, Tell People: The Power of Personal Bran..",
-                },
-                {
-                    id: 123,
-                    name: "Do Things, Tell People: The Power of Personal Bran..",
-                },
-            ]
+            selectUser: null,
+            users: [],
+            courses: []
         }
     },
     created() {
+        this.getUsers()
         this.getPermissions()
     },
     methods: {
@@ -218,9 +128,19 @@ export default {
             this.currentPage = newPage;
             console.log('Sahypa:', newPage);
         },
-        async getPermissions() {
-
-        }
+        async getUsers() {
+            const users = await api.get('/users/?is_teacher=false')
+            this.users = users.data.results
+        },
+        async getPermissions(id) {
+            this.selectUser = id
+            const isChecked = this.$refs[`checkboxRef-${id}`][0]?.checked
+            if (isChecked) {
+                const course_users = await api.get(`/course-users/?user=${id}`)
+                this.courses = course_users.data.results
+                console.log(course_users);
+            }
+        },
     }
 }
 </script>

@@ -60,8 +60,9 @@ export default {
     },
     data() {
         return {
+            offset: 0,
             currentPage: 1,
-            totalPages: 10,
+            totalPages: null,
             categories: null
         }
     },
@@ -71,14 +72,16 @@ export default {
     methods: {
         handlePageChange(newPage) {
             this.currentPage = newPage;
-            console.log('Sahypa:', newPage);
+            this.offset = (this.currentPage - 1) * 10
+            this.getUsers()
         },
         addCategory() {
             this.$router.push('/dashboard/admin/add/category')
         },
         // --------------
         async getCategories() {
-            const response = await api.get('/categories')
+            const response = await api.get(`/categories/?offset=${this.offset}&limit=10`)
+            this.totalPages = Math.ceil(response.data.count / 10)
             this.categories = response.data.results
         }
     }
