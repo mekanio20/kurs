@@ -36,15 +36,15 @@
                         </div>
                         <input type="text" v-model="searchQuery" @keydown.enter="performSearch"
                             class="block w-full p-4 pr-16 pl-6 md:text-sm text-xs text-m_gray-100 border-none rounded-lg placeholder:text-m_gray-100 bg-m_black-100 outline-none"
-                            placeholder="Search for courses, teachers, skills" required />
-                        <div v-if="searchQuery"
+                            placeholder="Search for courses" required />
+                        <!-- <div v-if="searchQuery"
                             class="absolute top-16 left-0 right-0 z-10 bg-m_black-500 px-10 py-6 rounded-lg flex flex-col space-y-6">
                             <div class="flex items-start space-x-6">
                                 <searchIcon />
                                 <div class="font-sf_pro font-medium text-base leading-5 text-white">Do Things, Tell
                                     People: The Power of Personal Branding</div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>
@@ -148,7 +148,12 @@ export default {
             this.cats = await response.data.results
         },
         performSearch() {
-
+            this.$router.push({
+                name: 'Search',
+                query: {
+                    name: this.searchQuery
+                }
+            })
         }
     },
     computed: {

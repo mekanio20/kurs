@@ -118,9 +118,9 @@
                     </video>
                 </div>
                 <!-- FAQ -->
-                <div class="w-full pb-5 md:px-28">
+                <div class="w-full pb-5 sm:px-28">
                     <h2
-                        class="text-center font-sf_pro font-bold lg:text-[40px] sm:text-[30px] text-[20px] lg:leading-[50px] sm:leading-[40px] leading-[30px] text-white md:w-2/3 w-full mx-auto sm:mt-20 mt-10 mb-20">
+                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-20 mt-10 mb-20">
                         Часто задаваемые вопросы
                     </h2>
                     <div class="sm:p-6 text-white">
