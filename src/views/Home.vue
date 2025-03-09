@@ -257,7 +257,7 @@
                     </div>
                 </div>
                 <!-- FAQ -->
-                <div class="w-full pb-5 px-28">
+                <div class="w-full pb-5 sm:px-28">
                     <h2
                         class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white md:w-2/3 w-full mx-auto sm:mt-20 mt-10 mb-20">
                         Часто задаваемые вопросы
@@ -320,10 +320,10 @@ export default {
             isMaster: null,
             popular_cats: null,
             cource_breakpoints: {
-                200: { slidesPerView: 1 },
-                500: { slidesPerView: 2 },
-                950: { slidesPerView: 3 },
-                1200: { slidesPerView: 4 },
+                200: { slidesPerView: 1.2 },
+                500: { slidesPerView: 2.3 },
+                950: { slidesPerView: 3.4 },
+                1200: { slidesPerView: 4.5 },
             },
             master_breakpoints: {
                 200: { slidesPerView: 1 },

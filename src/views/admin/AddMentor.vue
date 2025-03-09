@@ -46,7 +46,6 @@
                         <textarea v-model="bio" class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white resize-none"
                             cols="30" rows="10"></textarea>
                         <div class="pt-[50px] flex items-center space-x-6">
-                            <AdminButton :color="true" :bg_color="true" name="Отмена"></AdminButton>
                             <AdminButton @click="saveMentor" :bold="true" name="Сохранить"></AdminButton>
                         </div>
                     </div>
@@ -91,7 +90,6 @@ export default {
             this.mentors = response.data
         },
         handleFileUpload(event) {
-            this.local = true
             this.imageFile = URL.createObjectURL(event.target.files[0])
             this.img = event.target.files[0]
         },
@@ -105,6 +103,7 @@ export default {
             formData.append('full_name', this.fullName)
             formData.append('profession', this.profession)
             formData.append('password', this.password)
+            formData.append('otp', 1234)
             this.$store.dispatch('setLoading', true);
             try {
                 const response = await api.post('/users/', formData)

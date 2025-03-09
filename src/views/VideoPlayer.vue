@@ -21,16 +21,13 @@
                                 fill="white" />
                         </svg>
                     </router-link>
-                    <!-- Name -->
-                    <h1 class="font-sf_pro font-bold text-lg text-white">
-                        Определите своих клиентов
-                    </h1>
                 </div>
-                <div class="flex items-center space-x-10">
+                <div class="flex items-center sm:space-x-10 space-x-4">
                     <div @click.stop="isOpen = true"
                         class="px-8 py-2 rounded-lg bg-m_yellow-100 font-bold font-sf_pro text-lg flex items-center space-x-2 cursor-pointer">
                         <documentIcon />
-                        <p class="font-bold font-sf_pro text-lg">Домашнее задание</p>
+                        <p class="font-bold text-nowrap font-sf_pro lg;text-lg sm:text-base text-sm">Домашнее задание
+                        </p>
                     </div>
                     <router-link to="#" @click.prevent="$router.go(-1)">
                         <closeIcon />
@@ -56,12 +53,12 @@
                                 <p class="font-sf_pro font-normal text-base text-m_gray-100">Продвигайте себя, ясно
                                     выражайте идеи и используйте приемы, которые сделают вас более убедительными. </p>
                             </div>
-                            <button
-                                class="w-full bg-m_yellow-100 flex items-center justify-center space-x-4 py-4 rounded-lg mt-12">
+                            <div @click="downloadFile(lesson?.task_file)"
+                                class="w-full bg-m_yellow-100 flex items-center justify-center space-x-4 py-4 rounded-lg mt-12 cursor-pointer">
                                 <downloadIcon />
-                                <a :download="lesson?.task_file"
-                                    class="font-sf_pro font-bold text-lg text-black">Скачать домашнее задание</a>
-                            </button>
+                                <div class="font-sf_pro font-bold text-lg text-black">Скачать
+                                    домашнее задание</div>
+                            </div>
                             <div
                                 class="relative border border-dashed rounded-lg border-m_black-400 mt-10 flex flex-col items-center">
                                 <label for="fileUpload"
@@ -89,7 +86,9 @@
                                 </span>
                             </div>
                             <div class="w-full mt-12 flex items-center space-x-6 font-sf_pro text-lg">
-                                <button class="w-full bg-m_yellow-100 text-black font-bold py-3 rounded-lg">Сохранить
+                                <button @click="uploadHomeWorkFile" :disabled="!file"
+                                    :class="[file ? '' : 'cursor-not-allowed']"
+                                    class="w-full bg-m_yellow-100 text-black font-bold py-3 rounded-lg">Сохранить
                                 </button>
                             </div>
                         </div>
@@ -103,7 +102,7 @@
                 </div>
                 <div class="flex items-center justify-center py-10">
                     <p v-for="(item, index) in tabs" @click="activeTab = index"
-                        class="font-sf_pro font-medium text-lg px-6 pb-4 cursor-pointer border-b-4"
+                        class="font-sf_pro font-medium text-lg px-6 pb-4 cursor-pointer border-b-4 text-nowrap"
                         :class="[activeTab === index ? 'text-m_yellow-100 border-m_yellow-100' : 'text-m_gray-100 border-m_black-300']">
                         {{ item }}
                     </p>
@@ -142,14 +141,16 @@
                             class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center">
                             Ментор</h2>
                         <div class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 pt-20">
-                            <div class="sm:w-[400px] w-full h-[200px] rounded-lg bg-m_black-500 relative">
-                                <img class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]"
+                            <div class="sm:w-[400px] w-full h-[300px] rounded-lg relative">
+                                <div class="absolute bottom-0 left-0 w-full h-[260px] rounded-xl bg-m_black-500"></div>
+                                <img class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] object-cover"
                                     :src="owner?.avatar">
-                                <div class="absolute top-4 right-4">
+                                <div class="absolute top-14 right-4">
                                     <div class="flex items-center">
-                                        <span class="lg:text-base text-sm text-m_yellow-100">★</span>
-                                        <span class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">{{
-                        owner?.rating }}</span>
+                                        <span class="text-lg text-m_yellow-100">★</span>
+                                        <span class="ml-1 text-white text-base font-bold font-sf_pro">
+                                            {{ owner?.rating }}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -172,22 +173,22 @@
                     </div>
                 </div>
                 <!-- About -->
-                <div v-if="activeTab === 1" class="pt-10">
+                <div v-if="activeTab === 1" class="pt-5">
                     <div class="flex items-center space-x-6">
                         <div v-for="item in modules" :key="item.id" @click="moduleLessons(item.id)"
                             class="px-8 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-lg text-base text-white cursor-pointer">
                             {{ item.name }}
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-14">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 py-14">
                         <router-link v-for="(item, index) in lessons" :key="index"
                             :to="`/video/detail/${item.id}/${this.$route.params.courseId}`"
                             class="p-4 bg-m_black-500 rounded-xl overflow-hidden flex items-center space-x-4 cursor-pointer">
-                            <div class="relative w-24">
+                            <div class="relative w-24 h-20">
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                     <playIcon :w="32" :h="32" />
                                 </div>
-                                <img :src="item.banner" class="w-full rounded-xl object-cover mr-8">
+                                <img :src="item.banner" class="w-full h-full rounded-xl object-cover mr-8">
                             </div>
                             <div class="flex items-start flex-col space-y-2">
                                 <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: {{ index +
@@ -457,6 +458,28 @@ export default {
         document.addEventListener('keydown', this.handleKeyEvents);
     },
     methods: {
+        async downloadFile(file) {
+            console.log(file);
+            const fileUrl = file;
+            try {
+                const response = await axios.get(fileUrl, {
+                    responseType: 'blob', // Dosya içeriği blob olarak gelmeli
+                });
+
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'dosya.txt'); // Dosya adı
+                document.body.appendChild(link);
+                link.click();
+
+                // Belleği temizle
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(link);
+            } catch (error) {
+                console.error('Dosya indirilemedi:', error);
+            }
+        },
         handleKeyEvents(event) {
             if (event.key === 'ArrowRight') {
                 this.player.forward(5);
@@ -470,6 +493,7 @@ export default {
         },
         async getLessons() {
             const response = await api.get(`/lessons/${this.$route.params.id}`)
+            console.log(response);
             this.owner = response.data.course.owner
             this.lesson = response.data
         },
@@ -482,7 +506,13 @@ export default {
         },
         handleFileUpload(event) {
             this.file = event.target.files[0]
-            console.log(this.file);
+        },
+        async uploadHomeWorkFile() {
+            const formData = new FormData();
+            formData.append('lesson', this.lesson.id);
+            formData.append('file', this.file);
+            const response = await api.post(`/homeworks/`, formData)
+            console.log(response);
         },
     },
     beforeUnmount() {

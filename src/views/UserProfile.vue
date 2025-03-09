@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full min-h-100vh relative overflow-hidden">
+    <div class="w-full min-h-screen relative overflow-hidden">
         <div class="absolute left-0 -bottom-40">
             <svg width="580" height="861" viewBox="0 0 580 861" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <ellipse cx="-33.5267" cy="899.913" rx="613.473" ry="899.913" fill="url(#paint0_radial_585_4648)"
@@ -28,7 +28,7 @@
         </div>
         <div class="w-full relative z-50">
             <Navbar />
-            <div class="container bg-transparent my-44">
+            <div class="container bg-transparent mt-40 pb-10">
                 <div class="w-full flex md:flex-row flex-col items-stretch">
                     <div class="md:w-[550px] w-full lg:p-10 md:p-8 p-6 bg-m_black-500 rounded-xl lg:mr-10 md:mr-5 mb-2">
                         <h1 class="font-sf_pro font-bold lg:text-2xl text-xl text-white md:block hidden">Личный кабинет
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-full p-10 bg-m_black-500 rounded-xl">
+                    <div class="w-full min-h-[500px] p-10 bg-m_black-500 rounded-xl">
                         <form v-if="section === 1" class="w-full flex-col md:space-y-10 space-y-5">
                             <div class="md:flex hidden items-center space-x-6">
                                 <svg class="lg:w-[30px] w-[20px]" viewBox="0 0 20 20" fill="none"

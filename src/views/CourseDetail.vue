@@ -41,8 +41,8 @@
         </div>
         <div class="w-full relative z-50">
             <Navbar />
-            <div class="container bg-transparent sm:mt-20 mt-40">
-                <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center py-10">
+            <div class="container bg-transparent mt-20">
+                <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center pb-10">
                     <div class="relative lg:mr-20">
                         <!-- Video Elementi -->
                         <video :key="course?.preview_video" ref="videoPlayer" class="lg:w-[640px] lg:h-[440px] sm:w-[600px] sm:h-[600px] w-full h-full rounded-lg pt-10">
@@ -52,12 +52,12 @@
                         <!-- Play/Pause Butonu -->
                         <button @click="togglePlay"
                             class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
-                            <svg v-if="!isPlaying" class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <svg v-if="!isPlaying" class="sm:w-16 w-10 text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M4 4l12 6-12 6V4z" />
                             </svg>
                         </button>
                     </div>
-                    <div class="lg:w-[540px] sm:w-[600px] w-full  flex lg:items-start items-center flex-col space-y-8">
+                    <div class="lg:w-[540px] sm:w-[600px] w-full flex lg:items-start items-center flex-col space-y-8 pt-6">
                         <h1
                             class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white lg:text-start text-center">
                             {{ course?.name }}</h1>
@@ -76,7 +76,7 @@
                             </span>
                         </p>
                         <div
-                            class="flex flex-wrap sm:flex-row flex-col sm:space-y-0 space-y-4 items-center sm:gap-x-6 sm:gap-y-6">
+                            class="flex flex-wrap sm:space-x-4 space-x-2 sm:justify-start justify-center sm:space-y-0 space-y-2 items-center">
                             <div v-for="item in course?.categories" :key="item.id"
                                 class="px-6 py-3 rounded-3xl bg-m_black-300 font-sf_pro font-normal lg:text-base text-sm text-m_gray-100 text-nowrap">
                                 {{ item.name }}</div>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center pt-10">
+                <div class="text-center pt-8">
                     <h2
                         class="font-sf_pro font-bold lg:text-[40px] text-[30px] lg:leading-[60px] leading-[50px] text-white select-none">
                         Программа курса
@@ -117,7 +117,7 @@
                         <div v-for="(item, index) in video_modules" :key="item.id"
                             @click="changeActiveModule(item, index + 1)"
                             :class="item.id == active_module?.id ? 'bg-m_yellow-100 text-black font-bold' : 'text-m_gray-200'"
-                            class="px-8 py-3 rounded-3xl bg-m_black-300 font-sf_pro lg:text-lg text-base cursor-pointer hover:bg-m_yellow-100 hover:text-black duration-300">
+                            class="px-8 py-3 rounded-3xl bg-m_black-300 font-sf_pro lg:text-lg text-base cursor-pointer hover:bg-m_yellow-100 hover:text-black duration-300 text-nowrap">
                             {{ 'Модуль #' + (index + 1) }}
                         </div>
                     </div>
@@ -137,11 +137,11 @@
                         <router-link v-for="(item, index) in active_lessons" :key="index"
                             :to="`/video/detail/${item.id}/${course?.id}`"
                             class="p-4 bg-m_black-500 rounded-lg overflow-hidden flex items-center space-x-4 cursor-pointer">
-                            <div class="relative w-32">
+                            <div class="relative w-32 h-20">
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                     <playIcon :w="32" :h="32" />
                                 </div>
-                                <img :src="item.banner" class="w-full rounded-xl object-cover mr-8">
+                                <img class="w-full h-full rounded-xl object-cover mr-8" :src="item.banner">
                             </div>
                             <div class="flex items-start flex-col space-y-2">
                                 <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: {{ index +
@@ -156,7 +156,7 @@
                         {{ showAll ? "Скрыть" : "Посмотреть все" }}
                     </button> -->
                 </div>
-                <div class="w-full flex lg:flex-row flex-col lg:space-y-0 space-y-10 py-20">
+                <div class="w-full flex lg:flex-row flex-col lg:space-y-0 space-y-10 pt-10 pb-20">
                     <div class="lg:flex-1 w-full lg:mr-20">
                         <h2
                             class="lg:w-3/4 font-sf_pro font-bold lg:text-[44px] lg:leading-[60px] text-3xl leading-[50px] text-white">
@@ -220,15 +220,17 @@
                         class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center">
                         Ментор</h2>
                     <div
-                        class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 sm:my-28 my-20">
-                        <div class="sm:w-[400px] w-full h-[200px] rounded-lg bg-m_black-500 relative">
-                            <img v-if="ownerAvatar" :src="ownerAvatar"
-                                class="w-full absolute bottom-0 left-1/2 -translate-x-1/2 object-cover h-[250px]">
-                            <div class="absolute top-4 right-4">
+                        class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 my-20">
+                        <div class="sm:w-[400px] w-full h-[300px] rounded-lg relative">
+                            <div class="absolute bottom-0 left-0 w-full h-[260px] rounded-xl bg-m_black-500"></div>
+                            <img class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] object-cover"
+                                :src="ownerAvatar">
+                            <div class="absolute top-14 right-4">
                                 <div class="flex items-center">
-                                    <span class="lg:text-base text-sm text-m_yellow-100">★</span>
-                                    <span class="ml-1 text-white lg:text-base text-sm font-bold font-sf_pro">{{
-                                course?.owner.rating || 0 }}</span>
+                                    <span class="text-lg text-m_yellow-100">★</span>
+                                    <span class="ml-1 text-white text-base font-bold font-sf_pro">
+                                        {{ course?.owner.rating || 0 }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -247,14 +249,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full lg:pb-20">
+                <div class="w-full pb-20">
                     <h2
                         class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center">
                         Отзывы пользователей</h2>
                     <div
-                        class="w-full text-white p-6 rounded-lg justify-center items-center flex flex-col lg:flex-row gap-8 lg:mt-14 mt-8">
+                        class="w-full text-white sm:p-6 rounded-lg justify-center items-center flex flex-col lg:flex-row gap-8 lg:mt-14 mt-8">
                         <!-- Rating Overview -->
-                        <div class="w-full lg:h-[152px] flex lg:flex-row flex-col items-center justify-center px-10">
+                        <div class="w-full lg:h-[152px] flex lg:flex-row flex-col items-center justify-center sm:px-10">
                             <div
                                 class="h-full lg:pr-6 lg:mr-3 lg:border-r-2 lg:border-white lg:pb-0 pb-6 opacity-80 flex flex-col items-center justify-center">
                                 <div class="text-4xl font-bold font-sf_pro tracking-wider text-nowrap">4.6 <span
@@ -286,10 +288,6 @@
                     </div>
                 </div>
                 <div class="w-full text-center">
-                    <h2
-                        class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center pb-20">
-                        Отзывы
-                        пользователей</h2>
                     <div class="md:columns-3 mobile:columns-2 columns-1 gap-6 sm:pb-20 pb-10">
                         <div class="bg-m_black-500 rounded-lg p-8 mb-6">
                             <div class="w-full flex space-x-6 items-center">
@@ -427,7 +425,7 @@
                         Посмотреть все
                     </router-link>
                 </div>
-                <div class="w-full sm:pb-40 pb-20 pt-10">
+                <div class="w-full pb-20 pt-10">
                     <h2
                         class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-3xl text-white lg:w-2/3 w-full lg:leading-[60px] sm:leading-[50px] leading-[40px] mx-auto my-20">
                         Похожие курсы

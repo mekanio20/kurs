@@ -1,5 +1,5 @@
 <template>
-    <nav class="fixed w-full top-0 z-50 mx-auto bg-black select-none no-scrollbar">
+    <nav class="fixed w-full top-0 z-50 mx-auto bg-black select-none">
         <div class="container p-6 flex items-center justify-between">
             <div class="w-full flex items-center justify-start">
                 <!-- Burger -->
@@ -85,14 +85,14 @@
         <div class="w-full h-full mt-28 px-4">
             <!-- Search -->
             <div class="relative">
-                <svg class="absolute left-8 top-1/2 -translate-y-1/2" width="18" height="18" viewBox="0 0 24 24"
+                <svg class="absolute left-6 top-1/2 -translate-y-1/2" width="18" height="18" viewBox="0 0 24 24"
                     fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" />
                     <path d="M20 20L17 17" stroke="white" stroke-width="2" stroke-linecap="round" />
                 </svg>
                 <form @submit.prevent="performSearch">
                     <input v-model="searchQuery"
-                        class="w-full py-6 pl-16 pr-12 outline-none rounded font-inter font-normal text-sm placeholder:text-white text-white bg-m_black-100"
+                        class="w-full py-5 pl-14 pr-8 outline-none rounded font-inter font-normal text-sm placeholder:text-white text-white bg-m_black-100"
                         type="text" placeholder="Search" />
                 </form>
             </div>

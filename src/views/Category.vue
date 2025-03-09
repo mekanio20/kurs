@@ -33,10 +33,10 @@
                     class="font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-[30px] lg:leading-[60px] sm:leading-[50px] leading-[40px] text-white">
                     {{ categoryName }}
                 </h2>
-                <p class="font-sf_pro font-normal lg:text-xl sm:text-lg text-base text-white my-5">25, 785 результатов
+                <p class="font-sf_pro font-normal lg:text-xl sm:text-lg text-base text-white my-5">{{ count }} результатов
                 </p>
                 <div
-                    class="w-full flex sm:flex-row flex-col sm:items-center sm:space-y-0 space-y-4 items-start sm:space-x-6 sm:my-20 my-10 select-none">
+                    class="w-full flex sm:flex-row flex-col sm:items-center sm:space-y-0 space-y-4 items-start sm:space-x-6 sm:my-14 my-10 select-none">
                     <!-- <div @click="openFilter"
                         class="flex items-center space-x-6 px-8 py-2 font-sf_pro font-medium text-xl rounded-md cursor-pointer"
                         :class="[filterSelection ? 'bg-m_yellow-200 text-black' : 'text-white border border-m_gray-100']">
@@ -88,6 +88,7 @@ export default {
     },
     data() {
         return {
+            count: 0,
             courses: null,
             categoryName: null,
             sortSelection: false,
@@ -111,6 +112,7 @@ export default {
         async getCourses() {
             const response = await api.get(`/courses/?categories=${this.$route.params.id}`)
             this.courses = response.data.results
+            this.count = response.data.count
         },
         async getCategoryName() {
             const response = await api.get(`/categories/${this.$route.params.id}`)
