@@ -54,6 +54,9 @@
                     <input type="password" v-model="password"
                         class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 lg:text-lg sm:text-base text-sm rounded-lg outline-none"
                         placeholder="Пароль">
+                    <p class="w-full font-sf_pro font-normal text-sm text-yellow-600 opacity-80 pt-2"> - Пароль должен содержать не
+                        менее 8
+                        символов</p>
                     <div class="w-full flex items-center space-x-4 select-none">
                         <label class="relative inline-flex items-center cursor-pointer ml-2">
                             <input type="checkbox" v-model="checked" class="sr-only peer" />
@@ -67,8 +70,11 @@
                                 </svg>
                             </div>
                         </label>
-                        <p class="font-sf_pro font-normal text-sm text-m_black-400 w-4/5">Продолжая, вы соглашаетесь с
-                            нашими условиями и политикой конфиденциальности.</p>
+                        <!-- 8 символов -->
+                        <p class="font-sf_pro font-normal text-sm text-m_black-400 w-4/5 inline-block ">
+                            Продолжая, вы соглашаетесь
+                            с нашими условиями и политикой конфиденциальности.</p>
+
                     </div>
                     <button type="submit"
                         class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold sm:text-base text-sm !mt-10">Создать
@@ -141,7 +147,11 @@ export default {
             } catch (error) {
                 console.error(error);
                 const errorMessage = error.message || 'Register failed';
-                toast.error(errorMessage);
+                if (error.status === 400) {
+                    toast.error('Пользователь с таким email уже существует');
+                } else {
+                    toast.error(errorMessage);
+                }
             } finally {
                 this.$store.dispatch('setLoading', false);
             }
