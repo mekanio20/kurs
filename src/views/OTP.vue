@@ -171,7 +171,6 @@ export default {
                 if (this.isCodeComplete && this.$route.query.email && this.$route.query.password) {
                     const user = { otp: this.codeInputs.join(''), email: this.$route.query.email, password: this.$route.query.password };
                     const reset = await api.post('/password_reset/', user);
-                    console.log(reset);
                     if (reset.status === 204) {
                         const token = await api.post('/token/', { email: this.$route.query.email, password: this.$route.query.password });
                         localStorage.setItem('access', token.access);
