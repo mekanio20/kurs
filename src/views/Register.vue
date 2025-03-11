@@ -141,9 +141,12 @@ export default {
                 sessionStorage.setItem('password', this.password)
                 sessionStorage.setItem('email', this.email)
 
-                await api.post('/otp/', user_data);
-                this.$router.push({ name: "OTP" })
-
+                const otp = await api.post('/otp/', user_data);
+                if (otp.status === 201) {
+                    this.$router.push({ name: "OTP" })
+                } else {
+                    toast.error(otp.data.message)
+                }
             } catch (error) {
                 console.error(error);
                 const errorMessage = error.message || 'Register failed';

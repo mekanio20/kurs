@@ -49,7 +49,7 @@
                     <input type="password" v-model="password"
                         class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 lg:text-lg sm:text-base text-sm rounded-lg outline-none"
                         placeholder="Пароль">
-                    <router-link to="/otp"
+                    <router-link to="/reset"
                         class="font-sf_pro font-normal lg:text-base text-sm text-m_black-400 hover:underline self-start">Забыли
                         пароль?</router-link>
                     <button type="submit" 

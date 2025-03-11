@@ -48,26 +48,24 @@
                         Мы отправили код подтверждения на ваш адрес электронной почты, введите его
                     </p>
 
-                    <div class="w-full flex justify-between pb-3">
+                    <div class="w-full flex justify-between gap-x-4 pb-3">
                         <input v-for="(_, index) in codeInputs" :key="index" v-model="codeInputs[index]"
                             @input="handleInput(index)" @keydown.backspace="handleBackspace(index)" maxlength="1"
                             :ref="`input-${index}`"
-                            class="sm:w-[130px] w-full h-14 text-center text-base font-sf_pro font-medium text-white rounded-lg bg-m_black-500 focus:outline-none focus:ring-1 focus:ring-m_yellow-100"
+                            class="w-full h-14 text-center text-base font-sf_pro font-medium text-white rounded-lg bg-m_black-500 focus:outline-none focus:ring-1 focus:ring-m_yellow-100"
                             type="text" inputmode="numeric" />
                     </div>
 
                     <div class="w-full flex items-center justify-between text-sm text-gray-400 pb-14">
-                        <button @click="resetTimer" class="text-yellow-500 hover:underline cursor-pointer"
-                            :disabled="isTimerActive || isLoading">
+                        <button @click="resetTimer" class="text-yellow-500 hover:underline cursor-pointer">
                             Отправить еще раз
                         </button>
                         <span class="text-white">{{ formattedTime }}</span>
                     </div>
 
-                    <button @click="handleSubmit" :disabled="!isCodeComplete || isLoading"
+                    <button @click="handleSubmit" :disabled="!isCodeComplete"
                         class="w-full py-3 lg:text-lg sm:text-base text-sm font-bold text-black bg-yellow-500 rounded-lg hover:bg-yellow-600 disabled:cursor-not-allowed">
-                        <span v-if="!isLoading">Продолжить</span>
-                        <span v-else>
+                        <span>
                             Продолжить
                         </span>
                     </button>
@@ -141,7 +139,11 @@ export default {
                 }
             }, 1000);
         },
-        resetTimer() {
+        async resetTimer() {
+            const otp = await api.post('/otp/', {
+                email: this.$route.query.email,
+                purpose: 'reset_password'
+            })
             this.timer = 300;
             this.isTimerActive = true;
             clearInterval(this.timerInterval);
@@ -166,7 +168,21 @@ export default {
             const toast = useToast()
             this.$store.dispatch('setLoading', true)
             try {
-                if (this.isCodeComplete) {
+                if (this.isCodeComplete && this.$route.query.email && this.$route.query.password) {
+                    const user = { email: this.$route.query.email, password: this.$route.query.password, otp: this.codeInputs.join('') };
+                    const reset = await api.post('/password_reset/', user);
+                    console.log(reset);
+                    if (reset.status === 204) {
+                        const token = await api.post('/token/', user);
+                        localStorage.setItem('access', token.access);
+                        localStorage.setItem('refresh', token.refresh);
+                        await this.registerUser({ access: token.access, refresh: token.refresh });
+                        this.$router.push({ name: "Home" })
+                    } else {
+                        toast.error(reset.data.message)
+                    }
+                }
+                else if (this.isCodeComplete && !this.$route.query.email) {
                     const fullName = sessionStorage.getItem('fullName');
                     const password = sessionStorage.getItem('password');
                     const email = sessionStorage.getItem('email');
