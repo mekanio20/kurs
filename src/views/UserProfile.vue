@@ -117,7 +117,7 @@
                             </div>
                             <div class="flex md:flex-row flex-col md:space-y-0 space-y-6 items-center lg:space-x-16 md:space-x-10 md:pt-10 pb-4">
                                 <div class="w-24 rounded-full">
-                                    <img src="/imgs/person4.png">
+                                    <img :src="user.avatar || '/imgs/person6.png'">
                                 </div>
                                 <div
                                     class="flex items-center md:space-x-6 space-x-3 lg:px-8 px-6 py-3 font-sf_pro font-medium lg:text-lg sm:text-base text-sm rounded-xl text-white border border-white cursor-pointer">
@@ -138,17 +138,12 @@
                                 </div>
                             </div>
                             <div class="flex flex-col space-y-2">
-                                <label class="font-sf_pro font-normal text-m_gray-100 sm:text-base text-sm">Имя</label>
+                                <label class="font-sf_pro font-normal text-m_gray-100 sm:text-base text-sm">
+                                    ФИО
+                                </label>
                                 <input
                                     class="lg:w-2/3 w-full bg-m_black-300 px-8 py-4 rounded-lg font-sf_pro font-normal sm:text-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-m_yellow-200 focus:border-transparent"
-                                    type="text" value="Мария">
-                            </div>
-                            <div class="flex flex-col space-y-2">
-                                <label
-                                    class="font-sf_pro font-normal text-m_gray-100 sm:text-base text-sm">Фамилия</label>
-                                <input
-                                    class="lg:w-2/3 w-full bg-m_black-300 px-8 py-4 rounded-lg font-sf_pro font-normal sm:text-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-m_yellow-200 focus:border-transparent"
-                                    type="text" value="Смирнова">
+                                    type="text" :value="user.full_name">
                             </div>
                             <div class="flex flex-col space-y-2 lg:w-2/3 w-full">
                                 <label
@@ -190,13 +185,13 @@
                                 <label class="font-sf_pro font-normal text-m_gray-100 sm:text-base text-sm">Электронная почта</label>
                                 <input
                                     class="lg:w-2/3 w-full bg-m_black-300 px-8 py-4 rounded-lg font-sf_pro font-normal sm:text-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-m_yellow-200 focus:border-transparent"
-                                    type="email" value="randommail@gmail.com">
+                                    type="email" :value="user.email">
                             </div>
                             <div class="flex flex-col space-y-2 pt-8 pb-10">
                                 <label class="font-sf_pro font-normal text-m_gray-100 sm:text-base text-sm">Пароль</label>
                                 <input
                                     class="lg:w-2/3 w-full bg-m_black-300 px-8 py-4 rounded-lg font-sf_pro font-normal sm:text-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-m_yellow-200 focus:border-transparent"
-                                    type="password" value="adminadmin">
+                                    type="password" value="********">
                             </div>
                             <button type="submit"
                                 class="w-fit flex items-center space-x-6 px-8 py-3 font-sf_pro font-normal sm:text-base text-sm rounded-lg text-black bg-m_yellow-100 hover:bg-m_yellow-600 duration-300 cursor-pointer">
@@ -211,16 +206,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Navbar from '@/components/Navbar.vue';
 export default {
     name: "Profile",
     components: {
         Navbar,
     },
+    computed: {
+        ...mapGetters(['user'])
+    },
     data() {
         return {
             section: 1,
-            infoText: "With a deep commitment to lifelong learning, I have dedicated my career to helping others achieve their goals through accessible and engaging online courses 😊💜 I specialize in, where I’ve helped countless students develop the skills they need to excel in their careers.",
+            infoText: this.user?.bio,
         }
     },
 }

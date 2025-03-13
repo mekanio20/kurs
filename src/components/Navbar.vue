@@ -53,21 +53,23 @@
                     class="font-sf_pro font-bold lg:text-lg text-base text-white text-nowrap sm:block hidden">
                     Мое обучение
                 </router-link>
-                <router-link to="/notification" class="text-white relative">
-                    <notificationIcon />
-                    <div v-if="hasNotification" class="absolute top-0 right-1 w-2 h-2 bg-m_red-200 rounded-full"></div>
+                <router-link to="/dashboard/teacher/chat" class="text-white relative">
+                    <commentIcon />
+                    <div v-if="hasComment" class="absolute top-0 right-1 w-2 h-2 bg-m_red-200 rounded-full"></div>
                 </router-link>
-                <router-link to="/profile" class="w-[40px]">
-                    <img class="w-full h-full object-cover rounded-l-full" src="/imgs/person4.png">
+                <router-link :to="`/profile`" class="w-[40px]">
+                    <img class="w-full h-full object-cover rounded-l-full" :src="user?.avatar || '/imgs/person6.png'">
                 </router-link>
             </div>
             <div v-else class="flex items-center space-x-8">
                 <router-link to="/login"
-                    class="font-sf_pro font-bold lg:text-lg text-base text-white cursor-pointer text-nowrap sm:block hidden">Sign
-                    in</router-link>
+                    class="font-sf_pro font-bold lg:text-lg text-base text-white cursor-pointer text-nowrap sm:block hidden">
+                    Войти
+                </router-link>
                 <router-link to="/register"
-                    class="px-8 py-2 rounded-lg bg-m_yellow-100 font-sf_pro font-bold lg:text-lg text-base cursor-pointer text-nowrap">Sign
-                    Up</router-link>
+                    class="px-8 py-2 rounded-lg bg-m_yellow-100 font-sf_pro font-bold lg:text-lg text-base cursor-pointer text-nowrap">
+                    Регистрация
+                </router-link>
             </div>
         </div>
         <!-- All category -->
@@ -118,11 +120,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import api from '@/api/index';
 import logoIcon from '@/components/icons/logo.vue';
 import searchIcon from '@/components/icons/search.vue';
-import notificationIcon from '@/components/icons/notification.vue';
+import commentIcon from '@/components/icons/comment.vue';
 export default {
     name: "Navbar",
     data() {
@@ -130,14 +132,14 @@ export default {
             rotate: false,
             isBurger: false,
             searchQuery: null,
-            hasNotification: false,
+            hasComment: false,
             cats: [],
         }
     },
     components: {
         logoIcon,
         searchIcon,
-        notificationIcon
+        commentIcon
     },
     created() {
         this.getCategories()
@@ -157,6 +159,7 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(['user']),
         ...mapState(['isRegistered']),
         openCategory() {
             this.rotate = !this.rotate

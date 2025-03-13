@@ -140,7 +140,7 @@ export default {
             }, 1000);
         },
         async resetTimer() {
-            const otp = await api.post('/otp/', {
+            await api.post('/otp/', {
                 email: this.$route.query.email,
                 purpose: 'reset_password'
             })
@@ -172,10 +172,17 @@ export default {
                     const user = { otp: this.codeInputs.join(''), email: this.$route.query.email, password: this.$route.query.password };
                     const reset = await api.post('/password_reset/', user);
                     if (reset.status === 204) {
-                        const token = await api.post('/token/', { email: this.$route.query.email, password: this.$route.query.password });
-                        localStorage.setItem('access', token.access);
-                        localStorage.setItem('refresh', token.refresh);
-                        await this.registerUser({ access: token.access, refresh: token.refresh });
+                        const res = await api.post('/token/', { email: this.$route.query.email, password: this.$route.query.password });
+                        const { access, refresh, user } = res.data
+                        localStorage.setItem('access', access);
+                        localStorage.setItem('refresh', refresh);
+                        await this.registerUser({
+                            id: user.id,
+                            email: user.email,
+                            full_name: user.full_name,
+                            avatar: user.avatar,
+                            bio: user.bio
+                        });
                         this.$router.push({ name: "Home" })
                     } else {
                         toast.error(reset.data.message)
@@ -191,11 +198,11 @@ export default {
                     formData.append('password', password);
                     formData.append('otp', this.codeInputs.join(''));
                     await api.post('/users/', formData);
-                    
+
                     const user = { email: email, password: password };
                     const token = await api.post('/token/', user);
                     await this.registerUser({ access: token.access, refresh: token.refresh });
-                    
+
                     sessionStorage.removeItem('fullName');
                     sessionStorage.removeItem('password');
                     sessionStorage.removeItem('email');

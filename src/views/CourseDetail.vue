@@ -524,7 +524,7 @@ export default {
         },
         async redirectToWhatsApp(id) {
             const phoneNumber = "996502262623";
-            const message = encodeURIComponent(`Здравствуйте, я хочу купить этот курс: ${id}`);
+            const message = encodeURIComponent(`Здравствуйте, я хочу купить этот курс: https://0-100.community/course/detail/${id}`);
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
         },
         async getCourse() {

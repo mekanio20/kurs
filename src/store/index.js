@@ -2,7 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    user: null,
+    user: JSON.parse(localStorage.getItem('userData')) || null,
     isRegistered: !!localStorage.getItem("access"),
     pendingRequests: 0,
     loading: false,
@@ -13,6 +13,7 @@ export default createStore({
     },
     SET_USER(state, user) {
       state.user = user;
+      localStorage.setItem('userData', JSON.stringify(user))
     },
     SET_LOADING(state, status) {
       state.loading = status;
@@ -38,6 +39,10 @@ export default createStore({
     removePendingRequest({ commit }) {
       commit('REMOVE_PENDING_REQUEST');
     },
+    clearUser() {
+      this.user = null;
+      localStorage.removeItem('userData');
+    }
   },
   getters: {
     user: (state) => state.user,

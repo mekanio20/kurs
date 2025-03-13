@@ -112,10 +112,16 @@ export default {
                     const { access, refresh, user } = res.data;
                     localStorage.setItem('access', access);
                     localStorage.setItem('refresh', refresh);
-                    
-                    await this.registerUser({ access: access, refresh: refresh });
 
-                    if (user.is_teacher) { this.$router.push({ name: "AdminHome" }) }
+                    await this.registerUser({
+                        id: user.id,
+                        email: user.email,
+                        full_name: user.full_name,
+                        avatar: user.avatar,
+                        bio: user.bio
+                    });
+
+                    if (user.is_teacher) { this.$router.push({ name: "TeacherChat" }) }
                     else if (user.is_superuser) { this.$router.push({ name: "AdminHome" }) }
                     else { this.$router.push({ name: "Home" }) }
                 }
