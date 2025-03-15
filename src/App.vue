@@ -1,23 +1,18 @@
 <template>
   <div class="!w-full !h-full no-scrollbar">
-    <div v-if="loading" class="loading-overlay"></div>
+    <!-- <div v-if="loading" class="loading-overlay"></div> -->
     <RouterView />
   </div>
 </template>
 
 <script>
-import Loader from '@/components/Loader.vue';
-import { mapState } from 'vuex';
 import { RouterView } from 'vue-router'
 
 export default {
   name: "App",
   components: {
     RouterView,
-  },
-  computed: {
-    ...mapState(['loading']),
-  },
+  }
 }
 </script>
 

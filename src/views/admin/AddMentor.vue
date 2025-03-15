@@ -104,7 +104,6 @@ export default {
             formData.append('profession', this.profession)
             formData.append('password', this.password)
             formData.append('otp', 1234)
-            this.$store.dispatch('setLoading', true);
             try {
                 const response = await api.post('/users/', formData)
                 if (response.status === 201) { toast.success('Ментор успешно создан') } 
@@ -113,7 +112,6 @@ export default {
                 const errorMessage = error.response?.data?.detail || 'Login failed';
                 toast.error(errorMessage);
             } finally {
-                this.$store.dispatch('setLoading', false);
             }
         },
     },

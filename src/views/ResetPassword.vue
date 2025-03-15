@@ -101,7 +101,6 @@ export default {
         ...mapActions(['registerUser', 'setLoading']),
         async handleRegister() {
             const toast = useToast();
-            this.$store.dispatch('setLoading', true);
             try {
                 const otp = await api.post('/otp/', {
                     email: this.email,
@@ -117,7 +116,6 @@ export default {
                 const errorMessage = error.response?.message || 'Reset password failed';
                 toast.error(errorMessage);
             } finally {
-                this.$store.dispatch('setLoading', false);
             }
         },
     },

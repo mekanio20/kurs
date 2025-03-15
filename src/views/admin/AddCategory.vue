@@ -100,7 +100,6 @@ export default {
             formData.append('name', this.name)
             formData.append('image', this.img)
             formData.append('is_active', this.active_status)
-            this.$store.dispatch('setLoading', true);
 
             try {
                 const response = await api.post('/categories/', formData)
@@ -110,7 +109,6 @@ export default {
                 const errorMessage = error.response?.data?.detail || 'Login failed';
                 toast.error(errorMessage);
             } finally {
-                this.$store.dispatch('setLoading', false);
             }
         },
     },

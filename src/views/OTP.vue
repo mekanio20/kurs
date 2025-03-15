@@ -166,7 +166,6 @@ export default {
         },
         async handleSubmit() {
             const toast = useToast()
-            this.$store.dispatch('setLoading', true)
             try {
                 if (this.isCodeComplete && this.$route.query.email && this.$route.query.password) {
                     const user = { otp: this.codeInputs.join(''), email: this.$route.query.email, password: this.$route.query.password };
@@ -213,7 +212,6 @@ export default {
                 const errorMessage = error.message || 'OTP failed';
                 toast.error(errorMessage);
             } finally {
-                this.$store.dispatch('setLoading', false);
             }
         },
     },

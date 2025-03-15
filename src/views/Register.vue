@@ -130,7 +130,6 @@ export default {
     methods: {
         async handleRegister() {
             const toast = useToast()
-            this.$store.dispatch('setLoading', true)
             try {
                 if (this.password.length < 8) {
                     toast.error('Пароль должен содержать не менее 8 символов');
@@ -156,7 +155,6 @@ export default {
                     toast.error(errorMessage);
                 }
             } finally {
-                this.$store.dispatch('setLoading', false);
             }
         },
     },

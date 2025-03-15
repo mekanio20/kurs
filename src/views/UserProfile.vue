@@ -206,7 +206,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from "pinia";
+import { useUserStore } from "@/store/user.store";
 import Navbar from '@/components/Navbar.vue';
 export default {
     name: "Profile",
@@ -214,7 +215,7 @@ export default {
         Navbar,
     },
     computed: {
-        ...mapGetters(['user'])
+        ...mapState(useUserStore, ["user"]),
     },
     data() {
         return {
@@ -222,5 +223,9 @@ export default {
             infoText: this.user?.bio,
         }
     },
+    methods: {
+        async updateInfo() {
+        }
+    }
 }
 </script>

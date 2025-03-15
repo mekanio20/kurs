@@ -120,11 +120,12 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
 import api from '@/api/index';
 import logoIcon from '@/components/icons/logo.vue';
 import searchIcon from '@/components/icons/search.vue';
 import commentIcon from '@/components/icons/comment.vue';
+import { useUserStore } from "@/store/user.store";
+import { mapState, mapActions } from 'pinia';
 export default {
     name: "Navbar",
     data() {
@@ -159,8 +160,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['user']),
-        ...mapState(['isRegistered']),
+        ...mapState(useUserStore, ['user', 'isRegistered']),
         openCategory() {
             this.rotate = !this.rotate
         },

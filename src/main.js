@@ -1,13 +1,15 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from "./store/index";
+// import store from "./store/index";
 import "video.js/dist/video-js.css";
 import "./style.css";
 import Toast, { POSITION } from "vue-toastification";
 import "vue-toastification/dist/index.css";
+import { createPinia } from "pinia";
 
 const app = createApp(App);
+app.use(createPinia());
 
 app.use(Toast, {
   position: POSITION.TOP_RIGHT,
@@ -16,6 +18,6 @@ app.use(Toast, {
   closeOnClick: true,
 });
 
-app.use(store);
+// app.use(store);
 app.use(router);
 app.mount("#app");

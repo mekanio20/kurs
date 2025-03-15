@@ -1,26 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import store from "../store";
-import axios from "axios";
-
-axios.interceptors.request.use((config) => {
-  const authUser = localStorage.getItem("access");
-  store.dispatch("addPendingRequest");
-  if (authUser) {
-    config.headers["Authorization"] = `Bearer ${authUser}`;
-  }
-  return config;
-});
-
-axios.interceptors.response.use(
-  (response) => {
-    store.dispatch("removePendingRequest");
-    return response;
-  },
-  (error) => {
-    store.dispatch("removePendingRequest");
-    return Promise.reject(error);
-  }
-);
 
 const router = createRouter({
   history: createWebHistory(),

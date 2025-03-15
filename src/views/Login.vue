@@ -75,9 +75,8 @@
 </template>
 
 <script>
-import api from '@/api/index';
-import { mapActions, mapState } from 'vuex';
-import { useToast } from 'vue-toastification';
+import { useUserStore } from "@/store/user.store";
+import { mapState, mapActions } from "pinia";
 export default {
     name: "Login",
     data() {
@@ -100,43 +99,18 @@ export default {
             ],
         }
     },
+    computed: {
+        ...mapState(useUserStore, [{
+            userLoading: "loading",
+        }]),
+    },
     methods: {
-        ...mapActions(['registerUser', 'setLoading']),
+        ...mapActions(useUserStore, ['loginUser']),
         async handleLogin() {
-            const toast = useToast();
-            this.$store.dispatch('setLoading', true);
-            try {
-                const user = { email: this.email, password: this.password };
-                const res = await api.post('/token/', user);
-                if (res.status === 200) {
-                    const { access, refresh, user } = res.data;
-                    localStorage.setItem('access', access);
-                    localStorage.setItem('refresh', refresh);
-
-                    await this.registerUser({
-                        id: user.id,
-                        email: user.email,
-                        full_name: user.full_name,
-                        avatar: user.avatar,
-                        bio: user.bio
-                    });
-
-                    if (user.is_teacher) { this.$router.push({ name: "TeacherChat" }) }
-                    else if (user.is_superuser) { this.$router.push({ name: "AdminHome" }) }
-                    else { this.$router.push({ name: "Home" }) }
-                }
-            } catch (error) {
-                console.error(error);
-                const errorMessage = error.response?.data?.detail || 'Login failed';
-                toast.error(errorMessage);
-            } finally {
-                this.$store.dispatch('setLoading', false);
-            }
+            await this.loginUser({ email: this.email, password: this.password });
         },
     },
-    computed: {
-        ...mapState(['loading']),
-    },
+    
 }
 </script>
 
