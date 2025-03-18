@@ -152,7 +152,7 @@ export default {
         },
         async getPermissions(id) {
             this.selectUser = id
-            const isChecked = await this?.$refs[`checkboxRef-${id}`][0]
+            const isChecked = await this.$refs[`checkboxRef-${id}`][0]
             const courses = await api.get(`/courses/?offset=${this.permission_offset}&limit=10`)
             this.permission_totalPages = Math.ceil(courses.data.count / 10)
             this.courses = await courses.data.results
