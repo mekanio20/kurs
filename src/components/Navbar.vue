@@ -57,8 +57,8 @@
                     <commentIcon />
                     <div v-if="hasComment" class="absolute top-0 right-1 w-2 h-2 bg-m_red-200 rounded-full"></div>
                 </router-link>
-                <router-link :to="`/profile`" class="w-[40px]">
-                    <img class="w-full h-full object-cover rounded-l-full" :src="user?.avatar || '/imgs/person6.png'">
+                <router-link :to="`/profile`" class="w-[40px] h-[40px]">
+                    <img class="w-full h-full object-cover rounded-full" :src="user?.avatar || '/imgs/person6.png'">
                 </router-link>
             </div>
             <div v-else class="flex items-center space-x-8">

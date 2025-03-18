@@ -454,7 +454,6 @@ export default {
             settings: ['speed'],
             speed: { selected: 1.0, options: [0.5, 1, 1.5, 2, 4, 10] },
         });
-
         document.addEventListener('keydown', this.handleKeyEvents);
     },
     methods: {
