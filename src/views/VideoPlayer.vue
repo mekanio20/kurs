@@ -53,7 +53,7 @@
                                 <p class="font-sf_pro font-normal text-base text-m_gray-100">Продвигайте себя, ясно
                                     выражайте идеи и используйте приемы, которые сделают вас более убедительными. </p>
                             </div>
-                            <div @click="downloadFile(lesson?.task_file)"
+                            <div v-if="lesson?.task_file" @click="downloadFile(lesson?.task_file)"
                                 class="w-full bg-m_yellow-100 flex items-center justify-center space-x-4 py-4 rounded-lg mt-12 cursor-pointer">
                                 <downloadIcon />
                                 <div class="font-sf_pro font-bold text-lg text-black">Скачать
@@ -86,9 +86,15 @@
                                 </span>
                             </div>
                             <div class="w-full mt-12 flex items-center space-x-6 font-sf_pro text-lg">
-                                <button @click="uploadHomeWorkFile" :disabled="!file"
+                                <button @click="uploadHomeWorkFile" :disabled="!file || loading"
                                     :class="[file ? '' : 'cursor-not-allowed']"
-                                    class="w-full bg-m_yellow-100 text-black font-bold py-3 rounded-lg">Сохранить
+                                    class="w-full bg-m_yellow-100 text-black font-bold py-3 rounded-lg">
+                                    <span v-if="!loading">
+                                        Сохранить
+                                    </span>
+                                    <span v-else>
+                                        <Spinner size="w-6 h-6" />
+                                    </span>
                                 </button>
                             </div>
                         </div>
@@ -391,6 +397,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Plyr from 'plyr';
 import 'plyr/dist/plyr.css';
 import api from '@/api/index';
@@ -403,6 +410,8 @@ import Video from '@/components/Video.vue';
 import playIcon from '@/components/icons/play.vue';
 import StarRating from '@/components/StarRating.vue';
 import RatingBar from '@/components/RatingBar.vue';
+import Spinner from '@/components/base/Spinner.vue'
+import { useToast } from 'vue-toastification';
 export default {
     name: "VideoPlayer",
     components: {
@@ -412,12 +421,14 @@ export default {
         playIcon,
         StarRating,
         RatingBar,
+        Spinner,
         documentIcon,
         downloadIcon,
         uploadIcon
     },
     data() {
         return {
+            loading: false,
             file: null,
             owner: null,
             isOpen: false,
@@ -462,21 +473,19 @@ export default {
             const fileUrl = file;
             try {
                 const response = await axios.get(fileUrl, {
-                    responseType: 'blob', // Dosya içeriği blob olarak gelmeli
+                    responseType: 'blob',
                 });
-
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', 'dosya.txt'); // Dosya adı
+                link.setAttribute('download', file);
                 document.body.appendChild(link);
                 link.click();
 
-                // Belleği temizle
                 window.URL.revokeObjectURL(url);
                 document.body.removeChild(link);
             } catch (error) {
-                console.error('Dosya indirilemedi:', error);
+                console.error('Error: ', error);
             }
         },
         handleKeyEvents(event) {
@@ -507,11 +516,24 @@ export default {
             this.file = event.target.files[0]
         },
         async uploadHomeWorkFile() {
-            const formData = new FormData();
-            formData.append('lesson', this.lesson.id);
-            formData.append('file', this.file);
-            const response = await api.post(`/homeworks/`, formData)
-            console.log(response);
+            this.loading = true
+            const toast = useToast()
+            try {
+                const formData = new FormData();
+                formData.append('lesson', this.lesson.id);
+                formData.append('file', this.file);
+                const response = await api.post(`/homeworks/`, formData)
+                console.log(response);
+                if (response.status === 201) {
+                    this.file = null
+                    toast.success('Домашнее задание добавлено')
+                }
+            } catch (error) {
+                console.error("Error: ", error);
+                toast.error('Неизвестная ошибка');
+            } finally {
+                this.loading = false
+            }
         },
     },
     beforeUnmount() {

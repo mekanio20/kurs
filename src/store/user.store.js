@@ -64,7 +64,7 @@ export const useUserStore = defineStore("user", {
           const { access, refresh, user } = response.data;
 
           this.isRegistered = true;
-          this.user = response.data.user;
+          this.user = user;
 
           localStorage.setItem("access", access);
           localStorage.setItem("refresh", refresh);
@@ -79,8 +79,41 @@ export const useUserStore = defineStore("user", {
           }
         }
       } catch (error) {
-        if (error.status === 400) { this.error = "Неправильный логин или пароль"; } 
-        else { this.error = error.message }
+        if (error.status === 400) {
+          this.error = "Неправильный логин или пароль";
+        } else {
+          this.error = error.message;
+        }
+        toast.error(this.error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    async resetUser(user) {
+      this.loading = true;
+      this.error = null;
+      const toast = useToast();
+      try {
+        const reset = await api.post("/password_reset/", user);
+        if (reset.status === 204) {
+          const res = await api.post("/token/", {
+            email: user.email,
+            password: user.password,
+          });
+          const { access, refresh } = res.data;
+          this.user = res.data.user;
+          this.isRegistered = true;
+          localStorage.setItem("access", access);
+          localStorage.setItem("refresh", refresh);
+          localStorage.setItem("userData", JSON.stringify(res.data.user));
+          router.push({ name: "Home" });
+        } else {
+          this.error = reset.data.message;
+          toast.error(this.error);
+        }
+      } catch (error) {
+        console.error("Error: ", error);
+        this.error = error.response?.message;
         toast.error(this.error);
       } finally {
         this.loading = false;

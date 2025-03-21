@@ -65,8 +65,11 @@
 
                     <button @click="handleSubmit" :disabled="!isCodeComplete"
                         class="w-full py-3 lg:text-lg sm:text-base text-sm font-bold text-black bg-yellow-500 rounded-lg hover:bg-yellow-600 disabled:cursor-not-allowed">
-                        <span>
+                        <span v-if="!loading">
                             Продолжить
+                        </span>
+                        <span v-else>
+                            <Spinner />
                         </span>
                     </button>
                     <div
@@ -91,12 +94,18 @@
 
 <script>
 import api from '@/api/index';
-import { mapState, mapActions } from 'vuex';
+import { useUserStore } from "@/store/user.store";
+import { mapState, mapActions } from "pinia";
 import { useToast } from 'vue-toastification';
+import Spinner from '@/components/base/Spinner.vue';
 export default {
     name: "OTP",
+    components: {
+        Spinner
+    },
     data() {
         return {
+            loading: false,
             timer: 300,
             codeInputs: ["", "", "", ""],
             timerInterval: null,
@@ -118,6 +127,9 @@ export default {
         };
     },
     computed: {
+        ...mapState(useUserStore, {
+            userLoading: "loading",
+        }),
         formattedTime() {
             const minutes = Math.floor(this.timer / 60);
             const seconds = this.timer % 60;
@@ -128,7 +140,7 @@ export default {
         },
     },
     methods: {
-        ...mapActions(['registerUser', 'setLoading']),
+        ...mapActions(useUserStore, ['resetUser']),
         startTimer() {
             this.timerInterval = setInterval(() => {
                 if (this.timer > 0) {
@@ -166,26 +178,14 @@ export default {
         },
         async handleSubmit() {
             const toast = useToast()
+            this.loading = true
             try {
                 if (this.isCodeComplete && this.$route.query.email && this.$route.query.password) {
-                    const user = { otp: this.codeInputs.join(''), email: this.$route.query.email, password: this.$route.query.password };
-                    const reset = await api.post('/password_reset/', user);
-                    if (reset.status === 204) {
-                        const res = await api.post('/token/', { email: this.$route.query.email, password: this.$route.query.password });
-                        const { access, refresh, user } = res.data
-                        localStorage.setItem('access', access);
-                        localStorage.setItem('refresh', refresh);
-                        await this.registerUser({
-                            id: user.id,
-                            email: user.email,
-                            full_name: user.full_name,
-                            avatar: user.avatar,
-                            bio: user.bio
-                        });
-                        this.$router.push({ name: "Home" })
-                    } else {
-                        toast.error(reset.data.message)
-                    }
+                    await this.resetUser({
+                        otp: this.codeInputs.join(''),
+                        email: this.$route.query.email,
+                        password: this.$route.query.password
+                    })
                 }
                 else if (this.isCodeComplete && !this.$route.query.email) {
                     const fullName = sessionStorage.getItem('fullName');
@@ -200,7 +200,10 @@ export default {
 
                     const user = { email: email, password: password };
                     const token = await api.post('/token/', user);
-                    await this.registerUser({ access: token.access, refresh: token.refresh });
+                    
+                    localStorage.setItem('access', token.access)
+                    localStorage.setItem('refresh', token.refresh)
+                    localStorage.setItem("userData", JSON.stringify(token.data.user));
 
                     sessionStorage.removeItem('fullName');
                     sessionStorage.removeItem('password');
@@ -212,6 +215,7 @@ export default {
                 const errorMessage = error.message || 'OTP failed';
                 toast.error(errorMessage);
             } finally {
+                this.loading = false
             }
         },
     },
@@ -223,19 +227,3 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-@keyframes scroll {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(-100%);
-    }
-}
-
-.animate-scroll {
-    animation: scroll 80s linear infinite;
-}
-</style>

@@ -41,8 +41,10 @@
         </div>
         <div class="w-full relative z-50">
             <div class="container bg-transparent flex lg:items-start items-center">
-                <form @submit.prevent="handleLogin" class="lg:flex-1 w-full flex flex-col items-center space-y-4 mt-40 lg:mr-40 lg:mx-0 sm:mx-40">
-                    <h1 class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white mb-10">Авторизоваться</h1>
+                <form @submit.prevent="handleLogin"
+                    class="lg:flex-1 w-full flex flex-col items-center space-y-4 mt-40 lg:mr-40 lg:mx-0 sm:mx-40">
+                    <h1 class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white mb-10">Авторизоваться
+                    </h1>
                     <input type="email" v-model="email"
                         class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 lg:text-lg sm:text-base text-sm rounded-lg outline-none"
                         placeholder="Электронная почта">
@@ -52,8 +54,15 @@
                     <router-link to="/reset"
                         class="font-sf_pro font-normal lg:text-base text-sm text-m_black-400 hover:underline self-start">Забыли
                         пароль?</router-link>
-                    <button type="submit" 
-                        class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold lg:text-lg sm:text-base text-sm !mt-10">Войти</button>
+                    <button :disabled="!email || !password"
+                        class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold lg:text-lg sm:text-base text-sm !mt-10">
+                        <span v-if="!userLoading">
+                            Войти
+                        </span>
+                        <span v-else>
+                            <Spinner />
+                        </span>
+                    </button>
                     <div class="flex items-center space-x-1 font-sf_pro font-normal !mt-40">
                         <p class="text-m_gray-100 sm:text-base text-sm text-nowrap">У вас нет учетной записи?</p>
                         <router-link to="/register"
@@ -75,10 +84,14 @@
 </template>
 
 <script>
+import Spinner from "@/components/base/Spinner.vue";
 import { useUserStore } from "@/store/user.store";
 import { mapState, mapActions } from "pinia";
 export default {
     name: "Login",
+    components: {
+        Spinner
+    },
     data() {
         return {
             email: '',
@@ -100,9 +113,9 @@ export default {
         }
     },
     computed: {
-        ...mapState(useUserStore, [{
+        ...mapState(useUserStore, {
             userLoading: "loading",
-        }]),
+        }),
     },
     methods: {
         ...mapActions(useUserStore, ['loginUser']),
@@ -110,22 +123,6 @@ export default {
             await this.loginUser({ email: this.email, password: this.password });
         },
     },
-    
+
 }
 </script>
-
-<style scoped>
-@keyframes scroll {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(-100%);
-    }
-}
-
-.animate-scroll {
-    animation: scroll 80s linear infinite;
-}
-</style>

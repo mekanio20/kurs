@@ -76,9 +76,15 @@
                             с нашими условиями и политикой конфиденциальности.</p>
 
                     </div>
-                    <button type="submit"
-                        class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold sm:text-base text-sm !mt-10">Создать
-                        аккаунт</button>
+                    <button :disabled="!fullName || !email || !password"
+                        class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold sm:text-base text-sm !mt-10">
+                        <span v-if="!loading">
+                            Создать аккаунт
+                        </span>
+                        <span v-else>
+                            <Spinner />
+                        </span>
+                    </button>
                     <div
                         class="bg-transparent flex items-center space-x-1 font-sf_pro font-normal sm:text-base text-sm !mt-28">
                         <p class="text-m_gray-100">Уже есть аккаунт?</p>
@@ -101,12 +107,16 @@
 
 <script>
 import api from '@/api/index';
-import { mapState } from 'vuex';
 import { useToast } from 'vue-toastification';
+import Spinner from '@/components/base/Spinner.vue';
 export default {
     name: "Register",
+    components: {
+        Spinner
+    },
     data() {
         return {
+            loading: false,
             email: '',
             password: '',
             fullName: '',
@@ -130,6 +140,7 @@ export default {
     methods: {
         async handleRegister() {
             const toast = useToast()
+            this.loading = true
             try {
                 if (this.password.length < 8) {
                     toast.error('Пароль должен содержать не менее 8 символов');
@@ -155,27 +166,9 @@ export default {
                     toast.error(errorMessage);
                 }
             } finally {
+                this.loading = false
             }
         },
     },
-    computed: {
-        ...mapState(['loading']),
-    },
 }
 </script>
-
-<style scoped>
-@keyframes scroll {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(-100%);
-    }
-}
-
-.animate-scroll {
-    animation: scroll 80s linear infinite;
-}
-</style>
