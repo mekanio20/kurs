@@ -65,7 +65,7 @@
 
                     <button @click="handleSubmit" :disabled="!isCodeComplete"
                         class="w-full py-3 lg:text-lg sm:text-base text-sm font-bold text-black bg-yellow-500 rounded-lg hover:bg-yellow-600 disabled:cursor-not-allowed">
-                        <span v-if="!loading">
+                        <span v-if="!userLoading">
                             Продолжить
                         </span>
                         <span v-else>
@@ -105,7 +105,6 @@ export default {
     },
     data() {
         return {
-            loading: false,
             timer: 300,
             codeInputs: ["", "", "", ""],
             timerInterval: null,
@@ -140,7 +139,7 @@ export default {
         },
     },
     methods: {
-        ...mapActions(useUserStore, ['resetUser']),
+        ...mapActions(useUserStore, ['registerUser', 'resetUser']),
         startTimer() {
             this.timerInterval = setInterval(() => {
                 if (this.timer > 0) {
@@ -153,7 +152,7 @@ export default {
         },
         async resetTimer() {
             await api.post('/otp/', {
-                email: this.$route.query.email,
+                email: this.$route.query.email || sessionStorage.getItem('email'),
                 purpose: 'reset_password'
             })
             this.timer = 300;
@@ -177,45 +176,20 @@ export default {
             }
         },
         async handleSubmit() {
-            const toast = useToast()
-            this.loading = true
-            try {
-                if (this.isCodeComplete && this.$route.query.email && this.$route.query.password) {
-                    await this.resetUser({
-                        otp: this.codeInputs.join(''),
-                        email: this.$route.query.email,
-                        password: this.$route.query.password
-                    })
-                }
-                else if (this.isCodeComplete && !this.$route.query.email) {
-                    const fullName = sessionStorage.getItem('fullName');
-                    const password = sessionStorage.getItem('password');
-                    const email = sessionStorage.getItem('email');
-                    const formData = new FormData();
-                    formData.append('email', email);
-                    formData.append('full_name', fullName);
-                    formData.append('password', password);
-                    formData.append('otp', this.codeInputs.join(''));
-                    await api.post('/users/', formData);
-
-                    const user = { email: email, password: password };
-                    const token = await api.post('/token/', user);
-                    
-                    localStorage.setItem('access', token.access)
-                    localStorage.setItem('refresh', token.refresh)
-                    localStorage.setItem("userData", JSON.stringify(token.data.user));
-
-                    sessionStorage.removeItem('fullName');
-                    sessionStorage.removeItem('password');
-                    sessionStorage.removeItem('email');
-                    this.$router.push({ name: "Home" })
-                }
-            } catch (error) {
-                console.error(error);
-                const errorMessage = error.message || 'OTP failed';
-                toast.error(errorMessage);
-            } finally {
-                this.loading = false
+            if (this.isCodeComplete && this.$route.query.email && this.$route.query.password) {
+                await this.resetUser({
+                    otp: this.codeInputs.join(''),
+                    email: this.$route.query.email,
+                    password: this.$route.query.password
+                })
+            }
+            else if (this.isCodeComplete && !this.$route.query.email) {
+                await this.registerUser({
+                    email: sessionStorage.getItem('email'),
+                    password: sessionStorage.getItem('password'),
+                    fullName: sessionStorage.getItem('fullName'),
+                    otp: this.codeInputs.join('')
+                })
             }
         },
     },

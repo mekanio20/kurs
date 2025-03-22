@@ -47,11 +47,12 @@
                                     <closeIcon />
                                 </span>
                             </div>
-                            <div class="flex flex-col">
+                            <div v-if="lesson?.task_text" class="flex flex-col">
                                 <h4 class="font-sf_pro font-medium text-sm text-m_gray-600 uppercase pb-4">Заметки
                                     наставника</h4>
-                                <p class="font-sf_pro font-normal text-base text-m_gray-100">Продвигайте себя, ясно
-                                    выражайте идеи и используйте приемы, которые сделают вас более убедительными. </p>
+                                <p class="font-sf_pro font-normal text-base text-m_gray-100">
+                                    {{ lesson?.task_text }}
+                                </p>
                             </div>
                             <div v-if="lesson?.task_file" @click="downloadFile(lesson?.task_file)"
                                 class="w-full bg-m_yellow-100 flex items-center justify-center space-x-4 py-4 rounded-lg mt-12 cursor-pointer">

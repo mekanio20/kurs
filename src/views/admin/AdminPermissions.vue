@@ -67,6 +67,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <div v-if="loading" class="pt-6 pb-4">
+                                    <Spinner color="text-white" />
+                                </div>
                                 <tr v-for="item in courses" :key="item.id"
                                     class="border-b border-m_black-800 hover:bg-m_black-800">
                                     <td class="pt-2 text-base font-medium">
@@ -107,6 +110,7 @@ import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
 import AdminHeader from '@/components/admin/Header.vue';
 import AdminButton from '@/components/base/AdminButton.vue';
+import Spinner from '@/components/base/Spinner.vue'
 import Pagination from '@/components/Pagination.vue';
 import { useToast } from "vue-toastification";
 export default {
@@ -116,9 +120,11 @@ export default {
         AdminHeader,
         AdminButton,
         Pagination,
+        Spinner
     },
     data() {
         return {
+            loading: false,
             user_offset: 0,
             permission_offset: 0,
             user_currentPage: 1,
@@ -157,18 +163,25 @@ export default {
             this.permission_totalPages = Math.ceil(courses.data.count / 10)
             this.courses = await courses.data.results
             if (isChecked.checked) {
-                const permissions = await api.get(`/course-users/?user=${id}`)
-                this.permissions = await permissions.data.results
-                let isChecked = false
-                for (let i = 0; i < this.courses.length; i++) {
-                    for (let j = 0; j < this.permissions.length; j++) {
-                        if (this.courses[i].id === this.permissions[j].course.id) {
-                            isChecked = true
-                            this.$refs[`course-${this.courses[i].id}`][0].checked = true
+                this.loading = true
+                try {
+                    const permissions = await api.get(`/course-users/?user=${id}`)
+                    this.permissions = await permissions.data.results
+                    let isChecked = false
+                    for (let i = 0; i < this.courses.length; i++) {
+                        for (let j = 0; j < this.permissions.length; j++) {
+                            if (this.courses[i].id === this.permissions[j].course.id) {
+                                isChecked = true
+                                this.$refs[`course-${this.courses[i].id}`][0].checked = true
+                            }
                         }
+                        if (!isChecked) { this.$refs[`course-${this.courses[i].id}`][0].checked = false }
+                        isChecked = false
                     }
-                    if (!isChecked) { this.$refs[`course-${this.courses[i].id}`][0].checked = false }
-                    isChecked = false
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    this.loading = false
                 }
             }
         },

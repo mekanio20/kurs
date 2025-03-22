@@ -54,7 +54,8 @@
                     <input type="password" v-model="password"
                         class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 lg:text-lg sm:text-base text-sm rounded-lg outline-none"
                         placeholder="Пароль">
-                    <p class="w-full font-sf_pro font-normal text-sm text-yellow-600 opacity-80 pt-2"> - Пароль должен содержать не
+                    <p class="w-full font-sf_pro font-normal text-sm text-yellow-600 opacity-80 pt-2"> - Пароль должен
+                        содержать не
                         менее 8
                         символов</p>
                     <div class="w-full flex items-center space-x-4 select-none">
@@ -70,15 +71,14 @@
                                 </svg>
                             </div>
                         </label>
-                        <!-- 8 символов -->
                         <p class="font-sf_pro font-normal text-sm text-m_black-400 w-4/5 inline-block ">
                             Продолжая, вы соглашаетесь
                             с нашими условиями и политикой конфиденциальности.</p>
 
                     </div>
-                    <button :disabled="!fullName || !email || !password"
+                    <button :disabled="!fullName || !email || !password" type="submit"
                         class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold sm:text-base text-sm !mt-10">
-                        <span v-if="!loading">
+                        <span v-if="!userLoading">
                             Создать аккаунт
                         </span>
                         <span v-else>
@@ -106,9 +106,9 @@
 </template>
 
 <script>
-import api from '@/api/index';
-import { useToast } from 'vue-toastification';
 import Spinner from '@/components/base/Spinner.vue';
+import { useUserStore } from "@/store/user.store";
+import { mapActions, mapState } from 'pinia';
 export default {
     name: "Register",
     components: {
@@ -116,7 +116,6 @@ export default {
     },
     data() {
         return {
-            loading: false,
             email: '',
             password: '',
             fullName: '',
@@ -137,37 +136,19 @@ export default {
             ],
         }
     },
+    computed: {
+        ...mapState(useUserStore, {
+            userLoading: "loading",
+        }),
+    },
     methods: {
+        ...mapActions(useUserStore, ['registerEmail']),
         async handleRegister() {
-            const toast = useToast()
-            this.loading = true
-            try {
-                if (this.password.length < 8) {
-                    toast.error('Пароль должен содержать не менее 8 символов');
-                    return
-                }
-                const user_data = { email: this.email, purpose: 'registration' }
-                sessionStorage.setItem('fullName', this.fullName)
-                sessionStorage.setItem('password', this.password)
-                sessionStorage.setItem('email', this.email)
-
-                const otp = await api.post('/otp/', user_data);
-                if (otp.status === 201) {
-                    this.$router.push({ name: "OTP" })
-                } else {
-                    toast.error(otp.data.message)
-                }
-            } catch (error) {
-                console.error(error);
-                const errorMessage = error.message || 'Register failed';
-                if (error.status === 400) {
-                    toast.error('Пользователь с таким email уже существует');
-                } else {
-                    toast.error(errorMessage);
-                }
-            } finally {
-                this.loading = false
-            }
+            await this.registerEmail({
+                email: this.email,
+                password: this.password,
+                fullName: this.fullName
+            });
         },
     },
 }

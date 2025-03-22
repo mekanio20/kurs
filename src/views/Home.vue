@@ -316,8 +316,11 @@ export default {
             isMaster: null,
             popular_cats: null,
             cource_breakpoints: {
-                200: { slidesPerView: 1.2 },
-                500: { slidesPerView: 2.3 },
+                200: { slidesPerView: 1 },
+                420: { slidesPerView: 1.4 },
+                530: { slidesPerView: 1.8 },
+                640: { slidesPerView: 2 },
+                750: { slidesPerView: 2.5 },
                 950: { slidesPerView: 3.4 },
                 1200: { slidesPerView: 4.5 },
             },

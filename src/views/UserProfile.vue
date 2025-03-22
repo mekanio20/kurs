@@ -34,7 +34,8 @@
                         <h1 class="font-sf_pro font-bold lg:text-2xl text-xl text-white md:block hidden">Личный кабинет
                         </h1>
                         <div
-                            class="flex md:flex-col flex-row justify-evenly md:space-y-14 md:space-x-0 space-x-6 md:my-20">
+                            class="flex md:flex-col flex-row justify-evenly md:space-y-10 md:space-x-0 space-x-6 md:my-20">
+                            <!-- PROFILE -->
                             <div @click="section = 1" class="flex items-center space-x-6 group cursor-pointer">
                                 <svg :class="[section === 1 ? 'stroke-m_yellow-100' : 'stroke-white']"
                                     class="md:w-[25px] w-[20px] group-hover:stroke-m_yellow-100 duration-300"
@@ -51,6 +52,7 @@
                                     Редактировать профиль
                                 </div>
                             </div>
+                            <!-- SETTINGS -->
                             <div @click="section = 2" class="flex items-center space-x-6 group cursor-pointer">
                                 <svg :class="[section === 2 ? 'stroke-m_yellow-100' : 'stroke-white']"
                                     class="md:w-[25px] w-[20px] group-hover:stroke-m_yellow-100 duration-300"
@@ -74,9 +76,9 @@
                                     Настройки учетной записи
                                 </div>
                             </div>
-                            <div @click="section = 3" class="flex items-center space-x-6 group cursor-pointer">
-                                <svg :class="[section === 3 ? 'stroke-m_yellow-100' : 'stroke-white']"
-                                    class="md:w-[25px] w-[20px] group-hover:stroke-m_yellow-100 duration-300"
+                            <!-- LOGOUT -->
+                            <div @click="logout" class="flex items-center space-x-6 group cursor-pointer">
+                                <svg class="md:w-[25px] w-[20px] stroke-red-500 group-hover:stroke-m_red-200 duration-300"
                                     viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M10.0003 18.3334C14.6027 18.3334 18.3337 14.6025 18.3337 10.0001C18.3337 5.39771 14.6027 1.66675 10.0003 1.66675C5.39795 1.66675 1.66699 5.39771 1.66699 10.0001C1.66699 14.6025 5.39795 18.3334 10.0003 18.3334Z"
@@ -86,9 +88,9 @@
                                     <path d="M10 6.66675H10.0083" stroke-width="1.3" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                                <div :class="[section === 3 ? 'text-m_yellow-100' : 'text-white']"
-                                    class="font-sf_pro font-medium lg:text-lg text-base md:block hidden group-hover:text-m_yellow-100 duration-300">
-                                    Поддержка и помощь
+                                <div
+                                    class="font-sf_pro font-medium lg:text-lg text-base md:block hidden text-red-500 group-hover:text-m_red-200 duration-300">
+                                    Выход
                                 </div>
                             </div>
                         </div>
@@ -155,7 +157,12 @@
                             </div>
                             <button @click="updateProfile"
                                 class="w-fit flex items-center space-x-6 px-8 py-3 font-sf_pro font-normal sm:text-base text-sm rounded-lg text-black bg-m_yellow-100 hover:bg-m_yellow-600 duration-300 cursor-pointer">
-                                Обновить
+                                <span v-if="!loading">
+                                    Обновить
+                                </span>
+                                <span v-else>
+                                    <Spinner />
+                                </span>
                             </button>
                         </div>
                         <div v-if="section === 2" class="w-full flex flex-col space-y-4">
@@ -196,7 +203,12 @@
                             </div>
                             <button @click="updateProfile"
                                 class="w-fit flex items-center space-x-6 px-8 py-3 font-sf_pro font-normal sm:text-base text-sm rounded-lg text-black bg-m_yellow-100 hover:bg-m_yellow-600 duration-300 cursor-pointer">
-                                Обновить
+                                <span v-if="!loading">
+                                    Обновить
+                                </span>
+                                <span v-else>
+                                    <Spinner />
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -210,13 +222,15 @@
 import { mapState, mapActions } from "pinia";
 import { useUserStore } from "@/store/user.store";
 import Navbar from '@/components/Navbar.vue';
+import Spinner from '@/components/base/Spinner.vue'
 export default {
     name: "Profile",
     components: {
         Navbar,
+        Spinner
     },
     computed: {
-        ...mapState(useUserStore, ["user"]),
+        ...mapState(useUserStore, ["user", "loading"]),
     },
     data() {
         return {
@@ -233,7 +247,7 @@ export default {
         this.setData()
     },
     methods: {
-        ...mapActions(useUserStore, ['updateUser']),
+        ...mapActions(useUserStore, ['updateUser', 'logoutUser']),
         selectImage() {
             this.$refs.fileInput.click();
         },
@@ -251,13 +265,6 @@ export default {
             this.email = this.user?.email
         },
         async updateProfile() {
-            console.log({
-                full_name: this.full_name,
-                avatar: this.user_avatar ? this.user_avatar : null,
-                bio: this.bio,
-                email: this.email,
-                password: this.password == "********" ? null : this.password
-            });
             await this.updateUser({
                 userId: this.user.id,
                 user: {
@@ -268,7 +275,10 @@ export default {
                     password: this.password == "********" ? null : this.password
                 }
             });
-        }
+        },
+        async logout() {
+            await this.logoutUser()
+        },
     }
 }
 </script>
