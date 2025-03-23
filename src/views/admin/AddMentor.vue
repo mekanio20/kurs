@@ -46,7 +46,14 @@
                         <textarea v-model="bio" class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white resize-none"
                             cols="30" rows="10"></textarea>
                         <div class="pt-[50px] flex items-center space-x-6">
-                            <AdminButton @click="saveMentor" :bold="true" name="Сохранить"></AdminButton>
+                            <button class="px-14 py-3 font-sf_pro font-bold text-base rounded-lg cursor-pointer bg-m_yellow-100">
+                                <span v-if="loading">
+                                    <Spinner />
+                                </span>
+                                <span v-else>
+                                    Сохранить
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -60,17 +67,19 @@ import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
 import AdminHeader from '@/components/admin/Header.vue';
 import AdminButton from '@/components/base/AdminButton.vue';
+import Spinner from '@/components/base/Spinner.vue'
 import { useToast } from "vue-toastification";
-import { mapActions, mapState } from 'vuex';
 export default {
     name: "AddMentor",
     components: {
         Sidebar,
         AdminHeader,
-        AdminButton
+        AdminButton,
+        Spinner
     },
     data() {
         return {
+            loading: false,
             bio: null,
             email: null,
             fullName: null,
@@ -84,7 +93,6 @@ export default {
         this.getMentors()
     },
     methods: {
-        ...mapActions(['setLoading']),
         async getMentors() {
             const response = await api.get('/users/')
             this.mentors = response.data
@@ -93,7 +101,17 @@ export default {
             this.imageFile = URL.createObjectURL(event.target.files[0])
             this.img = event.target.files[0]
         },
+        clearFields() {
+            this.bio = null
+            this.email = null
+            this.fullName = null
+            this.profession = null
+            this.password = null
+            this.imageFile = null
+            this.img = null
+        },
         async saveMentor() {
+            this.loading = true
             const toast = useToast();
             const formData = new FormData()
             formData.append('bio', this.bio)
@@ -109,14 +127,13 @@ export default {
                 if (response.status === 201) { toast.success('Ментор успешно создан') } 
             } catch (error) {
                 console.error('Error occurred: ', error);
-                const errorMessage = error.response?.data?.detail || 'Login failed';
+                const errorMessage = error.message;
                 toast.error(errorMessage);
             } finally {
+                this.loading = false
+                this.clearFields()
             }
         },
-    },
-    computed: {
-        ...mapState(['loading']),
     },
 }
 </script>

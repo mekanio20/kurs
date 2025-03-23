@@ -50,8 +50,14 @@
                                 </div>
                             </div>
                         <div class="mt-[65px] flex items-center space-x-6">
-                            <!-- <AdminButton :color="true" :bg_color="true" name="Отмена"></AdminButton> -->
-                            <AdminButton :bold="true" name="Сохранить" @button-clicked="saveCategory" :disabled="loading"></AdminButton>
+                            <button @click="saveCategory" class="px-14 py-3 font-sf_pro font-bold text-base rounded-lg cursor-pointer bg-m_yellow-100">
+                                <span v-if="loading">
+                                    <Spinner />
+                                </span>
+                                <span v-else>
+                                    Сохранить
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -65,15 +71,16 @@ import api from '@/api/index';
 import Sidebar from '@/components/admin/Sidebar.vue';
 import AdminHeader from '@/components/admin/Header.vue'
 import AdminButton from '@/components/base/AdminButton.vue';
+import Spinner from '@/components/base/Spinner.vue';
 import image_icon from '@/components/icons/image.vue';
 import { useToast } from "vue-toastification";
-import { mapActions, mapState } from 'vuex';
 export default {
     name: "AddCategory",
     components: {
         Sidebar,
         AdminHeader,
         AdminButton,
+        Spinner,
         image_icon
     },
     data() {
@@ -83,10 +90,10 @@ export default {
             openDropdown: false,
             active_status: true,
             name: null,
+            loading: false,
         }
     },
     methods: {
-        ...mapActions(['setLoading']),
         handleFileUpload(event) {
             this.imageFile = URL.createObjectURL(event.target.files[0])
             this.img = event.target.files[0]
@@ -95,25 +102,23 @@ export default {
             this.openDropdown = !this.openDropdown
         },
         async saveCategory() {
+            this.loading = true
             const toast = useToast();
             const formData = new FormData();
             formData.append('name', this.name)
             formData.append('image', this.img)
             formData.append('is_active', this.active_status)
-
             try {
                 const response = await api.post('/categories/', formData)
                 if (response.status === 201) { toast.success('Категория успешно создана') } 
             } catch (error) {
                 console.error('Error occurred: ', error);
-                const errorMessage = error.response?.data?.detail || 'Login failed';
+                const errorMessage = error.message;
                 toast.error(errorMessage);
             } finally {
+                this.loading = false
             }
         },
-    },
-    computed: {
-        ...mapState(['loading']),
     },
 }
 </script>
