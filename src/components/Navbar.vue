@@ -112,7 +112,7 @@
                 </router-link>
                 <router-link v-else to="/login"
                     class="font-sf_pro font-bold lg:text-lg text-base text-white bg-m_black-400 w-fit py-3 px-6 rounded-lg cursor-pointer text-nowrap sm:hidden block">
-                    Sign in
+                    Войти
                 </router-link>
             </div>
         </div>

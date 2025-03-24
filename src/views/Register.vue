@@ -76,7 +76,7 @@
                             с нашими условиями и политикой конфиденциальности.</p>
 
                     </div>
-                    <button :disabled="!fullName || !email || !password" type="submit"
+                    <button :disabled="!fullName || !email || !password || userLoading" type="submit"
                         class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold sm:text-base text-sm !mt-10">
                         <span v-if="!userLoading">
                             Создать аккаунт

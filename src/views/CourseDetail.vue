@@ -45,26 +45,29 @@
                 <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-6 items-center pb-10">
                     <div class="relative lg:mr-20">
                         <!-- Video Elementi -->
-                        <video :key="course?.preview_video" ref="videoPlayer" class="lg:w-[640px] lg:h-[440px] sm:w-[600px] sm:h-[600px] w-full h-full rounded-lg pt-10">
+                        <video :key="course?.preview_video" ref="videoPlayer"
+                            class="lg:w-[640px] lg:h-[440px] sm:w-[600px] sm:h-[600px] w-full h-full rounded-lg pt-10">
                             <source v-if="course?.preview_video" :src="course?.preview_video" />
                         </video>
 
                         <!-- Play/Pause Butonu -->
                         <button @click="togglePlay"
                             class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
-                            <svg v-if="!isPlaying" class="sm:w-16 w-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <svg v-if="!isPlaying" class="sm:w-16 w-10 text-white" fill="currentColor"
+                                viewBox="0 0 20 20">
                                 <path d="M4 4l12 6-12 6V4z" />
                             </svg>
                         </button>
                     </div>
-                    <div class="lg:w-[540px] sm:w-[600px] w-full flex lg:items-start items-center flex-col space-y-8 pt-6">
+                    <div
+                        class="lg:w-[540px] sm:w-[600px] w-full flex lg:items-start items-center flex-col space-y-8 pt-6">
                         <h1
                             class="font-sf_pro font-bold lg:text-4xl sm:text-3xl text-2xl text-white lg:text-start text-center">
                             {{ course?.name }}</h1>
                         <p
                             class="break-all lg:w-4/5 w-full font-sf_pro font-normal lg:text-lg sm:text-base text-sm text-m_gray-100 lg:text-start text-center overflow-hidden">
                             <span v-if="course?.description.length > 200 && !isReadMore">{{ course?.description.slice(0,
-                                200) }}<p class="cursor-pointer inline-block text-m_yellow-100 hover:underline"
+                            200) }}<p class="cursor-pointer inline-block text-m_yellow-100 hover:underline"
                                     @click="isReadMore = !isReadMore">...Читать далее</p></span>
                             <span v-else-if="course?.description.length > 200 && isReadMore">
                                 {{ course?.description }}
@@ -93,7 +96,7 @@
                                 <span class="ml-1 text-white lg:text-base text-sm font-medium">{{ course?.rating || 0
                                     }}</span>
                                 <span class="ml-2 text-m_gray-100 lg:text-base text-sm font-medium">({{
-                                course?.total_ratings || 0 }} отзывов)</span>
+                            course?.total_ratings || 0 }} отзывов)</span>
                             </div>
                             <div class="flex items-center font-sf_pro font-medium lg:text-base text-sm text-white">
                                 {{ course?.students_count || 0 }} студентов
@@ -127,7 +130,7 @@
                             class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #1</p>
                         <p v-else="active_module?.index"
                             class="font-sf_pro font-medium lg:text-base text-sm text-m_yellow-100">Модуль #{{
-                                active_module.index }}</p>
+                            active_module.index }}</p>
                         <h2
                             class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white">
                             {{ active_module?.name }}
@@ -145,7 +148,7 @@
                             </div>
                             <div class="flex items-start flex-col space-y-2">
                                 <p class="font-sf_pro font-medium lg:text-base text-sm text-m_gray-100">Урок: {{ index +
-                                1 }}</p>
+                            1 }}</p>
                                 <p class="font-sf_pro font-medium text-start lg:text-xl text-lg text-white">{{ item.name
                                     }}</p>
                             </div>
@@ -219,8 +222,7 @@
                     <h2
                         class="font-sf_pro font-bold lg:text-[40px] text-3xl lg:leading-[60px] leading-[50px] text-white text-center">
                         Ментор</h2>
-                    <div
-                        class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 my-20">
+                    <div class="flex lg:flex-row flex-col items-center lg:space-x-10 lg:space-y-0 space-y-10 my-20">
                         <div class="sm:w-[400px] w-full h-[300px] rounded-lg relative">
                             <div class="absolute bottom-0 left-0 w-full h-[260px] rounded-xl bg-m_black-500"></div>
                             <img class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] object-cover"
@@ -238,7 +240,7 @@
                             <h3 class="font-sf_pro font-bold lg:text-2xl text-xl text-white">{{ course?.owner.full_name
                                 }}</h3>
                             <p class="font-sf_pro font-normal lg:text-base text-sm text-m_yellow-200">{{
-                                course?.owner.profession }}</p>
+                            course?.owner.profession }}</p>
                             <div class="text-m_gray-100 lg:text-start text-center">
                                 <p class="lg:text-base text-sm leading-relaxed mb-4">
                                     {{ course?.owner.bio }}
@@ -259,10 +261,10 @@
                         <div class="w-full lg:h-[152px] flex lg:flex-row flex-col items-center justify-center sm:px-10">
                             <div
                                 class="h-full lg:pr-6 lg:mr-3 lg:border-r-2 lg:border-white lg:pb-0 pb-6 opacity-80 flex flex-col items-center justify-center">
-                                <div class="text-4xl font-bold font-sf_pro tracking-wider text-nowrap">4.6 <span
+                                <div class="text-4xl font-bold font-sf_pro tracking-wider text-nowrap text-white mb-2">{{ course?.total_ratings }} <span
                                         class="font-normal text-base">/</span><sub class="font-normal text-base">5</sub>
                                 </div>
-                                <div class="fonst-sf_pro text-lg opacity-80 text-white">86 Ком.</div>
+                                <div class="fonst-sf_pro text-lg opacity-80 text-center text-nowrap text-white">{{ comments_count }} Ком.</div>
                             </div>
                             <div class="w-full h-full space-y-2">
                                 <RatingBar :stars="5" :count="70" />
@@ -274,160 +276,52 @@
                         </div>
                         <!-- Review Form -->
                         <div class="w-full bg-m_black-500 py-8 px-10 rounded-lg flex flex-col gap-4">
-                            <div class="flex items-center gap-2 pb-5">
-                                <StarRating :selectedStars="3" />
+                            <div class="flex items-center gap-2 pb-4">
+                                <StarRating v-model="userRating" />
                             </div>
                             <h4 class="font-sf_pro font-medium text-base text-m_gray-100">Комментарий</h4>
                             <textarea cols="5" rows="4" v-model="comment"
                                 class="w-full py-4 px-6 rounded-lg bg-m_black-300 text-white placeholder-gray-400 focus:outline-none resize-none"></textarea>
-                            <button
-                                class="mt-6 bg-transparent hover:bg-m_yellow-100 hover:text-black border border-m_yellow-100 text-m_yellow-100 font-sf_pro font-bold text-lg py-3 rounded-lg duration-300">
-                                Отправить комментарий
+                            <button @click="sendComment" :disabled="loading"
+                                class="mt-6 bg-transparent hover:bg-m_yellow-100 hover:text-black border border-m_yellow-100 text-m_yellow-100 font-sf_pro font-bold text-lg py-3 rounded-lg duration-300"
+                                :class="loading ? 'bg-m_yellow-100' : ''">
+                                <Spinner v-if="loading" color="border-white" />
+                                <span v-else>
+                                    Отправить комментарий
+                                </span>
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="w-full text-center">
-                    <div class="md:columns-3 mobile:columns-2 columns-1 gap-6 sm:pb-20 pb-10">
-                        <div class="bg-m_black-500 rounded-lg p-8 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:pb-20 pb-10">
+                        <div v-for="item in comments" :key="item.id" class="bg-m_black-500 rounded-lg p-8 mb-6">
                             <div class="w-full flex space-x-6 items-center">
                                 <div class="w-16 rounded-full">
-                                    <img src="/imgs/person4.png">
+                                    <img class="w-full h-full object-cover rounded-full" :src="item.owner.avatar || '/imgs/person6.png'">
                                 </div>
                                 <div class="flex flex-col items-start space-y-1">
-                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария
-                                        Смирнова</p>
+                                    <h4 class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">
+                                        {{ item.owner.full_name }}
+                                    </h4>
                                     <div class="flex items-center space-x-2">
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
+                                        <span v-for="i in item.rating" :key="i" class="text-sm text-m_yellow-100">★</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-sm text-white">
-                                Курсы предоставляют отличную возможность для расширения знаний и навыков в различных
-                                областях. 💜 Они структурированы так, чтобы обеспечить понимание материала.
+                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-start text-sm text-white">
+                                {{ item.text }}
                             </div>
-                        </div>
-                        <div class="bg-m_black-500 rounded-lg p-8 mb-6">
-                            <div class="w-full flex space-x-6 items-center">
-                                <div class="w-16 rounded-full">
-                                    <img src="/imgs/person4.png">
-                                </div>
-                                <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария
-                                        Смирнова</p>
-                                    <div class="flex items-center space-x-2">
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-sm text-white">
-                                Курсы предоставляют отличную возможность для расширения знаний и навыков в различных
-                                областях. 💜 Они структурированы так, чтобы обеспечить понимание материала.
-                            </div>
-                        </div>
-                        <div class="bg-m_black-500 rounded-lg p-8 mb-6">
-                            <div class="w-full flex space-x-6 items-center">
-                                <div class="w-16 rounded-full">
-                                    <img src="/imgs/person4.png">
-                                </div>
-                                <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария
-                                        Смирнова</p>
-                                    <div class="flex items-center space-x-2">
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-sm text-white">
-                                Опытные наставники и качественные материалы делают обучение Курсы предоставляют отличную
-                                возможность для расширения знаний и навыков в различных областях 😀🩷 Они
-                                структурированы так, чтобы обеспечить понимание материала, с интерактивными и
-                                практическими заданиями.
-                            </div>
-                        </div>
-                        <div class="bg-m_black-500 rounded-lg p-8 mb-6">
-                            <div class="w-full flex space-x-6 items-center">
-                                <div class="w-16 rounded-full">
-                                    <img src="/imgs/person4.png">
-                                </div>
-                                <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария
-                                        Смирнова</p>
-                                    <div class="flex items-center space-x-2">
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-sm text-white">
-                                Курсы предоставляют отличную возможность для расширения знаний и навыков в различных
-                                областях. 💜 Они структурированы так, чтобы обеспечить понимание материала.
-                            </div>
-                        </div>
-                        <div class="bg-m_black-500 rounded-lg p-8 mb-6">
-                            <div class="w-full flex space-x-6 items-center">
-                                <div class="w-16 rounded-full">
-                                    <img src="/imgs/person4.png">
-                                </div>
-                                <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария
-                                        Смирнова</p>
-                                    <div class="flex items-center space-x-2">
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-sm text-white">
-                                Курсы предоставляют отличную возможность для расширения знаний и навыков в различных
-                                областях. 💜 Они структурированы так, чтобы обеспечить понимание материала.
-                            </div>
-                        </div>
-                        <div class="bg-m_black-500 rounded-lg p-8 mb-6">
-                            <div class="w-full flex space-x-6 items-center">
-                                <div class="w-16 rounded-full">
-                                    <img src="/imgs/person4.png">
-                                </div>
-                                <div class="flex- flex-col space-y-1">
-                                    <p class="font-sf_pro font-medium lg:text-xl text-lg text-start text-white">Мария
-                                        Смирнова</p>
-                                    <div class="flex items-center space-x-2">
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                        <span class="text-sm text-m_yellow-100">★</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full pt-6 font-sf_pro font-normal lg:text-base text-sm text-white">
-                                Опытные наставники и качественные материалы делают обучение Курсы предоставляют отличную
-                                возможность для расширения знаний и навыков в различных областях 😀🩷 Они
-                                структурированы так, чтобы обеспечить понимание материала, с интерактивными и
-                                практическими заданиями.
-                            </div>
-                        </div>
+                        </div>                
                     </div>
-                    <router-link to="/"
+                    <!-- <router-link to="/"
                         class="px-7 py-3 mt-20 rounded-lg border border-white font-sf_pro font-medium text-white lg:text-base text-sm">
                         Посмотреть все
-                    </router-link>
+                    </router-link> -->
                 </div>
                 <div class="w-full pb-20 pt-10">
                     <h2
-                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-3xl text-white lg:w-2/3 w-full lg:leading-[60px] sm:leading-[50px] leading-[40px] mx-auto my-20">
+                        class="text-center font-sf_pro font-bold lg:text-[50px] sm:text-[40px] text-3xl text-white lg:w-2/3 w-full lg:leading-[60px] sm:leading-[50px] leading-[40px] mx-auto mb-20">
                         Похожие курсы
                     </h2>
                     <div class="flex flex-col items-center space-y-20">
@@ -456,8 +350,10 @@ import Footer from '@/components/Footer.vue';
 import Card from '@/components/Card.vue';
 import RatingBar from '@/components/RatingBar.vue';
 import StarRating from '@/components/StarRating.vue';
+import Spinner from '@/components/base/Spinner.vue'
 import playIcon from '@/components/icons/play.vue';
 import bookmarkIcon from '@/components/icons/bookmark.vue';
+import { useToast } from 'vue-toastification';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import 'swiper/css';
@@ -472,6 +368,7 @@ export default {
         Card,
         playIcon,
         RatingBar,
+        Spinner,
         StarRating,
         bookmarkIcon,
         SwiperSlide,
@@ -479,6 +376,7 @@ export default {
     },
     data() {
         return {
+            loading: false,
             isPlaying: false,
             isIconFilled: null,
             course: null,
@@ -486,6 +384,7 @@ export default {
             showAll: false,
             isReadMore: false,
             slidesPerView: 1,
+            userRating: null,
             cource_breakpoints: {
                 200: { slidesPerView: 1 },
                 500: { slidesPerView: 2 },
@@ -494,6 +393,8 @@ export default {
             },
             modules: [Pagination, Navigation, Autoplay],
             comment: null,
+            comments: null,
+            comments_count: 0,
             active_module: null,
             video_modules: null,
             active_lessons: null,
@@ -502,12 +403,12 @@ export default {
     },
     created() {
         if (this.$route.query.access && this.$route.query.refresh) {
-            console.log('Setting tokens');
             localStorage.setItem('access', this.$route.query.access)
             localStorage.setItem('refresh', this.$route.query.refresh)
         }
         this.getCourse(),
-            this.allCourses()
+        this.allCourses(),
+        this.getRating()
     },
     methods: {
         togglePlay() {
@@ -536,6 +437,29 @@ export default {
             this.active_module = await response?.data?.modules[0]
             this.active_lessons = await response?.data?.modules[0]?.lessons
             this.course = response.data
+        },
+        async getRating() {
+            const response = await api.get(`/courses/${this.$route.params.id}/ratings/`)
+            this.comments = await response.data.results
+            this.comments_count = await response.data.count
+        },
+        async sendComment() {
+            const toast = useToast()
+            this.loading = true
+            try {
+                const response = await api.post(`/courses/${this.$route.params.id}/rate/`, {
+                    rating: this.userRating,
+                    text: this.comment
+                })
+                if (response.status === 201) {
+                    toast.success('Отзыв отправлен')
+                }
+            } catch (error) {
+                console.log(error);
+                toast.error('Ошибка при отправке отзыва')
+            } finally {
+                this.loading = false
+            }
         },
         async allCourses() {
             const response = await api.get('/courses/')

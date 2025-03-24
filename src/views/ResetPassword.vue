@@ -49,7 +49,7 @@
                     <input type="password" v-model="password"
                         class="w-full bg-m_black-500 placeholder:text-m_gray-100 text-m_gray-100 px-8 py-4 lg:text-lg sm:text-base text-sm rounded-lg outline-none"
                         placeholder="Новый пароль">
-                    <button type="submit" 
+                    <button type="submit" :disabled="userLoading"
                         class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold lg:text-lg sm:text-base text-sm !mt-10">
                         <span v-if="!userLoading">
                             Войти

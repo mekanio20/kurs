@@ -46,7 +46,7 @@
                         <textarea v-model="bio" class="w-full bg-m_black-700 rounded-lg p-4 outline-none text-white resize-none"
                             cols="30" rows="10"></textarea>
                         <div class="pt-[50px] flex items-center space-x-6">
-                            <button class="px-14 py-3 font-sf_pro font-bold text-base rounded-lg cursor-pointer bg-m_yellow-100">
+                            <button :disabled="loading" class="px-14 py-3 font-sf_pro font-bold text-base rounded-lg cursor-pointer bg-m_yellow-100">
                                 <span v-if="loading">
                                     <Spinner />
                                 </span>

@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                         <div class="mt-[65px] flex items-center space-x-6">
-                            <button @click="saveCategory" class="px-14 py-3 font-sf_pro font-bold text-base rounded-lg cursor-pointer bg-m_yellow-100">
+                            <button :disabled="loading" @click="saveCategory" class="px-14 py-3 font-sf_pro font-bold text-base rounded-lg cursor-pointer bg-m_yellow-100">
                                 <span v-if="loading">
                                     <Spinner />
                                 </span>

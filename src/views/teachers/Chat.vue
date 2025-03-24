@@ -134,8 +134,12 @@ export default {
         fileIcon,
         imageIcon
     },
+    created() {
+        this.connectToWebSocket()
+    },
     data() {
         return {
+            socket: null,
             selectedFile: null,
             selectedImage: null,
             message: null,
@@ -181,7 +185,91 @@ export default {
                 const formData = new FormData();
                 formData.append('path', this.selectedImage);
             }
-        }
+        },
+        // 
+        async connectToWebSocket() {
+            this.socket = new WebSocket('wss://0-100.community/ws/chat/')
+
+            this.socket.onopen = () => {
+                console.log('WebSocket connection established')
+            }
+
+            this.socket.onerror = (error) => {
+                console.error('WebSocket error:', error)
+            }
+
+            this.socket.onmessage = (event) => {
+                const data = JSON.parse(event.data).message
+                this.receivedMessages.push(data)
+                this.$nextTick(() => {
+                    this.scrollToBottom()
+                })
+            }
+
+            this.socket.onclose = () => {
+                console.log('WebSocket connection closed')
+            }
+        },
+        async loadUserlist() {
+            try {
+                const response = await api.get('/users/?limit=1000000')
+                this.users = response.data.results.map(user => ({
+                    id: user.id,
+                    phone: user.phone,
+                    username: user.name,
+                    firstLetter: user.name.charAt(0).toUpperCase(),
+                }))
+            } catch (error) {
+                console.error('Error loading user list:', error)
+            }
+        },
+        async sendMessage() {
+            if (this.userId && this.socket.readyState === WebSocket.OPEN && (this.newMessage || this.uploads.length > 0)) {
+                const message = JSON.stringify({
+                    type: "send_message",
+                    data: {
+                        receiver: this.userId,
+                        text: this.newMessage,
+                        attachments: [...this.uploads],
+                    },
+                })
+                console.log(message)
+                this.socket.send(message)
+                this.newMessage = ''
+                this.uploads = []
+                this.$nextTick(() => {
+                    this.scrollToBottom()
+                })
+            } else {
+                console.error('WebSocket is not connected or message is empty.')
+            }
+        },
+        async getMessages() {
+            const response = await api.get(`/chat/messages/?user=${this.userId}&limit=100&offset=${this.offset}`, {
+                headers: {
+                    'Authorization': 'Token 11477de63fe7151e22f7c0a5af7d7242cb4bddf6'
+                }
+            })
+            console.log(response);
+            this.receivedMessages = response.data.results.reverse()
+            this.msg_count = response.data.count
+            if (this.msg_count > 100) { this.prev = true }
+            this.$nextTick(() => {
+                this.scrollToBottom()
+            })
+        },
+        async previusDownload() {
+            this.offset = this.offset + 100
+            const response = await api.get(`/chat/messages/?user=${this.userId}&limit=100&offset=${this.offset}`, {
+                headers: {
+                    'Authorization': 'Token 11477de63fe7151e22f7c0a5af7d7242cb4bddf6'
+                }
+            })
+            this.receivedMessages.unshift(...response.data.results.reverse())
+            if (this.receivedMessages.length >= this.msg_count) {
+                this.prev = false
+            }
+        },
     }
 }
 </script>

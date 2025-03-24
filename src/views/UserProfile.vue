@@ -201,7 +201,7 @@
                                     class="lg:w-2/3 w-full bg-m_black-300 px-8 py-4 rounded-lg font-sf_pro font-normal sm:text-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-m_yellow-200 focus:border-transparent"
                                     type="password">
                             </div>
-                            <button @click="updateProfile"
+                            <button @click="updateProfile" :disabled="loading"
                                 class="w-fit flex items-center space-x-6 px-8 py-3 font-sf_pro font-normal sm:text-base text-sm rounded-lg text-black bg-m_yellow-100 hover:bg-m_yellow-600 duration-300 cursor-pointer">
                                 <span v-if="!loading">
                                     Обновить

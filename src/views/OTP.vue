@@ -63,7 +63,7 @@
                         <span class="text-white">{{ formattedTime }}</span>
                     </div>
 
-                    <button @click="handleSubmit" :disabled="!isCodeComplete"
+                    <button @click="handleSubmit" :disabled="!isCodeComplete || userLoading"
                         class="w-full py-3 lg:text-lg sm:text-base text-sm font-bold text-black bg-yellow-500 rounded-lg hover:bg-yellow-600 disabled:cursor-not-allowed">
                         <span v-if="!userLoading">
                             Продолжить

@@ -54,7 +54,7 @@
                     <router-link to="/reset"
                         class="font-sf_pro font-normal lg:text-base text-sm text-m_black-400 hover:underline self-start">Забыли
                         пароль?</router-link>
-                    <button :disabled="!email || !password"
+                    <button :disabled="!email || !password || userLoading"
                         class="w-full bg-m_yellow-200 text-center py-4 rounded-lg font-sf_pro font-bold lg:text-lg sm:text-base text-sm !mt-10">
                         <span v-if="!userLoading">
                             Войти
